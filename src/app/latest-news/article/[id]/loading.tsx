@@ -20,7 +20,7 @@ const Loading: React.FC = () => {
 
   return (
     <div className="h-screen w-screen text-5xl font-black flex justify-center items-center">
-      Loading ...
+      Loading .....
     </div>
   );
 };
