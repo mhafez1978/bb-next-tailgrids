@@ -4,15 +4,21 @@ import nodemailer from "nodemailer";
 // Nodemailer route handler to send emails
 export async function POST(req: Request) {
   const { firstName, lastName, email, phone, message } = await req.json();
+  // Import necessary environment variables
+  const smtpHost = process.env.SMTP_HOST; // Replace with default fallback if needed
+  const smtpPort = process.env.SMTP_PORT
+    ? parseInt(process.env.SMTP_PORT)
+    : 465;
+  const smtpUser = process.env.SMTP_USER;
+  const smtpPassword = process.env.SMTP_PASSWORD;
 
-  // Nodemailer transport configuration for your custom domain's SMTP server
   const transporter = nodemailer.createTransport({
-    host: "mail.blooming-brands.com", // Your SMTP server
-    port: 465, // SMTP port for SSL
+    host: smtpHost,
+    port: smtpPort,
     secure: true, // Use SSL/TLS for SMTP connection
     auth: {
-      user: "admin@blooming-brands.com", // Your email address
-      pass: process.env.SMTP_PASSWORD, // Your email account’s password (ensure it's set in .env.local)
+      user: smtpUser,
+      pass: smtpPassword,
     },
   });
 
