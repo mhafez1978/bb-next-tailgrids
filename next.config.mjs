@@ -43,7 +43,7 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "via.placeholder.com", // Gravatar for author avatars
-        pathname: "*/**", // Allow all Gravatar images
+        pathname: "/**", // Allow all Gravatar images
       },
     ],
   },
