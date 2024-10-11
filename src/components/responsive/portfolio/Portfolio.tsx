@@ -30,9 +30,9 @@ const Portfolio = () => {
             </div>
           </div>
 
-          <div className="w-full flex flex-wrap justify-center -mx-4">
+          {/* <div className="w-full flex flex-wrap justify-center -mx-4">
             <div className="w-full px-4">
-              <ul className="flex flex-wrap justify-center mb-12 space-x-1">
+              <ul className="w-full flex flex-wrap justify-center items-center text-center mb-12 space-x-1">
                 <li className="mb-1">
                   <button
                     onClick={() => handleProject("all")}
@@ -95,7 +95,338 @@ const Portfolio = () => {
                 </li>
               </ul>
             </div>
+          </div> */}
+          {/* <div className="w-full flex flex-wrap justify-center -mx-4">
+            <div className="w-full px-4">
+              <ul className="w-full flex flex-wrap justify-center items-center text-center mb-12">
+                <li className="mb-1">
+                  <button
+                    onClick={() => handleProject("all")}
+                    className={`inline-block rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
+                      showCard === "all"
+                        ? "activeClasses bg-primary text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                    }`}
+                  >
+                    All Projects
+                  </button>
+                </li>
+                <li className="mb-1">
+                  <button
+                    onClick={() => handleProject("branding")}
+                    className={`inline-block rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
+                      showCard === "branding"
+                        ? "activeClasses bg-primary text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                    }`}
+                  >
+                    Branding
+                  </button>
+                </li>
+                <li className="mb-1">
+                  <button
+                    onClick={() => handleProject("design")}
+                    className={`inline-block rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
+                      showCard === "design"
+                        ? "activeClasses bg-primary text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                    }`}
+                  >
+                    Website Design
+                  </button>
+                </li>
+                <li className="mb-1">
+                  <button
+                    onClick={() => handleProject("marketing")}
+                    className={`inline-block rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
+                      showCard === "marketing"
+                        ? "activeClasses bg-primary text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                    }`}
+                  >
+                    Online Marketing
+                  </button>
+                </li>
+                <li className="mb-1">
+                  <button
+                    onClick={() => handleProject("development")}
+                    className={`inline-block rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
+                      showCard === "development"
+                        ? "activeClasses bg-primary text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                    }`}
+                  >
+                    Full Stack Development
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div> */}
+          {/* <div className="w-full flex flex-wrap justify-center -mx-4">
+            <div className="w-full px-4">
+              <ul className="w-full flex flex-wrap justify-center items-center text-center mb-12">
+                <li className="mb-1">
+                  <button
+                    onClick={() => handleProject("all")}
+                    className={`inline-block rounded-lg py-2 sm:px-3 lg:px-8 text-center text-base font-semibold transition md:py-3 ${
+                      showCard === "all"
+                        ? "activeClasses bg-primary text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                    }`}
+                  >
+                    All Projects
+                  </button>
+                </li>
+                <li className="mb-1">
+                  <button
+                    onClick={() => handleProject("branding")}
+                    className={`inline-block rounded-lg py-2 sm:px-3 lg:px-8 text-center text-base font-semibold transition md:py-3 ${
+                      showCard === "branding"
+                        ? "activeClasses bg-primary text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                    }`}
+                  >
+                    Branding
+                  </button>
+                </li>
+                <li className="mb-1">
+                  <button
+                    onClick={() => handleProject("design")}
+                    className={`inline-block rounded-lg py-2 sm:px-3 lg:px-8 text-center text-base font-semibold transition md:py-3 ${
+                      showCard === "design"
+                        ? "activeClasses bg-primary text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                    }`}
+                  >
+                    Website Design
+                  </button>
+                </li>
+                <li className="mb-1">
+                  <button
+                    onClick={() => handleProject("marketing")}
+                    className={`inline-block rounded-lg py-2 sm:px-3 lg:px-8 text-center text-base font-semibold transition md:py-3 ${
+                      showCard === "marketing"
+                        ? "activeClasses bg-primary text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                    }`}
+                  >
+                    Online Marketing
+                  </button>
+                </li>
+                <li className="mb-1">
+                  <button
+                    onClick={() => handleProject("development")}
+                    className={`inline-block rounded-lg py-2 sm:px-3 lg:px-8 text-center text-base font-semibold transition md:py-3 ${
+                      showCard === "development"
+                        ? "activeClasses bg-primary text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                    }`}
+                  >
+                    Full Stack Development
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div> */}
+          {/* <div className="w-full flex justify-center -mx-4">
+            <div className="w-full px-4">
+              <ul className="w-full flex flex-col justify-center items-center text-center mb-12 space-y-4">
+                <li className="w-full mb-1">
+                  <button
+                    onClick={() => handleProject("all")}
+                    className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
+                      showCard === "all"
+                        ? "activeClasses bg-primary text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                    }`}
+                  >
+                    All Projects
+                  </button>
+                </li>
+                <li className="w-full mb-1">
+                  <button
+                    onClick={() => handleProject("branding")}
+                    className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
+                      showCard === "branding"
+                        ? "activeClasses bg-primary text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                    }`}
+                  >
+                    Branding
+                  </button>
+                </li>
+                <li className="w-full mb-1">
+                  <button
+                    onClick={() => handleProject("design")}
+                    className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
+                      showCard === "design"
+                        ? "activeClasses bg-primary text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                    }`}
+                  >
+                    Website Design
+                  </button>
+                </li>
+                <li className="w-full mb-1">
+                  <button
+                    onClick={() => handleProject("marketing")}
+                    className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
+                      showCard === "marketing"
+                        ? "activeClasses bg-primary text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                    }`}
+                  >
+                    Online Marketing
+                  </button>
+                </li>
+                <li className="w-full mb-1">
+                  <button
+                    onClick={() => handleProject("development")}
+                    className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
+                      showCard === "development"
+                        ? "activeClasses bg-primary text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                    }`}
+                  >
+                    Full Stack Development
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div> */}
+          {/* <div className="w-full flex justify-center -mx-4">
+            <div className="w-full px-4">
+              <ul className="w-full grid grid-cols-2 md:grid-cols-1 gap-4 justify-center items-center text-center mb-12">
+                <li className="w-full">
+                  <button
+                    onClick={() => handleProject("all")}
+                    className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
+                      showCard === "all"
+                        ? "activeClasses bg-primary text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                    }`}
+                  >
+                    All Projects
+                  </button>
+                </li>
+                <li className="w-full">
+                  <button
+                    onClick={() => handleProject("branding")}
+                    className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
+                      showCard === "branding"
+                        ? "activeClasses bg-primary text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                    }`}
+                  >
+                    Branding
+                  </button>
+                </li>
+                <li className="w-full">
+                  <button
+                    onClick={() => handleProject("design")}
+                    className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
+                      showCard === "design"
+                        ? "activeClasses bg-primary text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                    }`}
+                  >
+                    Website Design
+                  </button>
+                </li>
+                <li className="w-full">
+                  <button
+                    onClick={() => handleProject("marketing")}
+                    className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
+                      showCard === "marketing"
+                        ? "activeClasses bg-primary text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                    }`}
+                  >
+                    Online Marketing
+                  </button>
+                </li>
+                <li className="w-full">
+                  <button
+                    onClick={() => handleProject("development")}
+                    className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
+                      showCard === "development"
+                        ? "activeClasses bg-primary text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                    }`}
+                  >
+                    Full Stack Development
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div> */}
+          <div className="w-full flex justify-center -mx-4">
+            <div className="w-full px-4">
+              <ul className="w-full grid grid-cols-2 gap-4 justify-center items-center text-center mb-12 lg:flex lg:flex-row">
+                <li className="w-full">
+                  <button
+                    onClick={() => handleProject("all")}
+                    className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
+                      showCard === "all"
+                        ? "activeClasses bg-primary text-black" // Keep text black for active
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-black" // Hover text stays black
+                    }`}
+                  >
+                    All Projects
+                  </button>
+                </li>
+                <li className="w-full">
+                  <button
+                    onClick={() => handleProject("branding")}
+                    className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
+                      showCard === "branding"
+                        ? "activeClasses bg-primary text-black"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-black"
+                    }`}
+                  >
+                    Branding
+                  </button>
+                </li>
+                <li className="w-full">
+                  <button
+                    onClick={() => handleProject("design")}
+                    className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
+                      showCard === "design"
+                        ? "activeClasses bg-primary text-black"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-black"
+                    }`}
+                  >
+                    Website Design
+                  </button>
+                </li>
+                <li className="w-full">
+                  <button
+                    onClick={() => handleProject("marketing")}
+                    className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
+                      showCard === "marketing"
+                        ? "activeClasses bg-primary text-black"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-black"
+                    }`}
+                  >
+                    Online Marketing
+                  </button>
+                </li>
+                <li className="w-full">
+                  <button
+                    onClick={() => handleProject("development")}
+                    className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
+                      showCard === "development"
+                        ? "activeClasses bg-primary text-black"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-black"
+                    }`}
+                  >
+                    Full Stack Development
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
+
           <div className="flex flex-wrap -mx-4">
             <PortfolioCard
               ImageHref="/pwwl-small.png"

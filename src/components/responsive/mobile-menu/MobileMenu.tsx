@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { AppPages } from "@/components/AppPages";
 import { FiMenu } from "react-icons/fi";
 import { GrClose } from "react-icons/gr";
-import Link from "next/link";
+//import Link from "next/link";
 import { motion } from "framer-motion";
 
 interface MobileMenuProps {
@@ -19,20 +19,19 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleClick = (e: React.SyntheticEvent) => {
+  const HandleCloseOpen = (e: React.SyntheticEvent) => {
     e.preventDefault();
     setIsOpen(!isOpen);
   };
 
-  const handleLinkClick = (e: React.SyntheticEvent) => {
+  const handleLinkClick = () => {
     // Close the menu when a link is clicked
-    e.preventDefault();
     setIsOpen(false);
   };
 
   return (
     <div className="w-full flex justify-end">
-      <FiMenu color={iconColor} size={size} onClick={handleClick} />
+      <FiMenu color={iconColor} size={size} onClick={HandleCloseOpen} />
       <div
         className={`fixed top-0 right-0 w-[100vw] min-h-screen z-50 bg-black text-white transition-transform duration-500 ${
           isOpen ? "translate-x-0" : "translate-x-full"
@@ -46,7 +45,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
             transition={{ duration: 1.5 }} // Duration of the rotation
             className="w-1/8 flex flex-row justify-end"
           >
-            <GrClose size={40} onClick={handleClick} />
+            <GrClose size={40} onClick={HandleCloseOpen} />
           </motion.div>
         </div>
 
@@ -59,13 +58,13 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
               animate={{ y: 0, opacity: isOpen ? 1 : 0 }} // Animate down and fade in
               transition={{ duration: 0.5, delay: index * 0.3 }} // Staggered delay
             >
-              <Link
+              <a
                 href={page.href}
                 className=""
                 onClick={handleLinkClick} // Close menu when link is clicked
               >
                 {page.pageTitle}
-              </Link>
+              </a>
             </motion.div>
           ))}
         </ul>
