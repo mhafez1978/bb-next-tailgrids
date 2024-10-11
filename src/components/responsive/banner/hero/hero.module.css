@@ -1,0 +1,12 @@
+.primary {
+  padding: 10px 18px;
+  border: 1px solid gray;
+  border-radius: 8px;
+}
+
+.primary:hover {
+  background-color: darkgray;
+  border: 1px solid black;
+  color: white;
+  transition: background-color 0.6s ease;
+}
