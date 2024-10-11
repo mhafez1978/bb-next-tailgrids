@@ -26,7 +26,7 @@ export async function POST(req: Request) {
     // Send email using Nodemailer
     await transporter.sendMail({
       from: `"${firstName} ${lastName}" <${email}>`, // Sender information
-      to: "admin@blooming-brands.com", // Your email address (or whoever should receive the form submission)
+      to: smtpUser, // Your email address (or whoever should receive the form submission)
       subject: "New Contact Form Submission",
       text: `Name: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`,
       html: `<p><strong>Name:</strong> ${firstName} ${lastName}</p>
