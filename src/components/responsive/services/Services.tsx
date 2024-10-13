@@ -246,7 +246,7 @@ const Services = () => {
       <div className="container mx-auto">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
-            <div className="mx-auto mb-[60px] max-w-[510px] text-center lg:mb-[70px]">
+            <div className="mx-auto mb-[60px] max-w-[600px] text-center lg:mb-[70px]">
               <span className="mb-2 block text-lg font-semibold text-black capitalize">
                 Solutions to grow your business
               </span>
