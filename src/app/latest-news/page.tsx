@@ -158,14 +158,14 @@ const PostCard = ({
         </div>
         <div>
           {date && (
-            <span className="mb-5 inline-block rounded bg-primary px-4 py-1 text-center text-xs font-semibold leading-loose text-white">
+            <span className="mb-5 inline-block rounded bg-black px-4 py-1 text-center text-xs font-semibold leading-loose text-white">
               {date}
             </span>
           )}
           <h3>
             <a
               href={`/latest-news/article/${id}`}
-              className="mb-4 inline-block text-xl font-semibold text-dark hover:text-primary dark:text-white sm:text-2xl lg:text-xl xl:text-2xl"
+              className="mb-4 inline-block text-xl font-semibold text-dark hover:text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl"
             >
               {CardTitle}
             </a>

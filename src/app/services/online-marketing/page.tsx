@@ -137,7 +137,7 @@ export default OnlineMarketingService;
 // const ListItem = ({ count, text }: ListItemProps) => {
 //   return (
 //     <li className="text-lg font-black dark:text-dark-6 flex text-base">
-//       <span className="bg-primary mr-2.5 flex h-[26px] w-full max-w-[26px] items-center justify-center rounded text-base text-white">
+//       <span className="bg-black mr-2.5 flex h-[26px] w-full max-w-[26px] items-center justify-center rounded text-base text-white">
 //         {count}
 //       </span>
 //       {text}

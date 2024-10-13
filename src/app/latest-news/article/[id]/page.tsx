@@ -227,7 +227,7 @@ const MetaTagItem = ({ slug, name }: { slug: string; name: string }) => {
   return (
     <a
       href={`/latest-news/tag/${slug}`}
-      className="mb-2 mr-2 block rounded bg-primary/5 px-5 py-2 text-xs font-medium text-primary hover:bg-primary hover:text-white md:mr-4 lg:mr-2 xl:mr-4"
+      className="mb-2 mr-2 block rounded bg-black/5 px-5 py-2 text-xs font-medium text-black hover:bg-black hover:text-white md:mr-4 lg:mr-2 xl:mr-4"
     >
       {name}
     </a>

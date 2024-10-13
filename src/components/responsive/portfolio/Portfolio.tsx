@@ -16,7 +16,7 @@ const Portfolio = () => {
           <div className="flex flex-wrap -mx-4">
             <div className="w-full px-4">
               <div className="mx-auto mb-[60px] max-w-[510px] text-center">
-                <span className="text-primary mb-2 block text-lg font-semibold">
+                <span className="text-black mb-2 block text-lg font-semibold">
                   Our Portfolio
                 </span>
                 <h2 className="text-dark mb-3 text-3xl leading-[1.208] font-bold sm:text-4xl md:text-[40px]">
@@ -38,8 +38,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("all")}
                     className={`inline-block rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "all"
-                        ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        ? "activeClasses bg-black text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
                     All Projects
@@ -50,8 +50,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("branding")}
                     className={`inline-block rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "branding"
-                        ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        ? "activeClasses bg-black text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
                     Branding
@@ -62,8 +62,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("design")}
                     className={`inline-block rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "design"
-                        ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        ? "activeClasses bg-black text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
                     Website Design
@@ -74,8 +74,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("marketing")}
                     className={`inline-block rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "marketing"
-                        ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        ? "activeClasses bg-black text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
                     Online Marketing
@@ -86,8 +86,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("development")}
                     className={`inline-block rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "development"
-                        ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        ? "activeClasses bg-black text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
                     Full Stack Development
@@ -104,8 +104,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("all")}
                     className={`inline-block rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "all"
-                        ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        ? "activeClasses bg-black text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
                     All Projects
@@ -116,8 +116,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("branding")}
                     className={`inline-block rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "branding"
-                        ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        ? "activeClasses bg-black text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
                     Branding
@@ -128,8 +128,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("design")}
                     className={`inline-block rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "design"
-                        ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        ? "activeClasses bg-black text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
                     Website Design
@@ -140,8 +140,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("marketing")}
                     className={`inline-block rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "marketing"
-                        ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        ? "activeClasses bg-black text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
                     Online Marketing
@@ -152,8 +152,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("development")}
                     className={`inline-block rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "development"
-                        ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        ? "activeClasses bg-black text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
                     Full Stack Development
@@ -170,8 +170,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("all")}
                     className={`inline-block rounded-lg py-2 sm:px-3 lg:px-8 text-center text-base font-semibold transition md:py-3 ${
                       showCard === "all"
-                        ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        ? "activeClasses bg-black text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
                     All Projects
@@ -182,8 +182,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("branding")}
                     className={`inline-block rounded-lg py-2 sm:px-3 lg:px-8 text-center text-base font-semibold transition md:py-3 ${
                       showCard === "branding"
-                        ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        ? "activeClasses bg-black text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
                     Branding
@@ -194,8 +194,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("design")}
                     className={`inline-block rounded-lg py-2 sm:px-3 lg:px-8 text-center text-base font-semibold transition md:py-3 ${
                       showCard === "design"
-                        ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        ? "activeClasses bg-black text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
                     Website Design
@@ -206,8 +206,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("marketing")}
                     className={`inline-block rounded-lg py-2 sm:px-3 lg:px-8 text-center text-base font-semibold transition md:py-3 ${
                       showCard === "marketing"
-                        ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        ? "activeClasses bg-black text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
                     Online Marketing
@@ -218,8 +218,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("development")}
                     className={`inline-block rounded-lg py-2 sm:px-3 lg:px-8 text-center text-base font-semibold transition md:py-3 ${
                       showCard === "development"
-                        ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        ? "activeClasses bg-black text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
                     Full Stack Development
@@ -236,8 +236,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("all")}
                     className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "all"
-                        ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        ? "activeClasses bg-black text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
                     All Projects
@@ -248,8 +248,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("branding")}
                     className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "branding"
-                        ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        ? "activeClasses bg-black text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
                     Branding
@@ -260,8 +260,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("design")}
                     className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "design"
-                        ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        ? "activeClasses bg-black text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
                     Website Design
@@ -272,8 +272,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("marketing")}
                     className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "marketing"
-                        ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        ? "activeClasses bg-black text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
                     Online Marketing
@@ -284,8 +284,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("development")}
                     className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "development"
-                        ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        ? "activeClasses bg-black text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
                     Full Stack Development
@@ -302,8 +302,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("all")}
                     className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "all"
-                        ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        ? "activeClasses bg-black text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
                     All Projects
@@ -314,8 +314,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("branding")}
                     className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "branding"
-                        ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        ? "activeClasses bg-black text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
                     Branding
@@ -326,8 +326,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("design")}
                     className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "design"
-                        ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        ? "activeClasses bg-black text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
                     Website Design
@@ -338,8 +338,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("marketing")}
                     className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "marketing"
-                        ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        ? "activeClasses bg-black text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
                     Online Marketing
@@ -350,8 +350,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("development")}
                     className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "development"
-                        ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        ? "activeClasses bg-black text-white"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
                     Full Stack Development
@@ -368,8 +368,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("all")}
                     className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "all"
-                        ? "activeClasses bg-primary text-black" // Keep text black for active
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-black" // Hover text stays black
+                        ? "activeClasses bg-black text-black" // Keep text black for active
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-black" // Hover text stays black
                     }`}
                   >
                     All Projects
@@ -380,8 +380,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("branding")}
                     className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "branding"
-                        ? "activeClasses bg-primary text-black"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-black"
+                        ? "activeClasses bg-black text-black"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-black"
                     }`}
                   >
                     Branding
@@ -392,8 +392,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("design")}
                     className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "design"
-                        ? "activeClasses bg-primary text-black"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-black"
+                        ? "activeClasses bg-black text-black"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-black"
                     }`}
                   >
                     Website Design
@@ -404,8 +404,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("marketing")}
                     className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "marketing"
-                        ? "activeClasses bg-primary text-black"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-black"
+                        ? "activeClasses bg-black text-black"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-black"
                     }`}
                   >
                     Online Marketing
@@ -416,8 +416,8 @@ const Portfolio = () => {
                     onClick={() => handleProject("development")}
                     className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "development"
-                        ? "activeClasses bg-primary text-black"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-black"
+                        ? "activeClasses bg-black text-black"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-black"
                     }`}
                   >
                     Full Stack Development
@@ -522,7 +522,7 @@ PortfolioCardProps) => {
             />
           </div>
           <div className="relative z-10 mx-7 -mt-20 rounded-lg border-2 border-black bg-white py-[34px] px-3 text-center shadow-portfolio dark:shadow-box-dark">
-            <span className="text-primary mb-2 block text-sm font-medium">
+            <span className="text-black mb-2 block text-sm font-medium">
               {category}
             </span>
             <h3 className="text-dark dark:text-white mb-5 text-xl font-bold">
@@ -531,7 +531,7 @@ PortfolioCardProps) => {
             {/* <a
               target="_blank"
               href={buttonHref}
-              className="text-body-color dark:text-dark-6 hover:border-primary hover:bg-primary inline-block rounded-md border border-stroke dark:border-dark-3 py-[10px] px-7 text-sm font-medium transition hover:text-white"
+              className="text-body-color dark:text-dark-6 hover:border-primary hover:bg-black inline-block rounded-md border border-stroke dark:border-dark-3 py-[10px] px-7 text-sm font-medium transition hover:text-white"
             >
               {button}
             </a> */}

@@ -42,7 +42,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages }) => {
               <button
                 className={`flex h-10 min-w-10 items-center justify-center rounded-full px-2 ${
                   currentPage === index + 1
-                    ? "bg-primary text-white"
+                    ? "bg-black text-white"
                     : "text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-white/5"
                 }`}
                 onClick={() => handlePageChange(index + 1)}

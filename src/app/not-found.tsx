@@ -48,7 +48,7 @@ const Error = () => {
 
               <Link
                 href="/"
-                className="rounded-lg bg-white px-8 py-3 text-base font-semibold text-primary shadow-md transition hover:bg-primary hover:text-white dark:bg-white/10"
+                className="rounded-lg bg-white px-8 py-3 text-base font-semibold text-black shadow-md transition hover:bg-black hover:text-white dark:bg-white/10"
               >
                 Go To Home
               </Link>

@@ -13,6 +13,7 @@ const Contact: FC = () => {
   const [buttonStatus, setButtonStatus] = useState(0); // 0 = disabled, 1 = enabled
   const [errorMessage, setErrorMessage] = useState("");
   const [showCaptcha, setShowCaptcha] = useState(false);
+  const [flag, setFlag] = useState(false);
 
   // Helper function for phone number validation & formatting
   const formatPhoneNumber = (phone: string) => {
@@ -96,6 +97,7 @@ const Contact: FC = () => {
 
       if (response.ok) {
         setStatus("Sent OK");
+        setFlag(true);
         setFirstName("");
         setLastName("");
         setPhone("");
@@ -105,6 +107,7 @@ const Contact: FC = () => {
         setShowCaptcha(false);
         setErrorMessage("");
         setStatus("Send");
+        hideMyElement();
       } else {
         setStatus("Sending Failed");
       }
@@ -112,6 +115,12 @@ const Contact: FC = () => {
       setStatus("Sending Failed");
       console.error("Error sending message:", error);
     }
+  };
+
+  const hideMyElement = () => {
+    setTimeout(() => {
+      setFlag(false);
+    }, 5000);
   };
 
   // Handle answer change and puzzle logic
@@ -215,18 +224,23 @@ const Contact: FC = () => {
                       </div>
                     </div>
                   )}
-                  <div className="w-full px-4">
+                  <div className="w-full px-4 flex flex-row justify-start items-center gap-4">
                     <button
                       type="submit"
                       className={`inline-flex rounded-lg items-center justify-center border border-transparent px-7 py-3 text-base font-medium text-white hover:bg-opacity-90 ${
                         buttonStatus === 1
-                          ? "bg-primary"
+                          ? "bg-black text-white"
                           : "bg-gray-300 cursor-not-allowed"
                       }`}
                       disabled={buttonStatus !== 1}
                     >
                       {status}
                     </button>
+                    {flag && (
+                      <span className="text-emerald-700">
+                        Your message was sent sucessfully.
+                      </span>
+                    )}
                   </div>
                 </div>
               </form>

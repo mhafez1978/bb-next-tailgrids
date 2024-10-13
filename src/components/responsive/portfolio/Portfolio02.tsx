@@ -180,7 +180,7 @@ const Portfolio02: React.FC = () => {
       >
         <div className="w-full pb-[400px]">
           <div className="container mx-auto text-center">
-            <span className="text-primary mb-2 block text-lg font-semibold">
+            <span className="text-black mb-2 block text-lg font-semibold">
               Success Case Studies
             </span>
             <h2 className="text-dark mb-3 text-3xl leading-[1.208] font-bold sm:text-4xl md:text-[40px]">
@@ -305,7 +305,7 @@ const Portfolio02: React.FC = () => {
           </Swiper>
           <div className="container mx-auto -mt-[25vh] w-full flex flex-row justify-between items-center z-30">
             <div className="prev-arrow" onClick={handlePrev}>
-              <button className="text-body-color dark:text-dark-6 hover:text-primary flex items-center justify-center text-sm font-medium transition-all">
+              <button className="text-body-color dark:text-dark-6 hover:text-black flex items-center justify-center text-sm font-medium transition-all">
                 <span className="mr-3">
                   <svg
                     width={22}
@@ -325,7 +325,7 @@ const Portfolio02: React.FC = () => {
               </button>
             </div>
             <div className="next-arrow" onClick={handleNext}>
-              <button className="text-body-color dark:text-dark-6 hover:text-primary flex items-center justify-center text-sm font-medium transition-all">
+              <button className="text-body-color dark:text-dark-6 hover:text-black flex items-center justify-center text-sm font-medium transition-all">
                 Next Project
                 <span className="ml-3">
                   <svg

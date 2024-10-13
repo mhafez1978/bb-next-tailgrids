@@ -32,7 +32,7 @@ const Cta = ({
                 <a
                   href="tel:+1-508-936-3727
 "
-                  className="my-1 mr-4 inline-block rounded-md border border-transparent bg-white px-7 py-3 text-base font-medium text-primary transition hover:text-primary hover:shadow-1"
+                  className="my-1 mr-4 inline-block rounded-md border border-transparent bg-white px-7 py-3 text-base font-medium text-black transition hover:text-black hover:shadow-1"
                 >
                   {mainCallToActionButtonText}
                 </a>

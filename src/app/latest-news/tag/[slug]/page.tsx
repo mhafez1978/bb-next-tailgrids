@@ -60,7 +60,7 @@ const TagContent = ({ params }: { params: { slug: string } }) => {
                 <h2 className="text-lg font-semibold">
                   <a
                     href={`/latest-news/article/${post.id}`}
-                    className="text-primary hover:underline"
+                    className="text-black hover:underline"
                   >
                     {post.title.rendered}
                   </a>

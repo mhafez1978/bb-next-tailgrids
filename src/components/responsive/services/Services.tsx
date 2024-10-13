@@ -18,7 +18,7 @@
 //         <div className="-mx-4 flex flex-wrap">
 //           <div className="w-full px-4">
 //             <div className="mx-auto mb-[60px] max-w-[510px] text-center lg:mb-[70px]">
-//               <span className="mb-2 block text-lg font-semibold text-primary capitalize">
+//               <span className="mb-2 block text-lg font-semibold text-black capitalize">
 //                 Solutions to grow your business
 //               </span>
 //               <h2 className="mb-3 text-3xl font-bold leading-[1.2] text-dark sm:text-4xl md:text-[40px]">
@@ -129,7 +129,7 @@
 //         <div className="-mx-4 flex flex-wrap">
 //           <div className="w-full px-4">
 //             <div className="mx-auto mb-[60px] max-w-[510px] text-center lg:mb-[70px]">
-//               <span className="mb-2 block text-lg font-semibold text-primary capitalize">
+//               <span className="mb-2 block text-lg font-semibold text-black capitalize">
 //                 Solutions to grow your business
 //               </span>
 //               <h2 className="mb-3 text-3xl font-bold leading-[1.2] text-dark sm:text-4xl md:text-[40px]">
@@ -247,7 +247,7 @@ const Services = () => {
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
             <div className="mx-auto mb-[60px] max-w-[510px] text-center lg:mb-[70px]">
-              <span className="mb-2 block text-lg font-semibold text-primary capitalize">
+              <span className="mb-2 block text-lg font-semibold text-black capitalize">
                 Solutions to grow your business
               </span>
               <h2 className="mb-3 text-3xl font-bold leading-[1.2] text-dark sm:text-4xl md:text-[40px]">

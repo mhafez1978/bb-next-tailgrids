@@ -32,7 +32,9 @@ export default function Home() {
       <Services />
       <OurProcessTimeLine />
       <Accomplishments />
-      <Portfolio />
+      <div id="portfolio">
+        <Portfolio />
+      </div>
       <Offer />
       <Testimonials />
       <Contact />

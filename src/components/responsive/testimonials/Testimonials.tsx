@@ -178,7 +178,7 @@ const Testimonials: React.FC = () => {
   };
 
   return (
-    <section className="relative w-screen min-h-[50vh] bg-slate-800 text-slate-100 py-24">
+    <section className="relative w-screen min-h-[50vh] bg-slate-800 text-slate-100 py-24 z-30">
       <h3 className="text-lg capitalize mb-4 text-center">
         What our clients are saying
       </h3>
