@@ -705,12 +705,12 @@ const Modal = () => {
                     )}
                     {step === 8 && (
                       <>
-                        <label
+                        {/* <label
                           htmlFor="websitePurpose"
                           className="mb-2 block font-semibold"
                         >
                           What is the purpose of your website?
-                        </label>
+                        </label> */}
                         <input
                           type="text"
                           name="websitePurpose"
@@ -731,12 +731,12 @@ const Modal = () => {
                     )}
                     {step === 9 && (
                       <>
-                        <label
+                        {/* <label
                           htmlFor="projectGoals"
                           className="mb-2 block font-semibold"
                         >
                           What are your main project objectives and goals?
-                        </label>
+                        </label> */}
                         <textarea
                           name="projectGoals"
                           value={formData.projectGoals}
@@ -754,12 +754,12 @@ const Modal = () => {
                     )}
                     {step === 10 && (
                       <>
-                        <label
+                        {/* <label
                           htmlFor="pagesNeeded"
                           className="mb-2 block font-semibold"
                         >
                           How many pages do you need for the website?
-                        </label>
+                        </label> */}
                         <input
                           type="number"
                           name="pagesNeeded"
@@ -780,9 +780,9 @@ const Modal = () => {
                     )}
                     {step === 11 && (
                       <>
-                        <label className="mb-2 block font-semibold">
+                        {/* <label className="mb-2 block font-semibold">
                           What features or functionality does your website need?
-                        </label>
+                        </label> */}
                         <div className="flex flex-col gap-2">
                           <div className="flex items-center">
                             <input
@@ -825,12 +825,12 @@ const Modal = () => {
                     )}
                     {step === 12 && (
                       <>
-                        <label
+                        {/* <label
                           htmlFor="projectTimeframe"
                           className="mb-2 block font-semibold"
                         >
                           How soon do you want to start the project?
-                        </label>
+                        </label> */}
                         <input
                           type="text"
                           name="projectTimeframe"
@@ -851,12 +851,12 @@ const Modal = () => {
                     )}
                     {step === 13 && (
                       <>
-                        <label
+                        {/* <label
                           htmlFor="projectBudget"
                           className="mb-2 block font-semibold"
                         >
                           What&apos;s your project budget?
-                        </label>
+                        </label> */}
                         <input
                           type="number"
                           name="projectBudget"
@@ -877,13 +877,13 @@ const Modal = () => {
                     )}
                     {step === 14 && (
                       <>
-                        <label
+                        {/* <label
                           htmlFor="needContent"
                           className="mb-2 block font-semibold"
                         >
                           Do you have content to use or want us to curate and
                           create your website content?
-                        </label>
+                        </label> */}
                         <select
                           name="needContent"
                           value={formData.needContent ? "true" : "false"} // Convert boolean to string for <select> value
@@ -910,12 +910,12 @@ const Modal = () => {
 
                     {step === 15 && (
                       <>
-                        <label
+                        {/* <label
                           htmlFor="needDomain"
                           className="mb-2 block font-semibold"
                         >
                           Do you own a domain name to be used for this project?
-                        </label>
+                        </label> */}
                         <select
                           name="needDomain"
                           value={formData.needDomain ? "true" : "false"} // Convert boolean to string for <select> value
@@ -941,12 +941,12 @@ const Modal = () => {
 
                     {step === 16 && (
                       <>
-                        <label
+                        {/* <label
                           htmlFor="needHosting"
                           className="mb-2 block font-semibold"
                         >
                           Do you have hosting for this project?
-                        </label>
+                        </label> */}
                         <select
                           name="needHosting"
                           value={formData.needHosting ? "true" : "false"} // Convert boolean to string for <select> value
@@ -973,12 +973,12 @@ const Modal = () => {
 
                     {step === 17 && (
                       <>
-                        <label
+                        {/* <label
                           htmlFor="needMarketing"
                           className="mb-2 block font-semibold"
                         >
                           Do you need online marketing for this project?
-                        </label>
+                        </label> */}
                         <select
                           name="needMarketing"
                           value={formData.needMarketing ? "Yes" : "No"} // Convert boolean to string
@@ -1006,13 +1006,13 @@ const Modal = () => {
 
                     {step === 18 && (
                       <>
-                        <label
+                        {/* <label
                           htmlFor="needOtherServices"
                           className="mb-2 block font-semibold"
                         >
                           Do you need any other services or have any specific
                           concerns?
-                        </label>
+                        </label> */}
                         <select
                           name="needOtherServices"
                           value={formData.needOtherServices ? "Yes" : "No"} // Convert boolean to string
@@ -1075,7 +1075,7 @@ const Modal = () => {
               {step === 19 && (
                 <div>
                   <h3 className="mb-6 text-xl font-semibold text-dark">
-                    Confirm Your Information
+                    Here&apos;s what we have so far ...
                   </h3>
                   <div className="mb-4 text-left">
                     {/* Full Name */}
