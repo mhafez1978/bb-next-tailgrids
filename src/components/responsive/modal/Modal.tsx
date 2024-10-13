@@ -427,7 +427,7 @@ const Modal = () => {
         <>
           <div className="fixed left-0 top-0 w-screen h-screen bg-black/80 z-40"></div>
           <div className="fixed left-0 top-0 flex w-screen h-screen items-center justify-center z-50">
-            <div className="relative w-[30vw] min-h-[30vh] rounded-2xl bg-white p-8 text-start shadow-xl overflow-auto">
+            <div className="relative w-[90vw] mx-auto min-h-[30vh] rounded-2xl bg-white p-8 text-start shadow-xl overflow-auto lg:w-[30vw]">
               <div className="absolute top-4 right-4 w-full text-right">
                 <button
                   onClick={handleModalToggle}
