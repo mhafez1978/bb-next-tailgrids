@@ -369,7 +369,7 @@ const Portfolio = () => {
                     className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "all"
                         ? "activeClasses bg-black text-white" // Keep text black for active
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-black" // Hover text stays black
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white" // Hover text stays black
                     }`}
                   >
                     All Projects
@@ -381,7 +381,7 @@ const Portfolio = () => {
                     className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "branding"
                         ? "activeClasses bg-black text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-black"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
                     Branding
@@ -393,7 +393,7 @@ const Portfolio = () => {
                     className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "design"
                         ? "activeClasses bg-black text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-black"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
                     Website Design
@@ -405,7 +405,7 @@ const Portfolio = () => {
                     className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "marketing"
                         ? "activeClasses bg-black text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-black"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
                     Online Marketing
@@ -417,7 +417,7 @@ const Portfolio = () => {
                     className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "development"
                         ? "activeClasses bg-black text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-black"
+                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
                     Full Stack Development
