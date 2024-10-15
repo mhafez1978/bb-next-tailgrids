@@ -368,7 +368,7 @@ const Portfolio = () => {
                     onClick={() => handleProject("all")}
                     className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "all"
-                        ? "activeClasses bg-black text-black" // Keep text black for active
+                        ? "activeClasses bg-black text-white" // Keep text black for active
                         : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-black" // Hover text stays black
                     }`}
                   >
@@ -380,7 +380,7 @@ const Portfolio = () => {
                     onClick={() => handleProject("branding")}
                     className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "branding"
-                        ? "activeClasses bg-black text-black"
+                        ? "activeClasses bg-black text-white"
                         : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-black"
                     }`}
                   >
@@ -392,7 +392,7 @@ const Portfolio = () => {
                     onClick={() => handleProject("design")}
                     className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "design"
-                        ? "activeClasses bg-black text-black"
+                        ? "activeClasses bg-black text-white"
                         : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-black"
                     }`}
                   >
@@ -404,7 +404,7 @@ const Portfolio = () => {
                     onClick={() => handleProject("marketing")}
                     className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "marketing"
-                        ? "activeClasses bg-black text-black"
+                        ? "activeClasses bg-black text-white"
                         : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-black"
                     }`}
                   >
@@ -416,7 +416,7 @@ const Portfolio = () => {
                     onClick={() => handleProject("development")}
                     className={`inline-block w-full rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "development"
-                        ? "activeClasses bg-black text-black"
+                        ? "activeClasses bg-black text-white"
                         : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-black"
                     }`}
                   >

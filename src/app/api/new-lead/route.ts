@@ -54,12 +54,12 @@ export async function POST(req: Request) {
     });
 
     const mailOptions = {
-      from: smtpUser,
+      from: email,
       to: smtpUser,
-      subject: "New Website Project Lead Intake Form",
+      subject: "New Website Customer Lead",
       html: `
         <br/>
-        <h1>New Website Project Lead Intake Form</h1>
+        <h1>New Website Customer Lead</h1>
         <hr/>
         <p><strong>Full Name:</strong> ${name}</p>
         <p><strong>Phone Number:</strong> ${phone}</p>
