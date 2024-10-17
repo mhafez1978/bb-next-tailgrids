@@ -1,0 +1,8 @@
+{
+  "github.copilot.enable": {
+    "jsx": true,
+    "tsx": true,
+    "javascript": true,
+    "typescript": true
+  }
+}
