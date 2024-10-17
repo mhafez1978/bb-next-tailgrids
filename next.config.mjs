@@ -50,6 +50,41 @@ const nextConfig = {
         hostname: "i.pravatar.cc", // Gravatar for author avatars
         pathname: "/**", // Allow all Pravatar images
       },
+      {
+        protocol: "https",
+        hostname: "picsum.photos", // Gravatar for author avatars
+        pathname: "/**", // Allow all Pravatar images
+      },
+      {
+        protocol: "https",
+        hostname: "media4.giphy.com", // Gravatar for author avatars
+        pathname: "/**", // Allow all Pravatar images
+      },
+      {
+        protocol: "https",
+        hostname: "media3.giphy.com", // Gravatar for author avatars
+        pathname: "/**", // Allow all Pravatar images
+      },
+      {
+        protocol: "https",
+        hostname: "media2.giphy.com", // Gravatar for author avatars
+        pathname: "/**", // Allow all Pravatar images
+      },
+      {
+        protocol: "https",
+        hostname: "media1.giphy.com", // Gravatar for author avatars
+        pathname: "/**", // Allow all Pravatar images
+      },
+      {
+        protocol: "https",
+        hostname: "media.giphy.com", // Gravatar for author avatars
+        pathname: "/**", // Allow all Pravatar images
+      },
+      {
+        protocol: "https",
+        hostname: "media0.giphy.com", // Gravatar for author avatars
+        pathname: "/**", // Allow all Pravatar images
+      },
     ],
   },
 };
