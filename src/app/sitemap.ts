@@ -12,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: "https://blooming-brands.com/about",
       lastModified: new Date(),
       changeFrequency: "monthly",
-      priority: 0.8,
+      priority: 0.6,
     },
     {
       url: "https://blooming-brands.com/services",
@@ -24,19 +24,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: "https://blooming-brands.com/services/website-design",
       lastModified: new Date(),
       changeFrequency: "monthly",
-      priority: 1,
+      priority: 0.9,
     },
     {
       url: "https://blooming-brands.com/services/wordpress-development",
       lastModified: new Date(),
       changeFrequency: "monthly",
-      priority: 1,
+      priority: 0.8,
     },
     {
       url: "https://blooming-brands.com/services/online-stores",
       lastModified: new Date(),
       changeFrequency: "monthly",
-      priority: 1,
+      priority: 0.7,
     },
     {
       url: "https://blooming-brands.com/services/online-marketing",
@@ -48,7 +48,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: "https://blooming-brands.com/services/content-curation",
       lastModified: new Date(),
       changeFrequency: "monthly",
-      priority: 1,
+      priority: 0.9,
     },
     {
       url: "https://blooming-brands.com/services/search-engine-optimization",
