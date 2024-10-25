@@ -139,7 +139,7 @@ const Accomplishments = () => {
             <h4 className="text-center mt-4 font-semibold">
               Years of Experience
             </h4>
-            <span className="font-black text-center text-4xl text-red-500 lg:text-[5rem]">
+            <span className="font-black text-center text-4xl text-white lg:text-[5rem]">
               {inView && <CountUp start={0} end={10} duration={6} suffix="+" />}
             </span>
           </div>
@@ -147,7 +147,7 @@ const Accomplishments = () => {
           {/* Active Projects */}
           <div className="flex flex-col-reverse items-center justify-center h-auto gap-4 px-4 pt-6 lg:pt-0">
             <h4 className="text-center mt-4 font-semibold">Active Projects</h4>
-            <span className="font-black text-center text-4xl text-red-500 lg:text-[5rem]">
+            <span className="font-black text-center text-4xl text-white lg:text-[5rem]">
               {inView && <CountUp start={0} end={3} duration={6} suffix="+" />}
             </span>
           </div>
@@ -155,7 +155,7 @@ const Accomplishments = () => {
           {/* Success Stories */}
           <div className="flex flex-col-reverse items-center justify-center h-auto gap-4 px-4 pt-6 lg:pt-0">
             <h4 className="text-center mt-4 font-semibold">Success Stories</h4>
-            <span className="font-black text-center text-4xl text-red-500 lg:text-[5rem]">
+            <span className="font-black text-center text-4xl text-white lg:text-[5rem]">
               {inView && <CountUp start={0} end={4} duration={6} suffix="+" />}
             </span>
           </div>
@@ -165,7 +165,7 @@ const Accomplishments = () => {
             <h4 className="text-center mt-4 font-semibold">
               Average Turnaround
             </h4>
-            <span className="font-black text-center text-4xl text-red-500 lg:text-[5rem]">
+            <span className="font-black text-center text-4xl text-white lg:text-[5rem]">
               {inView && <CountUp start={0} end={3} duration={8} suffix="+" />}
             </span>
           </div>

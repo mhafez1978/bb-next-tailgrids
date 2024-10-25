@@ -6,13 +6,15 @@ import Image from "next/image";
 
 interface HeaderProps {
   logo?: string;
+  darkLogo?: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ logo }) => {
+const Header: React.FC<HeaderProps> = ({ logo, darkLogo }) => {
   const [bgColor, setBgColor] = useState("bg-transparent");
   const [txtColor, setTxtColor] = useState("text-slate-800");
   const [iconColor, setIconColor] = useState("black");
   const [linkColor, setLinkColor] = useState("text-slate-800");
+  const [theLogo, setTheLogo] = useState(logo);
 
   const listenScrollEvent = () => {
     if (window.scrollY > 3) {
@@ -20,11 +22,13 @@ const Header: React.FC<HeaderProps> = ({ logo }) => {
       setLinkColor("text-slate-100");
       setTxtColor("text-slate-100");
       setIconColor("white");
+      setTheLogo(darkLogo);
     } else {
       setBgColor("bg-transparent");
       setLinkColor("text-slate-800");
       setTxtColor("text-slate-800");
       setIconColor("black");
+      setTheLogo(logo);
     }
   };
 
@@ -33,7 +37,7 @@ const Header: React.FC<HeaderProps> = ({ logo }) => {
     return () => {
       window.removeEventListener("scroll", listenScrollEvent);
     };
-  }, []);
+  }, [listenScrollEvent]);
 
   return (
     <section>
@@ -43,11 +47,11 @@ const Header: React.FC<HeaderProps> = ({ logo }) => {
         <div className="container h-full mx-auto flex flex-row justify-between items-center">
           {logo ? (
             <Image
-              width={360}
-              height={100}
-              src={logo}
+              width={200}
+              height={64}
+              {...(theLogo ? { src: theLogo } : { src: logo })}
               alt="logo"
-              className="w-2/3 h-[64px] border-2 border-red-400 lg:w-1/3"
+              className="w-[300px] h-[64px]"
             />
           ) : (
             <h1

@@ -24,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body>
-        <Header logo={""} />
+        <Header logo="/Blooming_Brands_Logo.png" darkLogo="/dark-logo.png" />
         {children}
         <Footer />
       </body>

@@ -91,6 +91,22 @@ const testimonials: Testimonial[] = [
     avatar: "https://i.pravatar.cc/150?Image=10",
     rating: 4.9,
   },
+  {
+    id: 11,
+    name: "Susan Lewis",
+    review:
+      "Our online marketing campaigns are successful thanks to their expertise.",
+    avatar: "https://i.pravatar.cc/150?Image=10",
+    rating: 4.9,
+  },
+  {
+    id: 12,
+    name: "Susan Lewis",
+    review:
+      "Our online marketing campaigns are successful thanks to their expertise.",
+    avatar: "https://i.pravatar.cc/150?Image=10",
+    rating: 4.9,
+  },
 ];
 
 const Testimonials: React.FC = () => {
@@ -178,7 +194,7 @@ const Testimonials: React.FC = () => {
   };
 
   return (
-    <section className="relative w-screen min-h-[50vh] bg-slate-800 text-slate-100 py-24 z-[50]">
+    <section className="relative w-screen min-h-[50vh] bg-slate-800 text-slate-100 py-24 z-[30]">
       <h3 className="text-lg capitalize mb-4 text-center">
         What our clients are saying
       </h3>
@@ -202,28 +218,6 @@ const Testimonials: React.FC = () => {
               }%)`,
             }}
           >
-            {/* Clone of the last testimonial */}
-            <div className="flex-none w-full lg:w-1/2 px-4">
-              <div className="p-6 bg-slate-100 rounded-lg shadow-lg text-black flex flex-col justify-center items-center">
-                <Image
-                  width={300}
-                  height={200}
-                  src={testimonials[testimonialLength - 1].avatar}
-                  alt={testimonials[testimonialLength - 1].name}
-                  className="w-16 h-16 rounded-full mb-4"
-                />
-                <h4 className="font-semibold text-lg mb-2">
-                  {testimonials[testimonialLength - 1].name}
-                </h4>
-                <div className="flex mb-4">
-                  {renderStars(testimonials[testimonialLength - 1].rating)}
-                </div>
-                <p className="text-gray-700">
-                  {testimonials[testimonialLength - 1].review}
-                </p>
-              </div>
-            </div>
-
             {/* Real testimonials */}
             {testimonials.map((testimonial) => (
               <div
@@ -248,26 +242,6 @@ const Testimonials: React.FC = () => {
                 </div>
               </div>
             ))}
-
-            {/* Clone of the first testimonial */}
-            <div className="flex-none w-full lg:w-1/2 px-4">
-              <div className="p-6 bg-slate-100 rounded-lg shadow-lg text-black flex flex-col justify-center items-center">
-                <Image
-                  width={300}
-                  height={200}
-                  src={testimonials[0].avatar}
-                  alt={testimonials[0].name}
-                  className="w-16 h-16 rounded-full mb-4"
-                />
-                <h4 className="font-semibold text-lg mb-2">
-                  {testimonials[0].name}
-                </h4>
-                <div className="flex mb-4">
-                  {renderStars(testimonials[0].rating)}
-                </div>
-                <p className="text-gray-700">{testimonials[0].review}</p>
-              </div>
-            </div>
           </div>
 
           {/* Arrows */}

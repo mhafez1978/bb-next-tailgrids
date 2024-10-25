@@ -11,6 +11,7 @@ import OurProcessTimeLine from "@/components/responsive/timeline/OurProcessTimeL
 import Testimonials from "@/components/responsive/testimonials/Testimonials";
 import Contact from "@/components/responsive/contact/Contact";
 import type { Metadata } from "next";
+//import Skeleton from "@/components/responsive/skelaton/Skelaton";
 
 export const metadata: Metadata = {
   title: "Blooming Brands | Home",

@@ -246,7 +246,7 @@ const Services = () => {
       <div className="container mx-auto">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
-            <div className="mx-auto mb-[60px] max-w-[600px] text-center lg:mb-[70px]">
+            <div className="mx-auto mb-[60px] max-w-[650px] text-center lg:mb-[70px]">
               <span className="mb-2 block text-lg font-semibold text-black capitalize">
                 Solutions to grow your business
               </span>
@@ -261,7 +261,7 @@ const Services = () => {
           </div>
         </div>
 
-        <div className="mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center z-30 lg:w-1/2 lg:mx-auto">
+        <div className="mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center z-30 lg:w-2/3 lg:mx-auto">
           <ServiceCard
             icon={<FaLaptopCode />}
             title="Website Design"
