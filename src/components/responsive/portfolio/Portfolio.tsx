@@ -420,7 +420,7 @@ const Portfolio = () => {
                         : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-black hover:text-white"
                     }`}
                   >
-                    Full Stack Development
+                    Full Stack
                   </button>
                 </li>
               </ul>
