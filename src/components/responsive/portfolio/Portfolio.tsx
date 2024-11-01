@@ -453,9 +453,9 @@ const Portfolio = () => {
               showCard={showCard}
             />
             <PortfolioCard
-              ImageHref="/ehab-01.png"
+              ImageHref="/hafez-design-studio.png"
               category="Design"
-              title="Captian Ehab Design Studio"
+              title="Hafez Design Studio"
               // button="View Details"
               // buttonHref="#"
               showCard={showCard}
