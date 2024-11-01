@@ -815,6 +815,21 @@ const Modal = () => {
                               Online Payment
                             </label>
                           </div>
+                          <div className="flex items-center">
+                            <input
+                              type="checkbox"
+                              name="featuresNeeded"
+                              value="Custom Function"
+                              checked={formData.featuresNeeded.includes(
+                                "Custom Function"
+                              )}
+                              onChange={handleFeaturesChange}
+                              className="form-checkbox"
+                            />
+                            <label htmlFor="featuresNeeded" className="ml-2">
+                              Custom Function
+                            </label>
+                          </div>
                           {/* Add more feature checkboxes as needed */}
                         </div>
                         {errors.featuresNeeded && (
@@ -876,28 +891,26 @@ const Modal = () => {
                         )}
                       </>
                     )}
+
                     {step === 14 && (
                       <>
-                        {/* <label
-                          htmlFor="needContent"
-                          className="mb-2 block font-semibold"
-                        >
-                          Do you have content to use or want us to curate and
-                          create your website content?
-                        </label> */}
                         <select
                           name="needContent"
-                          value={formData.needContent ? "true" : "false"} // Convert boolean to string for <select> value
-                          onChange={
-                            (e) =>
-                              setFormData({
-                                ...formData,
-                                needContent: e.target.value === "true",
-                              }) // Convert the string back to boolean
+                          value={
+                            formData.needContent !== null
+                              ? formData.needContent.toString()
+                              : ""
+                          } // Display selection
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              needContent: e.target.value === "true", // Convert string to boolean
+                            })
                           }
                           className="w-full rounded-md border px-4 py-3 mb-2"
                           required
                         >
+                          <option value="">Select an option</option>
                           <option value="false">I have content</option>
                           <option value="true">I need content creation</option>
                         </select>
@@ -929,6 +942,7 @@ const Modal = () => {
                           className="w-full rounded-md border px-4 py-3 mb-2"
                           required
                         >
+                          <option value="">Select an option</option>
                           <option value="false">I own a domain</option>
                           <option value="true">I need a domain</option>
                         </select>
