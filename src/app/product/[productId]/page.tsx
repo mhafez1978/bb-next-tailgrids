@@ -20,32 +20,30 @@ export default function ProductDetails() {
     if (!productId) return;
 
     const fetchProduct = async () => {
-      console.log("Fetching product with ID:", productId);
       try {
         setLoading(true);
         const response = await fetch(`/api/get-product/${productId}`, {
-          method: "POST",
+          method: "GET",
         });
 
+        const responseText = await response.text();
+        console.log("Response from API:", responseText);
+
         if (!response.ok) {
-          const { error } = await response.json();
-          console.error("API Error:", error);
-          throw new Error(error || "Failed to fetch product details.");
+          throw new Error(
+            `Failed to fetch product details. Status: ${response.status}`
+          );
         }
 
-        const data = await response.json();
-        console.log("Product data received:", data);
-
-        // Access the product details within the nested structure
-        const productData = data.products?.product[0];
-        if (productData) {
-          setProduct(productData);
-        } else {
-          throw new Error("Product not found");
-        }
-      } catch (error) {
+        const data = JSON.parse(responseText);
+        setProduct(data.product.products.product[0]); // Access the product object as needed
+      } catch (error: unknown) {
         console.error("Fetch Error:", error);
-        setError(`Error fetching product: ${(error as Error).message}`);
+        setError(
+          `Error fetching product: ${
+            error instanceof Error ? error.message : "Unknown error"
+          }`
+        );
       } finally {
         setLoading(false);
       }
@@ -54,18 +52,11 @@ export default function ProductDetails() {
     fetchProduct();
   }, [productId]);
 
-  if (loading)
-    return (
-      <div className="w-screen min-h-2/3 flex flex-col iems-center justify-center mt-[200px] mb-[200px]">
-        <div className="container mx-auto">
-          <h1 className="text-center">Loading ....</h1>
-        </div>
-      </div>
-    );
+  if (loading) return <div>Loading...</div>;
   if (error) return <div className="text-red-500">{error}</div>;
 
   return (
-    <div className="p-6 max-w-2xl mx-auto bg-white shadow-md rounded-lg mt-[200px] mb-[200px]">
+    <div className="p-6 max-w-2xl mx-auto bg-white shadow-md rounded-lg py-22 mt-[200px] mb-[200px] min-h-2/3">
       <h2 className="font-semibold text-2xl mb-4">{product?.name}</h2>
       <p className="text-gray-600 mb-4">{product?.description}</p>
       <a
