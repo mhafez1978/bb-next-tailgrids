@@ -175,46 +175,11 @@ const Modal = () => {
         projectBudget: "Please provide a budget for your project.",
       });
       return;
-    } else if (step === 14 && !formData.needContent) {
-      setErrors({
-        ...errors,
-        needContent:
-          "Please select whether you have content or need content creation.",
-      });
-      return;
-    } else if (step === 15 && !formData.needDomain) {
-      setErrors({
-        ...errors,
-        needDomain: "Please specify if you own a domain or need one.",
-      });
-      return;
-    } else if (step === 16 && !formData.needHosting) {
-      setErrors({
-        ...errors,
-        needHosting: "Please specify if you have hosting or need hosting.",
-      });
-      return;
-    } else if (step === 17 && !formData.needMarketing) {
-      setErrors({
-        ...errors,
-        needMarketing: "Please specify if you need online marketing services.",
-      });
-      return;
-    } else if (
-      step === 18 &&
-      formData.needOtherServices === true &&
-      !formData.otherServiceDetails
-    ) {
-      setErrors({
-        ...errors,
-        otherServiceDetails:
-          "Please provide details for other services if selected.",
-      });
-      return;
     }
 
     // Clear errors and move to the next step
     setFormData(sanitizedData);
+
     setErrors({
       name: "",
       email: "",
@@ -239,6 +204,7 @@ const Modal = () => {
       otherServiceDetails: "",
       projectType: "", // Ensure this field is reset as well
     });
+
     setStep((prevStep) => prevStep + 1);
   }, [formData, errors, step]);
 
@@ -274,14 +240,14 @@ const Modal = () => {
     setFormData({ ...formData, [name]: checked });
   };
 
-  const handleBothChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { checked } = e.target;
-    setFormData({
-      ...formData,
-      goods: checked,
-      services: checked,
-    });
-  };
+  // const handleBothChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { checked } = e.target;
+  //   setFormData({
+  //     ...formData,
+  //     goods: checked,
+  //     services: checked,
+  //   });
+  // };
 
   const handleConsentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsConsentChecked(e.target.checked);
@@ -594,7 +560,6 @@ const Modal = () => {
                               )}`}
                               value={formData.existingWebsiteUrl}
                               onChange={handleChange}
-                              required
                             />
                             <span className="text-red-600">
                               {errors.existingWebsiteUrl}
@@ -612,7 +577,6 @@ const Modal = () => {
                               )}`}
                               value={formData.businessName}
                               onChange={handleChange}
-                              required
                             />
                             <span className="text-red-600">
                               {errors.businessName}
@@ -653,20 +617,6 @@ const Modal = () => {
                               className="cursor-pointer"
                             >
                               Services
-                            </label>
-                          </div>
-
-                          <div className="flex items-center gap-2 mb-4">
-                            <input
-                              type="checkbox"
-                              name="both"
-                              value="both"
-                              checked={formData.both}
-                              onChange={handleBothChange}
-                              className="form-checkbox"
-                            />
-                            <label htmlFor="both" className="cursor-pointer">
-                              Both
                             </label>
                           </div>
                         </div>
@@ -900,17 +850,19 @@ const Modal = () => {
                             formData.needContent !== null
                               ? formData.needContent.toString()
                               : ""
-                          } // Display selection
+                          }
                           onChange={(e) =>
                             setFormData({
                               ...formData,
-                              needContent: e.target.value === "true", // Convert string to boolean
+                              needContent: e.target.value === "true", // Convert the string to a boolean
                             })
                           }
                           className="w-full rounded-md border px-4 py-3 mb-2"
                           required
                         >
-                          <option value="">Select an option</option>
+                          <option value="" disabled>
+                            Select an option
+                          </option>
                           <option value="false">I have content</option>
                           <option value="true">I need content creation</option>
                         </select>
