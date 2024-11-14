@@ -3,6 +3,7 @@ import PageTop from "@/components/responsive/page-top/PageTop";
 import Pagination from "@/components/pagination/Pagination";
 import Image from "next/image";
 import { Suspense } from "react";
+// import Link from "next/link";
 
 // Metadata for SEO
 export const metadata: Metadata = {
@@ -33,19 +34,17 @@ interface WordPressPost {
 
 // Define LatestNewsProps
 interface LatestNewsProps {
-  searchParams: Record<string, string | string[] | undefined>; // Search parameters
+  searchParams: Record<string, string | string[] | undefined>;
 }
 
 // Component to display the latest news with posts and pagination
 const LatestNewsRoll = async ({ searchParams }: LatestNewsProps) => {
-  // Handle pagination with default to page 1
   const page = parseInt(searchParams.page?.toString() || "1");
-  const perPage = 5;
+  const perPage = 6;
 
   try {
-    // Fetch posts data from WordPress API
     const data = await fetch(
-      `https://api.blooming-brands.com/wp-json/wp/v2/posts?page=${page}&per_page=${perPage}`
+      `https://api.blooming-brands.com/wp/wp-json/wp/v2/posts?page=${page}&per_page=${perPage}`
     );
 
     if (!data.ok) {
@@ -55,127 +54,114 @@ const LatestNewsRoll = async ({ searchParams }: LatestNewsProps) => {
     const posts = (await data.json()) as WordPressPost[];
     const totalPages = parseInt(data.headers.get("X-WP-TotalPages") || "1");
 
-    // Fetch media details function
-    const fetchMedia = async (mediaUrl: string) => {
-      try {
-        const mediaResponse = await fetch(mediaUrl);
-        if (!mediaResponse.ok) {
-          throw new Error("Media fetch failed");
-        }
+    const postsContent = await Promise.all(
+      posts.map(async (post: WordPressPost) => {
+        const mediaResponse = await fetch(post._links["wp:attachment"][0].href);
         const mediaData = await mediaResponse.json();
-        return mediaData.source_url || "";
-      } catch (error) {
-        console.error("Error fetching media:", error);
-        return "https://i.ibb.co/Cnwd4q6/image-01.jpg"; // Fallback image URL
-      }
-    };
+        const imageSrc =
+          Array.isArray(mediaData) && mediaData[0]?.source_url
+            ? mediaData[0].source_url
+            : "https://via.placeholder.com/600x400.png";
+
+        const authorResponse = await fetch(
+          `https://api.blooming-brands.com/wp/wp-json/wp/v2/users/${post.author}`
+        );
+        const authorData = await authorResponse.json();
+        const authorName = authorData?.name || "Unknown Author";
+
+        return (
+          <PostCard
+            key={post.id}
+            id={post.id}
+            date={new Date(post.date).toLocaleDateString()}
+            CardTitle={post.title.rendered}
+            CardDescription={
+              <div
+                className="excerpt-content"
+                dangerouslySetInnerHTML={{
+                  __html: post.excerpt.rendered.replace(
+                    /\[&hellip;\]|\[...\]/g,
+                    `... <a href="/latest-news/article/${post.id}" class="text-sky-600 dark:text-gray-400">Read more</a>`
+                  ),
+                }}
+              />
+            }
+            image={imageSrc}
+            author={authorName}
+          />
+        );
+      })
+    );
 
     return (
       <>
         <PageTop PageMessage="Latest News" />
         <section className="bg-white pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]">
           <div className="container mx-auto">
-            <div className="-mx-4 flex flex-wrap">
-              {await Promise.all(
-                posts.map(async (post: WordPressPost) => {
-                  let imageUrl = "https://i.ibb.co/Cnwd4q6/image-01.jpg";
-
-                  if (
-                    post._links["wp:attachment"] &&
-                    post._links["wp:attachment"].length > 0
-                  ) {
-                    const fetchedUrl = await fetchMedia(
-                      post._links["wp:attachment"][0].href
-                    );
-                    if (fetchedUrl) {
-                      imageUrl = fetchedUrl;
-                    }
-                  }
-
-                  return (
-                    <PostCard
-                      key={post.id}
-                      id={post.id}
-                      date={new Date(post.date).toLocaleDateString()}
-                      CardTitle={post.title.rendered}
-                      CardDescription={
-                        <div
-                          className="excerpt-content"
-                          dangerouslySetInnerHTML={{
-                            __html: post.excerpt.rendered,
-                          }}
-                        />
-                      }
-                      image={imageUrl}
-                    />
-                  );
-                })
-              )}
+            <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+              {postsContent}
             </div>
-
-            {/* Pagination */}
             <Pagination currentPage={page} totalPages={totalPages} />
           </div>
         </section>
       </>
     );
-  } catch (error) {
-    console.error("Error in LatestNewsRoll:", error);
+  } catch (error: unknown) {
     return (
-      <div className="text-center py-20">
-        <h2 className="text-xl font-bold">Failed to load news articles.</h2>
-        <p>Please try again later.</p>
+      <div className="text-center p-4 text-red-500">
+        {error instanceof Error ? error.message : "Failed to fetch posts"}
       </div>
     );
   }
 };
 
-// PostCard component for rendering individual posts
 const PostCard = ({
+  id,
+  author,
   image,
   date,
   CardTitle,
   CardDescription,
-  id,
 }: {
+  id: number;
+  author: string;
   image: string;
   date: string;
   CardTitle: string;
   CardDescription: React.ReactNode;
-  id: number;
 }) => {
   return (
-    <div className="w-full px-4 md:w-1/2 lg:w-1/3">
-      <div className="mb-10 w-full">
-        <div className="mb-8 overflow-hidden rounded">
+    // <Link href={`/latest-news/article/${id}`}>
+    <div key={id} id={id.toString()} className="w-full h-full flex flex-col">
+      <div className="mb-10 w-full h-full bg-white dark:bg-dark rounded shadow-md overflow-hidden flex flex-col justify-between">
+        <div className="overflow-hidden rounded-t h-64 flex-shrink-0">
           <Image
             src={image}
             alt=""
-            className="w-full"
-            width={400}
-            height={300}
+            className="w-full h-full object-cover"
+            width={600}
+            height={400}
           />
         </div>
-        <div>
+        <div className="py-4 px-4 flex flex-col justify-between flex-grow">
           {date && (
-            <span className="mb-5 inline-block rounded bg-black px-4 py-1 text-center text-xs font-semibold leading-loose text-white">
-              {date}
+            <span className="mb-2 inline-block rounded bg-black px-4 py-1 text-left text-xs font-semibold text-white">
+              Date Published: {date}
             </span>
           )}
-          <h3>
-            <a
-              href={`/latest-news/article/${id}`}
-              className="mb-4 inline-block text-xl font-semibold text-dark hover:text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl"
-            >
-              {CardTitle}
-            </a>
+          <div className="text-sm font-semibold text-sky-600 dark:text-gray-400">
+            <span className="text-black">Author:</span> {author}
+          </div>
+          <h3 className="mb-4 text-xl font-semibold text-dark dark:text-white">
+            {CardTitle}
           </h3>
-          <div className="text-base text-body-color dark:text-dark-6">
+          <div className="mb-4 text-base text-body-color dark:text-dark-6">
             {CardDescription}
           </div>
         </div>
       </div>
     </div>
+    // </Link>
   );
 };
 

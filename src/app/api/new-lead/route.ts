@@ -1,109 +1,191 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import axios from "axios";
+
+const senderEmail = process.env.SMTP_USER as string;
+
+interface FormData {
+  name: string;
+  phone: string;
+  email: string;
+  businessName?: string;
+  goods?: boolean;
+  services?: boolean;
+  both?: boolean;
+  websitePurpose?: string;
+  featuresNeeded?: string[];
+  projectTimeframe?: string;
+  projectBudget?: string;
+  idealCustomers?: string;
+  projectGoals?: string;
+  pagesNeeded?: number;
+  needContent?: boolean;
+  needDomain?: boolean;
+  needHosting?: boolean;
+  needMarketing?: boolean;
+  needMaintenance?: boolean;
+  needOtherServices?: boolean;
+  otherServiceDetails?: string;
+}
+
+async function getOAuthToken() {
+  const tenantId = process.env.APPTENANTID as string;
+  const clientId = process.env.APPCLIENTID as string;
+  const clientSecret = process.env.APPSECRET as string;
+
+  // Check that required environment variables are defined
+  if (!tenantId || !clientId || !clientSecret) {
+    console.error("Missing environment variables:", {
+      tenantId,
+      clientId,
+      clientSecret,
+    });
+    throw new Error("Missing required environment variables for OAuth");
+  }
+
+  try {
+    // Create URLSearchParams and append each parameter
+    const params = new URLSearchParams({
+      client_id: clientId,
+      client_secret: clientSecret,
+      scope: "https://graph.microsoft.com/.default",
+      grant_type: "client_credentials",
+    });
+
+    const response = await axios.post(
+      `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`,
+      params,
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }
+    );
+
+    return response.data.access_token;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Failed to obtain OAuth token");
+  }
+}
 
 export async function POST(req: Request) {
   try {
-    const formData = await req.json();
+    const formData: FormData = await req.json();
+    // const {
+    //   name,
+    //   phone,
+    //   email,
+    //   businessName,
+    //   goods,
+    //   services,
+    //   both,
+    //   websitePurpose,
+    //   featuresNeeded = [],
+    //   projectTimeframe,
+    //   projectBudget,
+    //   idealCustomers,
+    //   projectGoals,
+    //   pagesNeeded,
+    //   needContent,
+    //   needDomain,
+    //   needHosting,
+    //   needMarketing,
+    //   needMaintenance,
+    //   needOtherServices,
+    //   otherServiceDetails,
+    // } = formData;
 
-    // Debug log for formData
-    console.log("Form Data: ", formData);
+    // Email content in HTML
+    const emailContent = `
+      <br/>
+      <h1>New Website Customer Lead</h1>
+      <hr/>
+      <p><strong>Full Name:</strong> ${formData.name}</p>
+      <p><strong>Phone Number:</strong> ${formData.phone}</p>
+      <p><strong>Email Address:</strong> ${formData.email}</p>
+      <p><strong>Business Name:</strong> ${formData.businessName}</p>
+      <p><strong>Project Type:</strong>
+        ${formData.goods ? "Goods" : ""}
+        ${formData.services ? "Services" : ""}
+        ${formData.both ? "Both" : ""}
+      </p>
+      <p><strong>Ideal Customers (Age Range):</strong> ${
+        formData.idealCustomers
+      }</p>
+      <p><strong>Website Purpose:</strong> ${formData.websitePurpose}</p>
+      <p><strong>Project Goals:</strong> ${formData.projectGoals}</p>
+      <p><strong>Number of Pages:</strong> ${formData.pagesNeeded}</p>
+      <p><strong>Features Needed:</strong>
+      ${
+        Array.isArray(formData.featuresNeeded)
+          ? formData.featuresNeeded.join(", ")
+          : ""
+      }</p>
+      <p><strong>Timeframe & Budget:</strong>
+      ${formData.projectTimeframe} / $ ${formData.projectBudget}.00</p>
+      <p><strong>Need Content Creation:</strong> ${
+        formData.needContent ? "Yes" : "No"
+      }</p>
+      <p><strong>Own a Domain:</strong> ${
+        formData.needDomain ? "Yes" : "No"
+      }</p>
+      <p><strong>Have Hosting:</strong> ${
+        formData.needHosting ? "Yes" : "No"
+      }</p>
+      <p><strong>Need Online Marketing:</strong> ${
+        formData.needMarketing ? "Yes" : "No"
+      }</p>
+      <p><strong>Need Maintenance:</strong> ${
+        formData.needMaintenance ? "Yes" : "No"
+      }</p>
+      <p><strong>Need Other Services:</strong> ${
+        formData.needOtherServices ? "Yes" : "No"
+      }</p>
+      ${
+        formData.needOtherServices && formData.otherServiceDetails?.trim()
+          ? `<p><strong>Other Services Details:</strong><br/> ${formData.otherServiceDetails}</p>`
+          : ""
+      }
+      <p>End of lead.</p>
+    `;
 
-    const {
-      name,
-      phone,
-      email,
-      businessName,
-      goods,
-      services,
-      both,
-      websitePurpose,
-      featuresNeeded = [],
-      projectTimeframe,
-      projectBudget,
-      idealCustomers,
-      projectGoals,
-      pagesNeeded,
-      needContent,
-      needDomain,
-      needHosting,
-      needMarketing,
-      needMaintenance,
-      needOtherServices,
-      otherServiceDetails,
-    } = formData;
+    // Get OAuth token
+    const oAuthToken = await getOAuthToken();
 
-    // Debug log for other services
-    console.log("Need Other Services:", needOtherServices);
-    console.log("Other Services Details:", otherServiceDetails);
-
-    const smtpHost = process.env.SMTP_HOST;
-    const smtpPort = process.env.SMTP_PORT
-      ? parseInt(process.env.SMTP_PORT)
-      : 465;
-    const smtpUser = process.env.SMTP_USER;
-    const smtpPassword = process.env.SMTP_PASS;
-
-    const transporter = nodemailer.createTransport({
-      host: smtpHost,
-      port: smtpPort,
-      secure: true,
-      auth: {
-        user: smtpUser,
-        pass: smtpPassword,
+    // Email payload for Microsoft Graph
+    const emailPayload = {
+      message: {
+        subject: "New Website Customer Lead",
+        body: {
+          contentType: "HTML",
+          content: emailContent,
+        },
+        toRecipients: [
+          {
+            emailAddress: {
+              address: senderEmail, // Recipient email
+            },
+          },
+        ],
+        from: {
+          emailAddress: {
+            address: senderEmail, // Sender email
+          },
+        },
       },
-    });
-
-    const mailOptions = {
-      from: email,
-      to: smtpUser,
-      subject: "New Website Customer Lead",
-      html: `
-        <br/>
-        <h1>New Website Customer Lead</h1>
-        <hr/>
-        <p><strong>Full Name:</strong> ${name}</p>
-        <p><strong>Phone Number:</strong> ${phone}</p>
-        <p><strong>Email Address:</strong> ${email}</p>
-        <p><strong>Business Name:</strong> ${businessName}</p>
-        <p><strong>Project Type:</strong> 
-          ${goods ? "Goods" : ""} 
-          ${services ? "Services" : ""} 
-          ${both ? "Both" : ""}
-        </p>
-        <p><strong>Ideal Customers (Age Range):</strong> ${idealCustomers}</p>
-        <p><strong>Website Purpose:</strong> ${websitePurpose}</p>
-        <p><strong>Project Goals:</strong> ${projectGoals}</p>
-        <p><strong>Number of Pages:</strong> ${pagesNeeded}</p>
-        <p><strong>Features Needed:</strong> 
-        ${Array.isArray(featuresNeeded) ? featuresNeeded.join(", ") : ""}</p>
-        <p><strong>Timeframe & Budget:</strong> 
-        ${projectTimeframe} / ${projectBudget}</p>
-        <p><strong>Need Content Creation:</strong> ${
-          needContent ? "Yes" : "No"
-        }</p>
-        <p><strong>Own a Domain:</strong> ${needDomain ? "Yes" : "No"}</p>
-        <p><strong>Have Hosting:</strong> ${needHosting ? "Yes" : "No"}</p>
-        <p><strong>Need Online Marketing:</strong> ${
-          needMarketing ? "Yes" : "No"
-        }</p>
-        <p><strong>Need Maintenance:</strong> ${
-          needMaintenance ? "Yes" : "No"
-        }</p>
-        <p><strong>Need Other Services:</strong> ${
-          needOtherServices ? "Yes" : "No"
-        }</p>
-        ${
-          needOtherServices && otherServiceDetails?.trim()
-            ? `<p><strong>Other Services Details:</strong><br/> ${otherServiceDetails}</p>`
-            : ""
-        }
-        <p>
-        End of lead.
-        </p>
-      `,
     };
 
-    await transporter.sendMail(mailOptions);
+    // Send the email using Microsoft Graph API
+    const graphUrl = `https://graph.microsoft.com/v1.0/users/${encodeURIComponent(
+      senderEmail
+    )}/sendMail`;
+
+    await axios.post(graphUrl, emailPayload, {
+      headers: {
+        Authorization: `Bearer ${oAuthToken}`,
+        "Content-Type": "application/json",
+      },
+    });
 
     return NextResponse.json(
       { message: "Email sent successfully!" },
@@ -112,7 +194,6 @@ export async function POST(req: Request) {
   } catch (error) {
     console.error("Error sending email:", error);
 
-    // Type check and ensure error is an object with a `message`
     const errorMessage =
       error instanceof Error ? error.message : "Unknown error";
 
