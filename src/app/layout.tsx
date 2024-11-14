@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 
 import "./globals.css";
 import Header from "@/components/responsive/header/Header";
@@ -27,6 +28,11 @@ export default function RootLayout({
         <Header logo="/Blooming_Brands_Logo.png" darkLogo="/dark-logo.png" />
         {children}
         <Footer />
+        <Script
+          src="https://cdn.userway.org/widget.js"
+          data-account="MmYQdFTvmZ"
+          strategy="beforeInteractive"
+        />
       </body>
     </html>
   );
