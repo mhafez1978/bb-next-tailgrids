@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { GoogleAnalytics } from "@next/third-parties/google";
-
-import "./globals.css";
 import Header from "@/components/responsive/header/Header";
 import Footer from "@/components/responsive/footer/Footer";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Blooming Brands | ",
@@ -29,6 +28,14 @@ export default function RootLayout({
         <Header logo="/Blooming_Brands_Logo.png" darkLogo="/dark-logo.png" />
         {children}
         <Footer />
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-N8472QG7"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          ></iframe>
+        </noscript>
         <Script
           src="https://cdn.userway.org/widget.js"
           data-account="MmYQdFTvmZ"
@@ -37,6 +44,11 @@ export default function RootLayout({
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-7DSB7Y9V9X"
           strategy="beforeInteractive"
+        />
+        <Script
+          id="ga-script"
+          strategy="beforeInteractive"
+          src="https://www.googletagmanager.com/gtm.js?id=GTM-N8472QG7"
         />
         <GoogleAnalytics gaId="G-7DSB7Y9V9X" />
       </body>
