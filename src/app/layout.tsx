@@ -34,6 +34,10 @@ export default function RootLayout({
           data-account="MmYQdFTvmZ"
           strategy="beforeInteractive"
         />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-7DSB7Y9V9X"
+          strategy="beforeInteractive"
+        />
         <GoogleAnalytics gaId="G-7DSB7Y9V9X" />
       </body>
     </html>
