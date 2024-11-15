@@ -58,6 +58,10 @@ export default function RootLayout({
           src="https://www.googletagmanager.com/gtag/js?id=AW-16774657503"
           strategy="beforeInteractive"
         />
+        <Script
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266489978722809"
+          strategy="beforeInteractive"
+        />
         <GoogleAnalytics gaId="G-7DSB7Y9V9X" />
       </body>
     </html>
