@@ -44,7 +44,7 @@ const LatestNewsRoll = async ({ searchParams }: LatestNewsProps) => {
 
   try {
     const data = await fetch(
-      `https://api.blooming-brands.com/wp/wp-json/wp/v2/posts?order=desc&page=${page}&per_page=${perPage}`
+      `https://api.blooming-brands.com/wp/wp-json/wp/v2/posts?order=desc&status=publish&page=${page}&per_page=${perPage}`
     );
 
     if (!data.ok) {
@@ -86,7 +86,7 @@ const LatestNewsRoll = async ({ searchParams }: LatestNewsProps) => {
                 }}
               />
             }
-            image={imageSrc}
+            image={imageSrc || "https://via.placeholder.com/600x400.png"}
             author={authorName}
           />
         );
