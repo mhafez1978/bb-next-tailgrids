@@ -11,6 +11,7 @@ import OurProcessTimeLine from "@/components/responsive/timeline/OurProcessTimeL
 import Testimonials from "@/components/responsive/testimonials/Testimonials";
 import Contact from "@/components/responsive/contact/Contact";
 import type { Metadata } from "next";
+import CookiesConcentNotice from "@/components/responsive/concent/CookiesConcentNotice";
 //import Skeleton from "@/components/responsive/skelaton/Skelaton";
 
 export const metadata: Metadata = {
@@ -39,6 +40,7 @@ export default function Home() {
       <Offer />
       <Testimonials />
       <Contact />
+      <CookiesConcentNotice />
     </>
   );
 }
