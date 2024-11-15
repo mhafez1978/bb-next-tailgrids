@@ -50,6 +50,10 @@ export default function RootLayout({
           strategy="beforeInteractive"
           src="https://www.googletagmanager.com/gtm.js?id=GTM-N8472QG7"
         />
+        <Script
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266489978722809"
+          strategy="beforeInteractive"
+        />
         <GoogleAnalytics gaId="G-7DSB7Y9V9X" />
       </body>
     </html>
