@@ -92,7 +92,7 @@
 // }
 
 export async function GET() {
-  const baseUrl = process.env.BASE_URL || "http://localhost:3000"; // Use environment variables for flexibility
+  const baseUrl = process.env.BASE_URL || "http://api.blooming-brands.com"; // Use environment variables for flexibility
 
   try {
     // Fetch posts from your `/api/latest-news` route
