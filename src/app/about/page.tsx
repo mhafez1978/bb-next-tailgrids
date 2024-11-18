@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-//import GetPageName from "../util/getPageName";
+// import GetPageName from "../util/getPageName";
 import About from "@/components/responsive/about/About";
 import PageTop from "@/components/responsive/page-top/PageTop";
+// import NewsletterSignup from "@/components/responsive/newsletter/NewsletterForm";
+import NewsletterSignup2 from "@/components/responsive/newsletter/NewsletterForm2";
 
 export const metadata: Metadata = {
   title: "Blooming Brands | About us",
@@ -22,6 +24,8 @@ const page = () => {
         <PageTop PageMessage="About us" />
         <About />
       </div>
+      {/* <NewsletterSignup /> */}
+      <NewsletterSignup2 />
     </>
   );
 };

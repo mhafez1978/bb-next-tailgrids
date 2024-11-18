@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Services from "@/components/responsive/services/Services";
 //import GetPageName from "../util/getPageName";
 import PageTop from "@/components/responsive/page-top/PageTop";
+import NewsLetterForm2 from "@/components/responsive/newsletter/NewsletterForm2";
 
 export const metadata: Metadata = {
   title: "Blooming Brands | Our Services",
@@ -22,6 +23,7 @@ const page = () => {
         <PageTop PageMessage="Our Services" />
         <Services />
       </div>
+      <NewsLetterForm2 />
     </>
   );
 };

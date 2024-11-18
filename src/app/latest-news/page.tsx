@@ -4,6 +4,7 @@ import Pagination from "@/components/pagination/Pagination";
 import Image from "next/image";
 import { Suspense } from "react";
 // import Link from "next/link";
+import NewsLetterForm2 from "@/components/responsive/newsletter/NewsletterForm2";
 
 // Metadata for SEO
 export const metadata: Metadata = {
@@ -96,6 +97,7 @@ const LatestNewsRoll = async ({ searchParams }: LatestNewsProps) => {
     return (
       <>
         <PageTop PageMessage="Latest News" />
+
         <section className="bg-white pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]">
           <div className="container mx-auto">
             <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
@@ -104,9 +106,10 @@ const LatestNewsRoll = async ({ searchParams }: LatestNewsProps) => {
             <Pagination currentPage={page} totalPages={totalPages} />
           </div>
         </section>
+        <NewsLetterForm2 />
       </>
     );
-  } catch (error: unknown) {
+  } catch (error) {
     return (
       <div className="text-center p-4 text-red-500">
         {error instanceof Error ? error.message : "Failed to fetch posts"}

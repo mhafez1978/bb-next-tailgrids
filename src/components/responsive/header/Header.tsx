@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import MobileMenu from "../mobile-menu/MobileMenu";
 import DesktopMenu from "../desktop-menu/DesktopMenu";
 import Image from "next/image";
+import Link from "next/link";
 
 interface HeaderProps {
   logo?: string;
@@ -45,22 +46,23 @@ const Header: React.FC<HeaderProps> = ({ logo, darkLogo }) => {
         className={`fixed top-0 w-screen h-[64px] ${bgColor} px-4 z-40 lg:px-0`}
       >
         <div className="container h-full mx-auto flex flex-row justify-between items-center">
-          {logo ? (
-            <Image
-              width={200}
-              height={64}
-              {...(theLogo ? { src: theLogo } : { src: logo })}
-              alt="logo"
-              className="w-[300px] h-[64px]"
-            />
-          ) : (
-            <h1
-              className={`w-2/3 text-xl font-black uppercase lg:w-1/3 ${txtColor}`}
-            >
-              Blooming Brands
-            </h1>
-          )}
-
+          <Link href="/">
+            {logo ? (
+              <Image
+                width={200}
+                height={64}
+                {...(theLogo ? { src: theLogo } : { src: logo })}
+                alt="logo"
+                className="w-[300px] h-[64px]"
+              />
+            ) : (
+              <h1
+                className={`w-2/3 text-xl font-black uppercase lg:w-1/3 ${txtColor}`}
+              >
+                Blooming Brands
+              </h1>
+            )}
+          </Link>
           <div
             className={`desktopMenu hidden ${txtColor} uppercase lg:flex lg:flex-row lg:w-2/3 lg:justify-end lg:text-xl`}
           >

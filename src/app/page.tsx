@@ -12,6 +12,7 @@ import Testimonials from "@/components/responsive/testimonials/Testimonials";
 import Contact from "@/components/responsive/contact/Contact";
 import type { Metadata } from "next";
 import CookiesConcentNotice from "@/components/responsive/concent/CookiesConcentNotice";
+import NewsLetterForm2 from "@/components/responsive/newsletter/NewsletterForm2";
 //import Skeleton from "@/components/responsive/skelaton/Skelaton";
 
 export const metadata: Metadata = {
@@ -40,6 +41,7 @@ export default function Home() {
       <Offer />
       <Testimonials />
       <Contact />
+      <NewsLetterForm2 />
       <CookiesConcentNotice />
     </>
   );
