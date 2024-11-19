@@ -190,11 +190,126 @@
 //     .replace(/'/g, "&apos;");
 // }
 
+// export async function GET() {
+//   const baseUrl = process.env.BASE_URL || "https://api.blooming-brands.com";
+
+//   try {
+//     // Fetch posts from your WordPress API
+//     const response = await fetch(`${baseUrl}/wp/wp-json/wp/v2/posts`);
+
+//     if (!response.ok) {
+//       throw new Error(`Failed to fetch posts: ${response.statusText}`);
+//     }
+
+//     const posts = await response.json();
+
+//     // Function to get file size
+//     async function getFileSize(url: string): Promise<number | null> {
+//       try {
+//         const headResponse = await fetch(url, { method: "HEAD" });
+//         const contentLength = headResponse.headers.get("content-length");
+//         return contentLength ? parseInt(contentLength, 10) : null;
+//       } catch {
+//         return null;
+//       }
+//     }
+
+//     // Build the RSS feed dynamically
+//     const items = await Promise.all(
+//       posts.map(
+//         async (post: {
+//           title: string | undefined;
+//           id: string;
+//           excerpt: string | undefined;
+//           date: string;
+//           author: string | undefined;
+//           category: string | undefined;
+//           featured_image: string | undefined;
+//         }) => {
+//           const featuredImage = post.featured_image ?? "";
+//           const fileSize = featuredImage
+//             ? await getFileSize(featuredImage)
+//             : null;
+
+//           return `
+//           <item>
+//             <title>${escapeXml(post.title ?? "No Title")}</title>
+//             <link>${baseUrl}/latest-news/${post.id}</link>
+//             <description>${escapeXml(
+//               post.excerpt ?? "No Description"
+//             )}</description>
+//             <pubDate>${new Date(post.date).toUTCString()}</pubDate>
+//             <author>${escapeXml(post.author ?? "Unknown Author")}</author>
+//             <category>${escapeXml(post.category ?? "General")}</category>
+//             <enclosure url="${featuredImage}" type="image/jpeg" length="${
+//             fileSize ?? 0
+//           }" />
+//           </item>
+//         `;
+//         }
+//       )
+//     );
+
+//     // Final RSS feed
+//     const rss = `<?xml version="1.0" encoding="UTF-8" ?>
+//     <rss version="2.0">
+//       <channel>
+//         <title>Blooming Brands LLC RSS Feed</title>
+//         <link>${baseUrl}/latest-news</link>
+//         <description>Latest News from Boston's Blooming Brands LLC. A Web Design And Online Marketing Agency....</description>
+//         <language>en</language>
+//         ${items.join("")}
+//       </channel>
+//     </rss>`;
+
+//     return new Response(rss, {
+//       headers: {
+//         "Content-Type": "text/xml",
+//       },
+//     });
+//   } catch (error) {
+//     console.error("Failed to generate RSS feed:", error);
+
+//     const errorMessage =
+//       error instanceof Error ? error.message : "An unknown error occurred";
+
+//     return new Response(
+//       `<?xml version="1.0" encoding="UTF-8" ?>
+//       <rss version="2.0">
+//         <channel>
+//           <title>Error Generating RSS Feed</title>
+//           <link>${baseUrl}/latest-news</link>
+//           <description>${escapeXml(errorMessage)}</description>
+//           <language>en</language>
+//         </channel>
+//       </rss>`,
+//       {
+//         headers: {
+//           "Content-Type": "text/xml",
+//         },
+//         status: 500,
+//       }
+//     );
+//   }
+// }
+
+// // Function to escape special XML characters
+// function escapeXml(unsafe: string): string {
+//   if (typeof unsafe !== "string") {
+//     return ""; // Return an empty string for non-string inputs
+//   }
+//   return unsafe
+//     .replace(/&/g, "&amp;")
+//     .replace(/</g, "&lt;")
+//     .replace(/>/g, "&gt;")
+//     .replace(/"/g, "&quot;")
+//     .replace(/'/g, "&apos;");
+// }
+
 export async function GET() {
   const baseUrl = process.env.BASE_URL || "https://api.blooming-brands.com";
 
   try {
-    // Fetch posts from your WordPress API
     const response = await fetch(`${baseUrl}/wp/wp-json/wp/v2/posts`);
 
     if (!response.ok) {
@@ -203,7 +318,6 @@ export async function GET() {
 
     const posts = await response.json();
 
-    // Function to get file size
     async function getFileSize(url: string): Promise<number | null> {
       try {
         const headResponse = await fetch(url, { method: "HEAD" });
@@ -214,7 +328,6 @@ export async function GET() {
       }
     }
 
-    // Build the RSS feed dynamically
     const items = await Promise.all(
       posts.map(
         async (post: {
@@ -223,6 +336,7 @@ export async function GET() {
           excerpt: string | undefined;
           date: string;
           author: string | undefined;
+          authorEmail: string | undefined;
           category: string | undefined;
           featured_image: string | undefined;
         }) => {
@@ -233,24 +347,28 @@ export async function GET() {
 
           return `
           <item>
-            <title>${escapeXml(post.title ?? "No Title")}</title>
+            <title>${escapeXml(post.title ?? "Untitled Post")}</title>
             <link>${baseUrl}/latest-news/${post.id}</link>
             <description>${escapeXml(
               post.excerpt ?? "No Description"
             )}</description>
             <pubDate>${new Date(post.date).toUTCString()}</pubDate>
-            <author>${escapeXml(post.author ?? "Unknown Author")}</author>
+            <author>${post.authorEmail ?? "info@blooming-brands.com"}</author>
             <category>${escapeXml(post.category ?? "General")}</category>
-            <enclosure url="${featuredImage}" type="image/jpeg" length="${
-            fileSize ?? 0
-          }" />
+            ${
+              featuredImage
+                ? `<enclosure url="${featuredImage}" type="image/jpeg" length="${
+                    fileSize ?? 0
+                  }" />`
+                : ""
+            }
+            <guid isPermaLink="true">${baseUrl}/latest-news/${post.id}</guid>
           </item>
         `;
         }
       )
     );
 
-    // Final RSS feed
     const rss = `<?xml version="1.0" encoding="UTF-8" ?>
     <rss version="2.0">
       <channel>
@@ -258,6 +376,7 @@ export async function GET() {
         <link>${baseUrl}/latest-news</link>
         <description>Latest News from Boston's Blooming Brands LLC. A Web Design And Online Marketing Agency....</description>
         <language>en</language>
+        <atom:link href="${baseUrl}/rss.xml" rel="self" type="application/rss+xml" xmlns:atom="http://www.w3.org/2005/Atom" />
         ${items.join("")}
       </channel>
     </rss>`;
@@ -269,35 +388,11 @@ export async function GET() {
     });
   } catch (error) {
     console.error("Failed to generate RSS feed:", error);
-
-    const errorMessage =
-      error instanceof Error ? error.message : "An unknown error occurred";
-
-    return new Response(
-      `<?xml version="1.0" encoding="UTF-8" ?>
-      <rss version="2.0">
-        <channel>
-          <title>Error Generating RSS Feed</title>
-          <link>${baseUrl}/latest-news</link>
-          <description>${escapeXml(errorMessage)}</description>
-          <language>en</language>
-        </channel>
-      </rss>`,
-      {
-        headers: {
-          "Content-Type": "text/xml",
-        },
-        status: 500,
-      }
-    );
+    return new Response("Error generating feed.", { status: 500 });
   }
 }
 
-// Function to escape special XML characters
 function escapeXml(unsafe: string): string {
-  if (typeof unsafe !== "string") {
-    return ""; // Return an empty string for non-string inputs
-  }
   return unsafe
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
