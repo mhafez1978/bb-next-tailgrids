@@ -91,12 +91,14 @@
 //     .replace(/'/g, "&apos;");
 // }
 
+//api.blooming-brands.com/wp/wp-json/wp/v2/posts
+
 export async function GET() {
-  const baseUrl = process.env.BASE_URL || "http://api.blooming-brands.com"; // Use environment variables for flexibility
+  const baseUrl = process.env.BASE_URL || "https://api.blooming-brands.com"; // Use environment variables for flexibility
 
   try {
     // Fetch posts from your `/api/latest-news` route
-    const response = await fetch(`${baseUrl}/api/latest-news`);
+    const response = await fetch(`${baseUrl}/wp/wp-json/wp/v2/posts`);
 
     if (!response.ok) {
       throw new Error(`Failed to fetch posts: ${response.statusText}`);
