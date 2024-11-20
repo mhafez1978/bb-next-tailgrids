@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { GoogleTagManager } from "@next/third-parties/google";
+
 import Header from "@/components/responsive/header/Header";
 import Footer from "@/components/responsive/footer/Footer";
 import "./globals.css";
@@ -63,6 +65,7 @@ export default function RootLayout({
           strategy="beforeInteractive"
         />
         <GoogleAnalytics gaId="G-7DSB7Y9V9X" />
+        <GoogleTagManager gtmId="GTM-N8472QG7" />
       </body>
     </html>
   );
