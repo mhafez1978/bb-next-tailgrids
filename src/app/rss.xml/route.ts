@@ -202,24 +202,53 @@ export async function GET() {
       },
       {}
     );
+    function convertRelativeUrlsToAbsolute(
+      content: string,
+      baseUrl: string
+    ): string {
+      return content.replace(/href="\/(.*?)"/g, (match, path) => {
+        return `href="${baseUrl}/${path}"`;
+      });
+    }
 
     // Initialize the RSS feed
     const feed = new Feed({
       title: "Blooming Brands LLC RSS Feed",
       description:
         "Latest News from Boston's Blooming Brands LLC. A Web Design and Online Marketing Agency.",
-      id: "https://api.blooming-brands.com/rss.xml",
-      link: "https://api.blooming-brands.com/rss.xml",
+      id: "https://api.blooming-brands.com/rss.xml", // Ensure this is the correct feed URL
+      link: "https://api.blooming-brands.com/rss.xml", // Ensure this is correct
       language: "en",
       copyright: `Copyright ${new Date().getFullYear()} Blooming Brands LLC`,
       updated: new Date(),
       generator: "Feed for Node.js",
       feedLinks: {
-        rss: "https://api.blooming-brands.com/rss.xml",
+        rss: "https://api.blooming-brands.com/rss.xml", // Ensure this matches exactly
       },
     });
 
     // Add posts to the feed
+    // posts.forEach((post: Post) => {
+    //   const author = userMap[post.author] || {
+    //     name: "Unknown Author",
+    //     email: "unknown@blooming-brands.com",
+    //   };
+
+    //   feed.addItem({
+    //     title: post.title.rendered || "Untitled Post",
+    //     id: `https://api.blooming-brands.com/latest-news/${post.id}`,
+    //     link: `https://api.blooming-brands.com/latest-news/${post.id}`,
+    //     description: post.excerpt.rendered || "No Description",
+    //     content: post.content.rendered || "No Content",
+    //     author: [
+    //       {
+    //         name: author.name,
+    //         email: author.email,
+    //       },
+    //     ],
+    //     date: new Date(post.date),
+    //   });
+    // });
     posts.forEach((post: Post) => {
       const author = userMap[post.author] || {
         name: "Unknown Author",
@@ -230,8 +259,14 @@ export async function GET() {
         title: post.title.rendered || "Untitled Post",
         id: `https://api.blooming-brands.com/latest-news/${post.id}`,
         link: `https://api.blooming-brands.com/latest-news/${post.id}`,
-        description: post.excerpt.rendered || "No Description",
-        content: post.content.rendered || "No Content",
+        description: convertRelativeUrlsToAbsolute(
+          post.excerpt.rendered || "No Description",
+          "https://blooming-brands.com"
+        ),
+        content: convertRelativeUrlsToAbsolute(
+          post.content.rendered || "No Content",
+          "https://blooming-brands.com"
+        ),
         author: [
           {
             name: author.name,
