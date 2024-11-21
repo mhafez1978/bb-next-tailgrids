@@ -1,6 +1,7 @@
 type User = {
   id: number;
   name: string;
+  slug: string;
 };
 
 type Post = {
@@ -29,7 +30,7 @@ export async function GET() {
 
   // Map users by their ID for quick lookup
   const usersMap = users.reduce((map: Record<number, string>, user) => {
-    map[user.id] = user.name;
+    map[user.id] = user.slug;
     return map;
   }, {});
 
@@ -51,7 +52,7 @@ export async function GET() {
           <title>${sanitizedTitle}</title>
           <link>${frontendLink}</link>
           <description><![CDATA[${sanitizedDescription}]]></description>
-          <author>${authorName}</author>
+          <author>${authorName}@blooming-brands.com</author>
           <pubDate>${new Date(post.date).toUTCString()}</pubDate>
           <guid isPermaLink="true">${frontendLink}</guid>
         </item>
