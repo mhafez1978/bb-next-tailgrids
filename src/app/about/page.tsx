@@ -23,6 +23,16 @@ const page = () => {
       <div className="min-h-[50vh] mt-[63px]">
         <PageTop PageMessage="About us" />
         <About />
+        <div className="min-h-[20vh] w-screen mt-10 mb-10">
+          <ins
+            className="adsbygoogle"
+            style={{ display: "block" }}
+            data-ad-client="ca-pub-1266489978722809"
+            data-ad-slot="8088782196"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          ></ins>
+        </div>
       </div>
       {/* <NewsletterSignup /> */}
       <NewsletterSignup2 />

@@ -6,6 +6,7 @@ import { GoogleTagManager } from "@next/third-parties/google";
 import Header from "@/components/responsive/header/Header";
 import Footer from "@/components/responsive/footer/Footer";
 import "./globals.css";
+import Adsense from "@/components/adsense/Adsense";
 
 export const metadata: Metadata = {
   title: "Blooming Brands | ",
@@ -26,6 +27,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <Adsense publisher_id="1266489978722809" />
+      </head>
       <body>
         <Header logo="/Blooming_Brands_Logo.png" darkLogo="/dark-logo.png" />
         {children}
@@ -43,17 +47,19 @@ export default function RootLayout({
           data-account="MmYQdFTvmZ"
           strategy="beforeInteractive"
         />
-        <Script
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266489978722809"
-          strategy="beforeInteractive"
-        />
-        <Script
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266489978722809"
-          strategy="beforeInteractive"
-        />
+
+        <Script id="adsbygoogle" async strategy="afterInteractive">
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </Script>
+
+        {/* G-7DSB7Y9V9X */}
         <GoogleAnalytics gaId="G-7DSB7Y9V9X" />
+        {/* GTM-N8472QG7 */}
         <GoogleTagManager gtmId="GTM-N8472QG7" />
+        {/* AW-16774657503 */}
         <GoogleTagManager gtmId="AW-16774657503" />
+        <GoogleTagManager gtmId="GT-NB9WLNG3" />
+        {/* GT-NB9WLNG3 */}
       </body>
     </html>
   );
