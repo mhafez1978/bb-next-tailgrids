@@ -44,20 +44,7 @@ export default function RootLayout({
           strategy="beforeInteractive"
         />
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-7DSB7Y9V9X"
-          strategy="beforeInteractive"
-        />
-        <Script
-          id="ga-script"
-          strategy="beforeInteractive"
-          src="https://www.googletagmanager.com/gtm.js?id=GTM-N8472QG7"
-        />
-        <Script
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266489978722809"
-          strategy="beforeInteractive"
-        />
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=AW-16774657503"
           strategy="beforeInteractive"
         />
         <Script
@@ -66,6 +53,7 @@ export default function RootLayout({
         />
         <GoogleAnalytics gaId="G-7DSB7Y9V9X" />
         <GoogleTagManager gtmId="GTM-N8472QG7" />
+        <GoogleTagManager gtmId="AW-16774657503" />
       </body>
     </html>
   );
