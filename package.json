@@ -28,6 +28,7 @@
     "framer-motion": "^11.9.0",
     "lucide-react": "^0.446.0",
     "next": "14.2.13",
+    "next-secure-headers": "^2.2.0",
     "nodemailer": "^6.9.15",
     "react": "^18",
     "react-countup": "^6.5.3",

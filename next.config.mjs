@@ -1,3 +1,4 @@
+import { createSecureHeaders } from "next-secure-headers";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -104,6 +105,18 @@ const nextConfig = {
             value:
               "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
           },
+        ],
+      },
+      {
+        source: "/(.*)",
+        headers: [
+          ...createSecureHeaders({
+            // HSTS Preload: https://hstspreload.org/
+            forceHTTPSRedirect: [
+              true,
+              { maxAge: 63072000, includeSubDomains: true, preload: true },
+            ],
+          }),
         ],
       },
     ];
