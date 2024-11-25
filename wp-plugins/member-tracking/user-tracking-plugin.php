@@ -187,6 +187,46 @@ add_action('rest_api_init', function () {
 
 // Fetch Logs
 // Fetch Logs and adjust date/time to user's local timezone
+// function usertrack_fetch_logs() {
+//     global $wpdb;
+
+//     $login_logs_table = $wpdb->prefix . 'usertrack_login_logs';
+//     $registration_logs_table = $wpdb->prefix . 'usertrack_registration_logs';
+//     $users_table = $wpdb->prefix . 'users';
+
+//     // Fetch the timezone offset from the request headers
+//     $timezone_offset = isset($_SERVER['HTTP_X_TIMEZONE_OFFSET']) ? intval($_SERVER['HTTP_X_TIMEZONE_OFFSET']) : 0;
+
+//     // Fetch login logs
+//     $login_logs = $wpdb->get_results("
+//         SELECT u.user_email, l.login_time
+//         FROM $login_logs_table AS l
+//         JOIN $users_table AS u ON l.user_id = u.ID
+//         ORDER BY l.login_time DESC
+//     ");
+
+//     // Fetch registration logs
+//     $registration_logs = $wpdb->get_results("
+//         SELECT u.user_email, r.registration_time
+//         FROM $registration_logs_table AS r
+//         JOIN $users_table AS u ON r.user_id = u.ID
+//         ORDER BY r.registration_time DESC
+//     ");
+
+//     // Format the date and time for each log entry based on the user's timezone
+//     foreach ($login_logs as &$log) {
+//         $log->login_time = format_datetime_to_timezone($log->login_time, $timezone_offset);
+//     }
+
+//     foreach ($registration_logs as &$log) {
+//         $log->registration_time = format_datetime_to_timezone($log->registration_time, $timezone_offset);
+//     }
+
+//     return new WP_REST_Response([
+//         'login_logs' => $login_logs,
+//         'registration_logs' => $registration_logs,
+//     ], 200);
+// }
 function usertrack_fetch_logs() {
     global $wpdb;
 
@@ -194,8 +234,8 @@ function usertrack_fetch_logs() {
     $registration_logs_table = $wpdb->prefix . 'usertrack_registration_logs';
     $users_table = $wpdb->prefix . 'users';
 
-    // Fetch the timezone offset from the request headers
-    $timezone_offset = isset($_SERVER['HTTP_X_TIMEZONE_OFFSET']) ? intval($_SERVER['HTTP_X_TIMEZONE_OFFSET']) : 0;
+    // Fetch the timezone from WordPress settings
+    $timezone = get_option('timezone_string', 'UTC'); // Default to 'UTC' if no timezone is set
 
     // Fetch login logs
     $login_logs = $wpdb->get_results("
@@ -213,13 +253,13 @@ function usertrack_fetch_logs() {
         ORDER BY r.registration_time DESC
     ");
 
-    // Format the date and time for each log entry based on the user's timezone
+    // Format the date and time for each log entry based on the WordPress timezone
     foreach ($login_logs as &$log) {
-        $log->login_time = format_datetime_to_timezone($log->login_time, $timezone_offset);
+        $log->login_time = format_datetime_to_timezone($log->login_time, $timezone);
     }
 
     foreach ($registration_logs as &$log) {
-        $log->registration_time = format_datetime_to_timezone($log->registration_time, $timezone_offset);
+        $log->registration_time = format_datetime_to_timezone($log->registration_time, $timezone);
     }
 
     return new WP_REST_Response([
@@ -228,12 +268,65 @@ function usertrack_fetch_logs() {
     ], 200);
 }
 
+
 // Helper function to format datetime to the user's local timezone
-function format_datetime_to_timezone($datetime, $timezone_offset) {
-    $date = new DateTime($datetime, new DateTimeZone('UTC')); // Assuming stored time is in UTC
-    $date->modify($timezone_offset > 0 ? "+{$timezone_offset} minutes" : "{$timezone_offset} minutes"); // Apply the offset
-    return $date->format('F j, Y g:i A'); // Format to 'Month Day, Year Hour:Minute AM/PM'
+// function format_datetime_to_timezone($datetime, $timezone_offset) {
+//     $date = new DateTime($datetime, new DateTimeZone('UTC')); // Assuming stored time is in UTC
+//     $date->modify($timezone_offset > 0 ? "+{$timezone_offset} minutes" : "{$timezone_offset} minutes"); // Apply the offset
+//     return $date->format('F j, Y g:i A'); // Format to 'Month Day, Year Hour:Minute AM/PM'
+// }
+
+// function format_datetime_to_timezone($datetime) {
+//     // Get the WordPress configured timezone
+//     $timezone = get_option('timezone_string', 'UTC'); // Default to UTC if no timezone is set
+
+//     // If WordPress timezone is not set (empty), use UTC
+//     if (empty($timezone)) {
+//         $timezone = 'UTC';
+//     }
+
+//     // Create a DateTime object using UTC (assuming the datetime stored is in UTC)
+//     $date = new DateTime($datetime, new DateTimeZone('UTC'));
+
+//     // Convert to the specified timezone
+//     $date->setTimezone(new DateTimeZone($timezone));
+
+//     // Return the formatted date/time in 'Month Day, Year Hour:Minute AM/PM' format
+//     return $date->format('F j, Y g:i A');
+// }
+
+// function format_datetime_to_timezone($datetime) {
+//     // Get WordPress configured timezone (should be 'America/New_York' if set to Eastern New York)
+//     $timezone = get_option('timezone_string', 'New York'); // Default to 'America/New_York'
+
+//     // Create DateTime object using the provided datetime (stored as UTC)
+//     $date = new DateTime($datetime, new DateTimeZone('UTC')); // Assuming the datetime stored is UTC
+
+//     // Convert the datetime to Eastern New York timezone (or whatever WordPress timezone is set to)
+//     $date->setTimezone(new DateTimeZone($timezone));
+
+//     // Return the formatted date/time in 'Month Day, Year Hour:Minute AM/PM' format
+//     return $date->format('F j, Y g:i A');
+// }
+
+function format_datetime_to_timezone($datetime) {
+    // Force the timezone to America/New_York (Eastern Time)
+    $timezone = 'America/New_York';  // Eastern Standard Time or Eastern Daylight Time
+
+    // Create a DateTime object in UTC (assuming the datetime stored is in UTC)
+    $date = new DateTime($datetime, new DateTimeZone('UTC'));
+
+    // Set the timezone to Eastern Time (America/New_York)
+    $date->setTimezone(new DateTimeZone($timezone));
+
+    // Return the formatted date/time in 'Month Day, Year Hour:Minute AM/PM' format
+    return $date->format('F j, Y g:i A');
 }
+
+
+
+
+
 
 
 // Log Events
