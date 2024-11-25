@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
 
     // Send the email to the WordPress API
     const response = await fetch(
-      `https://api.blooming-brands.com/wp/wp-json/newsletter/v2/signup`,
+      `${process.env.WORDPRESS_URL}/wp-json/newsletter/v2/signup`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
