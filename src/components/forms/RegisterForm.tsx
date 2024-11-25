@@ -1,200 +1,80 @@
 "use client";
 
-import React, { useState } from "react";
-import ResponsiveSection from "@/components/responsive/section/ResponsiveSection";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { useContext, useState } from "react";
+import { AuthContext } from "@/app/context/AuthContext";
 
-const RegisterForm = () => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    username: "",
-    password: "",
-    repeatPassword: "",
-    consent: false,
-  });
+export default function RegisterForm() {
+  const { register } = useContext(AuthContext);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [error, setError] = useState("");
 
-  const [errors, setErrors] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    username: "",
-    password: "",
-    repeatPassword: "",
-  });
-
-  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const validateForm = () => {
-    const newErrors = {
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      username: "",
-      password: "",
-      repeatPassword: "",
-    };
-
-    if (formData.firstName.trim().length < 2) {
-      newErrors.firstName = "at least 2 characters long.";
-    }
-    if (formData.lastName.trim().length < 2) {
-      newErrors.lastName = "at least 2 characters long.";
-    }
-    if (formData.username.trim().length < 5) {
-      newErrors.username = "at least 5 characters long.";
-    }
-    if (!formData.email.includes("@") || !formData.email.includes(".")) {
-      newErrors.email = "Valid email address needed.";
-    }
-    if (formData.password !== formData.repeatPassword) {
-      newErrors.repeatPassword = "Passwords do not match.";
-    }
-    if (formData.password.length < 8) {
-      newErrors.password = "at least 8 characters long.";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleRegister = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (validateForm()) {
-      alert(JSON.stringify(formData, null, 2));
+    setError("");
+    setSuccessMessage("");
+
+    try {
+      const message = await register(username, password, email);
+      setSuccessMessage(message);
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message || "Registration failed.");
+      } else {
+        setError("Registration failed.");
+      }
     }
   };
 
   return (
-    <ResponsiveSection>
-      <div className="w-1/4 mx-auto">
-        <form className="flex flex-col" onSubmit={handleRegister}>
-          <div className="flex flex-row justify-between items-center">
-            <Label htmlFor="firstName" className="mb-2">
-              First Name
-            </Label>
-            {errors.firstName && (
-              <span className="text-red-500 text-sm">{errors.firstName}</span>
-            )}
-          </div>
-          <Input
-            id="firstName"
-            name="firstName"
+    <div className="w-screen min-h-[100vh] flex flex-col justify-center">
+      <div className="max-w-md h-[38vh] mx-auto p-4 bg-gray-100 rounded-lg shadow">
+        <h2 className="text-xl font-bold mb-4 text-center">Register</h2>
+        <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
+          <input
             type="text"
-            placeholder="enter your first name"
-            className="mb-4"
-            onChange={handleFormChange}
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
           />
-
-          <Label htmlFor="lastName" className="mb-2">
-            Last Name
-          </Label>
-          {errors.lastName && (
-            <span className="text-red-500 text-sm">{errors.lastName}</span>
-          )}
-          <Input
-            id="lastName"
-            name="lastName"
-            type="text"
-            placeholder="enter your last name"
-            className="mb-4"
-            onChange={handleFormChange}
-          />
-
-          <Label htmlFor="email" className="mb-2">
-            Email
-          </Label>
-          {errors.email && (
-            <span className="text-red-500 text-sm">{errors.email}</span>
-          )}
-          <Input
-            id="email"
-            name="email"
-            type="text"
-            placeholder="enter your email"
-            className="mb-4"
-            onChange={handleFormChange}
-          />
-
-          <Label htmlFor="phone" className="mb-2">
-            Phone
-          </Label>
-          <Input
-            id="phone"
-            name="phone"
-            type="text"
-            placeholder="enter your phone number"
-            className="mb-4"
-            onChange={handleFormChange}
-          />
-
-          <Label htmlFor="username" className="mb-2">
-            Username
-          </Label>
-          {errors.username && (
-            <span className="text-red-500 text-sm">{errors.username}</span>
-          )}
-          <Input
-            id="username"
-            name="username"
-            type="text"
-            placeholder="enter your username"
-            className="mb-4"
-            onChange={handleFormChange}
-          />
-
-          <Label htmlFor="password" className="mb-2">
-            Password
-          </Label>
-          {errors.password && (
-            <span className="text-red-500 text-sm">{errors.password}</span>
-          )}
-          <Input
-            id="password"
-            name="password"
+          <input
             type="password"
-            placeholder="Enter your password"
-            className="mb-4"
-            onChange={handleFormChange}
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
           />
-
-          <Input
-            id="repeatPassword"
-            name="repeatPassword"
-            type="password"
-            placeholder="Enter your password again"
-            className="mb-2"
-            onChange={handleFormChange}
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
           />
-          {errors.repeatPassword && (
-            <span className="text-red-500 text-sm">
-              {errors.repeatPassword}
-            </span>
+          {error && <p className="text-red-500">{error}</p>}
+          {successMessage && (
+            <p className="text-green-500">
+              {successMessage}.{" "}
+              <a href="/login" className="underline">
+                Login here
+              </a>
+              .
+            </p>
           )}
-
-          <div className="w-full items-center flex flex-col lg:flex-row gap-4 mt-4">
-            <Button type="submit" size={"lg"} className="text-white">
-              Register
-            </Button>
-            <a href="/login" className="alert text-white text-sm">
-              Have an account already? Login here.
-            </a>
-          </div>
+          <button
+            type="submit"
+            className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
+          >
+            Register
+          </button>
         </form>
       </div>
-    </ResponsiveSection>
+    </div>
   );
-};
-
-export default RegisterForm;
+}

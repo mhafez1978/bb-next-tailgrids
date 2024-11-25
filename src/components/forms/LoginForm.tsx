@@ -1,68 +1,61 @@
 "use client";
 
-import React, { useState } from "react";
-import ResponsiveSection from "@/components/responsive/section/ResponsiveSection";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { useContext, useState } from "react";
+import { AuthContext } from "@/app/context/AuthContext";
 
-const LoginForm = () => {
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-  });
-  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-    //console.log({ formData });
-  };
-  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+export default function LoginForm() {
+  const { login } = useContext(AuthContext);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log({ formData });
+    setError("");
+
+    try {
+      await login(username, password);
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message || "Login failed.");
+      } else {
+        setError("Login failed.");
+      }
+    }
   };
 
   return (
     <>
-      <ResponsiveSection>
-        <div className="w-1/4 mx-auto">
-          <form className="flex flex-col" onSubmit={handleLogin}>
-            <Label htmlFor="username" className="mb-2">
-              Username
-            </Label>
-            <Input
-              id="username"
-              name="username"
+      <div className="py-40 min-h-[100vh] flex flex-col justify-center">
+        <div className="max-w-lg h-[30vh] mx-auto p-4 bg-gray-100 rounded-lg shadow">
+          <h2 className="text-xl font-bold mb-4 text-center">Login</h2>
+          <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
+            <input
               type="text"
-              placeholder="enter your username"
-              className="mb-4"
-              onChange={handleFormChange}
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
             />
-            <Label htmlFor="password" className="mb-2">
-              Password
-            </Label>
-            <Input
-              id="password"
-              name="password"
+            <input
               type="password"
-              placeholder="password"
-              className="mb-8"
-              onChange={handleFormChange}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
             />
-            <div className="w-full items-center flex flex-col lg:flex-row gap-4">
-              <Button size={"lg"} className="text-white">
-                Login
-              </Button>
-              <a href="/register" className="alert text-white text-sm">
-                Don&apos;t have an account ? Register Account today.
-              </a>
-            </div>
+            {error && <p className="text-red-500">{error}</p>}
+            <button
+              type="submit"
+              className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+            >
+              Login
+            </button>
           </form>
         </div>
-      </ResponsiveSection>
+      </div>
     </>
   );
-};
-
-export default LoginForm;
+}

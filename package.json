@@ -26,6 +26,7 @@
     "emailjs": "^4.0.3",
     "feed": "^4.2.2",
     "framer-motion": "^11.9.0",
+    "jwt-decode": "^4.0.0",
     "lucide-react": "^0.446.0",
     "next": "14.2.13",
     "next-secure-headers": "^2.2.0",
