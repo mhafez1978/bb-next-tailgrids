@@ -1,14 +1,30 @@
 <?php
 /**
- * Plugin Name: Enhanced JWT Management Plugin with TailwindCSS
- * Description: A plugin to manage JWT tokens with admin controls, REST API endpoints, secure token handling, and TailwindCSS UI.
- * Version: 2.3
+ * Plugin Name: Enhanced JWT Management Plugin
+ * Description: A plugin to manage JWT tokens with admin controls, REST API endpoints, and secure token handling.
+ * Version: 2.2
  * Author: Mohamed Hafez
  *
- * API Routes:
+ * API Routes (exposed when JWT is enabled):
  * - POST /wp-json/jwt/v1/login
+ *   Description: Authenticate a user and generate a JWT token.
+ *   Request Body: { "username": "user", "password": "password" }
+ *   Response: { "token": "JWT_TOKEN", "expires_in": 3600 }
+ *
  * - POST /wp-json/jwt/v1/register
+ *   Description: Register a new user and generate a JWT token.
+ *   Request Body: { "username": "newuser", "password": "password", "email": "user@example.com" }
+ *   Response: { "token": "JWT_TOKEN", "expires_in": 3600 }
+ *
  * - POST /wp-json/jwt/v1/refresh
+ *   Description: Refresh an existing JWT token.
+ *   Request Body: { "token": "EXISTING_JWT_TOKEN" }
+ *   Response: { "token": "NEW_JWT_TOKEN", "expires_in": 3600 }
+ *
+ * Notes:
+ * - These API routes are only available when JWT is enabled via the admin interface.
+ * - When JWT is disabled, the routes are dynamically unregistered.
+ * - Admin interface allows toggling JWT, generating tokens, and validating tokens manually.
  */
 
 if (!defined('ABSPATH')) exit;
@@ -90,16 +106,6 @@ function is_jwt_enabled() {
     return get_option('jwt_plugin_status', false);
 }
 
-// Enqueue TailwindCSS
-add_action('admin_enqueue_scripts', function () {
-    wp_enqueue_style(
-        'tailwindcss',
-        'https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css',
-        [],
-        null
-    );
-});
-
 // Admin Menu
 add_action('admin_menu', function () {
     add_menu_page(
@@ -108,8 +114,8 @@ add_action('admin_menu', function () {
         'manage_options',
         'jwt-management',
         'jwt_management_admin_page',
-        'dashicons-admin-tools',
-        100
+		'dashicons-admin-tools',
+		100
     );
 });
 
@@ -166,6 +172,15 @@ function jwt_management_admin_page() {
         }
     }
 
+    // Enqueue TailwindCSS
+    wp_enqueue_script(
+        'tailwindcss',
+        'https://cdn.tailwindcss.com',
+        [],
+        null,
+        true
+    );
+
     ?>
     <div class="max-w-4xl mx-auto p-6 bg-gray-100 rounded-lg shadow-lg">
         <h1 class="text-2xl font-bold mb-4">JWT Management</h1>
@@ -179,37 +194,41 @@ function jwt_management_admin_page() {
             <p class="mt-2">Status: <strong><?php echo $jwt_status ? 'Enabled' : 'Disabled'; ?></strong></p>
         </form>
 
+        <!-- Show Message When JWT is Disabled -->
         <?php if (!$jwt_status): ?>
             <p class="text-red-500 mb-6">
                 JWT is currently disabled. Please enable it to generate or validate tokens.
             </p>
         <?php endif; ?>
 
-        <?php if ($jwt_status): ?>
         <!-- Generate Token -->
         <form method="post" class="mb-6">
             <h2 class="text-lg font-semibold mb-2">Generate Token</h2>
             <label for="username" class="block text-sm font-medium">Username:</label>
-            <input type="text" id="username" name="username" required class="border border-gray-300 rounded px-4 py-2 mb-2 w-full">
+            <input type="text" id="username" name="username" required class="border border-gray-300 rounded px-4 py-2 mb-2 w-full" <?php echo !$jwt_status ? 'disabled' : ''; ?> />
             <label for="password" class="block text-sm font-medium">Password:</label>
-            <input type="password" id="password" name="password" required class="border border-gray-300 rounded px-4 py-2 mb-4 w-full">
+            <input type="password" id="password" name="password" required class="border border-gray-300 rounded px-4 py-2 mb-4 w-full" <?php echo !$jwt_status ? 'disabled' : ''; ?> />
             <button type="submit" name="generate_token"
-                    class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                    class="<?php echo $jwt_status ? 'bg-green-500 text-white hover:bg-green-600' : 'bg-gray-300 text-gray-500 cursor-not-allowed'; ?> px-4 py-2 rounded"
+                    <?php echo !$jwt_status ? 'disabled' : ''; ?>>
                 Generate Token
             </button>
         </form>
         <?php if ($token_response): ?>
             <p><strong>Generated Token:</strong></p>
-            <pre class="bg-gray-200 p-4 rounded text-wrap break-all"><?php echo esc_html($token_response); ?></pre>
+            <div class="overflow-hidden">
+                <pre class="bg-gray-200 p-4 rounded text-wrap break-all"><?php echo esc_html($token_response); ?></pre>
+            </div>
         <?php endif; ?>
 
         <!-- Validate Token -->
         <form method="post" class="mb-6">
             <h2 class="text-lg font-semibold mb-2">Validate Token</h2>
             <label for="token" class="block text-sm font-medium">Token:</label>
-            <textarea id="token" name="token" required class="border border-gray-300 rounded px-4 py-2 mb-4 w-full"></textarea>
+            <textarea id="token" name="token" required class="border border-gray-300 rounded px-4 py-2 mb-4 w-full" <?php echo !$jwt_status ? 'disabled' : ''; ?>></textarea>
             <button type="submit" name="validate_token"
-                    class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">
+                    class="<?php echo $jwt_status ? 'bg-yellow-500 text-white hover:bg-yellow-600' : 'bg-gray-300 text-gray-500 cursor-not-allowed'; ?> px-4 py-2 rounded"
+                    <?php echo !$jwt_status ? 'disabled' : ''; ?>>
                 Validate Token
             </button>
         </form>
@@ -217,12 +236,10 @@ function jwt_management_admin_page() {
             <p><strong>Token Details:</strong></p>
             <pre class="bg-gray-200 p-4 rounded break-all"><?php echo esc_html($validation_response); ?></pre>
         <?php endif; ?>
-        <?php endif; ?>
     </div>
     <?php
 }
 
-// Add REST API routes and token handling (login, register, refresh).
 // REST API Routes
 add_action('rest_api_init', function () {
     if (!is_jwt_enabled()) {
@@ -268,7 +285,7 @@ function handle_jwt_login(WP_REST_Request $request) {
     $payload = [
         'iss' => get_bloginfo('url'),
         'iat' => time(),
-        'exp' => time() + 3600, // Access token valid for 1 hour
+        'exp' => time() + 3600,
         'user' => [
             'id' => $user->ID,
             'login' => $user->user_login,
@@ -277,19 +294,6 @@ function handle_jwt_login(WP_REST_Request $request) {
     ];
 
     $token = JWT::encode($payload, $jwt_secret_key, 'HS256');
-
-    // Generate a refresh token
-    $refresh_token = bin2hex(random_bytes(32)); // Secure random token
-    update_user_meta($user->ID, 'refresh_token', $refresh_token);
-
-    // Set the refresh token as a secure, HttpOnly cookie
-    setcookie('refreshToken', $refresh_token, [
-        'expires' => time() + (7 * 24 * 60 * 60), // Valid for 7 days
-        'path' => '/',
-        'httponly' => true,
-        'secure' => is_ssl(),
-        'samesite' => 'Strict',
-    ]);
 
     return new WP_REST_Response(['token' => $token, 'expires_in' => 3600], 200);
 }
@@ -325,19 +329,6 @@ function handle_jwt_register(WP_REST_Request $request) {
 
         $token = JWT::encode($payload, $jwt_secret_key, 'HS256');
 
-        // Generate a refresh token for the new user
-        $refresh_token = bin2hex(random_bytes(32));
-        update_user_meta($user_id, 'refresh_token', $refresh_token);
-
-        // Set the refresh token as a secure, HttpOnly cookie
-        setcookie('refreshToken', $refresh_token, [
-            'expires' => time() + (7 * 24 * 60 * 60), // Valid for 7 days
-            'path' => '/',
-            'httponly' => true,
-            'secure' => is_ssl(),
-            'samesite' => 'Strict',
-        ]);
-
         return new WP_REST_Response(['token' => $token, 'expires_in' => 3600], 200);
     } else {
         return new WP_REST_Response(['error' => 'Username or email already exists'], 409);
@@ -345,88 +336,28 @@ function handle_jwt_register(WP_REST_Request $request) {
 }
 
 // Handle Refresh API
-// function handle_jwt_refresh(WP_REST_Request $request) {
-//     if (!is_jwt_enabled()) {
-//         return new WP_REST_Response(['error' => 'JWT functionality is disabled.'], 403);
-//     }
-
-//     // Get refresh token from cookie
-//     $refresh_token = $_COOKIE['refreshToken'] ?? null;
-
-//     if (!$refresh_token) {
-//         return new WP_REST_Response(['error' => 'Refresh token missing.'], 401);
-//     }
-
-//     // Validate refresh token
-//     $user_query = new WP_User_Query([
-//         'meta_key' => 'refresh_token',
-//         'meta_value' => sanitize_text_field($refresh_token),
-//         'number' => 1,
-//     ]);
-//     $users = $user_query->get_results();
-
-//     if (empty($users)) {
-//         return new WP_REST_Response(['error' => 'Invalid refresh token.'], 403);
-//     }
-
-//     $user = $users[0];
-
-//     $jwt_secret_key = get_option('jwt_secret_key', '');
-//     $payload = [
-//         'iss' => get_bloginfo('url'),
-//         'iat' => time(),
-//         'exp' => time() + 3600, // New access token valid for 1 hour
-//         'user' => [
-//             'id' => $user->ID,
-//             'login' => $user->user_login,
-//             'email' => $user->user_email,
-//         ],
-//     ];
-
-//     $new_token = JWT::encode($payload, $jwt_secret_key, 'HS256');
-
-//     return new WP_REST_Response(['token' => $new_token, 'expires_in' => 3600], 200);
-// }
-
 function handle_jwt_refresh(WP_REST_Request $request) {
     if (!is_jwt_enabled()) {
         return new WP_REST_Response(['error' => 'JWT functionality is disabled.'], 403);
     }
 
-    // Get refresh token from cookie
-    $refresh_token = $_COOKIE['refreshToken'] ?? null;
-
-    if (!$refresh_token) {
-        return new WP_REST_Response(['error' => 'Refresh token missing.'], 401);
-    }
-
-    // Validate refresh token
-    $user_query = new WP_User_Query([
-        'meta_key' => 'refresh_token',
-        'meta_value' => sanitize_text_field($refresh_token),
-        'number' => 1,
-    ]);
-    $users = $user_query->get_results();
-
-    if (empty($users)) {
-        return new WP_REST_Response(['error' => 'Invalid refresh token.'], 403);
-    }
-
-    $user = $users[0];
+    $params = $request->get_json_params();
+    $token = sanitize_text_field($params['token'] ?? '');
 
     $jwt_secret_key = get_option('jwt_secret_key', '');
-    $payload = [
-        'iss' => get_bloginfo('url'),
-        'iat' => time(),
-        'exp' => time() + 3600, // New access token valid for 1 hour
-        'user' => [
-            'id' => $user->ID,
-            'login' => $user->user_login,
-            'email' => $user->user_email,
-        ],
-    ];
 
-    $new_token = JWT::encode($payload, $jwt_secret_key, 'HS256');
+    try {
+        $decoded = JWT::decode($token, $jwt_secret_key, ['HS256']);
+        $decoded_array = (array) $decoded;
 
-    return new WP_REST_Response(['token' => $new_token], 200);
+        // Refresh the token
+        $decoded_array['iat'] = time();
+        $decoded_array['exp'] = time() + 3600;
+
+        $new_token = JWT::encode($decoded_array, $jwt_secret_key, 'HS256');
+
+        return new WP_REST_Response(['token' => $new_token, 'expires_in' => 3600], 200);
+    } catch (Exception $e) {
+        return new WP_REST_Response(['error' => $e->getMessage()], 403);
+    }
 }

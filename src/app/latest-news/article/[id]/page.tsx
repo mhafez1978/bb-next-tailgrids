@@ -12,7 +12,7 @@ const Post = async ({ params }: { params: { id: string } }) => {
   try {
     // Fetch the current post using the post ID from params
     const data = await fetch(
-      `https://api.blooming-brands.com/wp/wp-json/wp/v2/posts/${params.id}?_embed`
+      `https://api.blooming-brands.com/wp-json/wp/v2/posts/${params.id}?_embed`
     );
     const post = await data.json();
 
@@ -23,7 +23,7 @@ const Post = async ({ params }: { params: { id: string } }) => {
 
     // Fetch all posts to find the next and previous posts
     const allPostsRes = await fetch(
-      `https://api.blooming-brands.com/wp/wp-json/wp/v2/posts?per_page=100`
+      `https://api.blooming-brands.com/wp-json/wp/v2/posts?per_page=100`
     );
     const allPosts = await allPostsRes.json();
 
@@ -46,7 +46,7 @@ const Post = async ({ params }: { params: { id: string } }) => {
     let tagsData: Tag[] = [];
     if (post.tags.length > 0) {
       const tagsRes = await fetch(
-        `https://api.blooming-brands.com/wp/wp-json/wp/v2/tags?include=${post.tags.join(
+        `https://api.blooming-brands.com/wp-json/wp/v2/tags?include=${post.tags.join(
           ","
         )}`
       );

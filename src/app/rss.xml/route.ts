@@ -14,10 +14,10 @@ type Post = {
 
 export async function GET() {
   const postsResponse = await fetch(
-    "https://api.blooming-brands.com/wp/wp-json/wp/v2/posts"
+    "https://api.blooming-brands.com/wp-json/wp/v2/posts"
   );
   const usersResponse = await fetch(
-    "https://api.blooming-brands.com/wp/wp-json/wp/v2/users"
+    "https://api.blooming-brands.com/wp-json/wp/v2/users"
   );
 
   // Validate API responses

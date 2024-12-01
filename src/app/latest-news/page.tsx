@@ -45,7 +45,7 @@ const LatestNewsRoll = async ({ searchParams }: LatestNewsProps) => {
 
   try {
     const data = await fetch(
-      `https://api.blooming-brands.com/wp/wp-json/wp/v2/posts?order=desc&status=publish&page=${page}&per_page=${perPage}`
+      `https://api.blooming-brands.com/wp-json/wp/v2/posts?order=desc&status=publish&page=${page}&per_page=${perPage}`
     );
 
     if (!data.ok) {
@@ -65,7 +65,7 @@ const LatestNewsRoll = async ({ searchParams }: LatestNewsProps) => {
             : "https://via.placeholder.com/600x400.png";
 
         const authorResponse = await fetch(
-          `https://api.blooming-brands.com/wp/wp-json/wp/v2/users/${post.author}`
+          `https://api.blooming-brands.com/wp-json/wp/v2/users/${post.author}`
         );
         const authorData = await authorResponse.json();
         const authorName = authorData?.name || "Unknown Author";

@@ -23,14 +23,6 @@ const Error = () => {
         <div className="-mx-4 flex flex-wrap items-center">
           <div className="w-full px-4 md:w-5/12 lg:w-6/12">
             <div className="text-center">
-              {/* <Image
-                width={600}
-                height={900}
-                src="https://cdn.tailgrids.com/2.0/image/application/images/404/image-01.svg"
-                alt="image"
-                className="mx-auto max-w-full"
-              /> */}
-              {/* <RandomImage /> */}
               <RandomFunnyImage />
             </div>
           </div>
