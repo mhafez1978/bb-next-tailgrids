@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import PageTop from "@/components/responsive/page-top/PageTop";
 import Pagination from "@/components/pagination/Pagination";
-import Image from "next/image";
+//import Image from "next/image";
 import { Suspense } from "react";
 // import Link from "next/link";
 import NewsLetterForm2 from "@/components/responsive/newsletter/NewsletterForm2";
@@ -26,10 +26,10 @@ interface WordPressPost {
   title: { rendered: string };
   excerpt: { rendered: string };
   content: { rendered: string };
-  featured_image?: string;
-  author: number;
-  _links: {
-    "wp:attachment": Array<{ href: string }>;
+  post_featured_image?: string;
+  author_details: {
+    name: string;
+    avatar: string;
   };
 }
 
@@ -44,64 +44,48 @@ const LatestNewsRoll = async ({ searchParams }: LatestNewsProps) => {
   const perPage = 6;
 
   try {
-    const data = await fetch(
-      `https://api.blooming-brands.com/wp-json/wp/v2/posts?order=desc&status=publish&page=${page}&per_page=${perPage}`
+    const response = await fetch(
+      `https://api.blooming-brands.com/wp-json/wp/v2/posts?page=${page}&per_page=${perPage}`
     );
 
-    if (!data.ok) {
+    if (!response.ok) {
       throw new Error("Failed to fetch posts");
     }
 
-    const posts = (await data.json()) as WordPressPost[];
-    const totalPages = parseInt(data.headers.get("X-WP-TotalPages") || "1");
-
-    const postsContent = await Promise.all(
-      posts.map(async (post: WordPressPost) => {
-        const mediaResponse = await fetch(post._links["wp:attachment"][0].href);
-        const mediaData = await mediaResponse.json();
-        const imageSrc =
-          Array.isArray(mediaData) && mediaData[0]?.source_url
-            ? mediaData[0].source_url
-            : "https://via.placeholder.com/600x400.png";
-
-        const authorResponse = await fetch(
-          `https://api.blooming-brands.com/wp-json/wp/v2/users/${post.author}`
-        );
-        const authorData = await authorResponse.json();
-        const authorName = authorData?.name || "Unknown Author";
-
-        return (
-          <PostCard
-            key={post.id}
-            id={post.id}
-            date={new Date(post.date).toLocaleDateString()}
-            CardTitle={post.title.rendered}
-            CardDescription={
-              <div
-                className="excerpt-content"
-                dangerouslySetInnerHTML={{
-                  __html: post.excerpt.rendered.replace(
-                    /\[&hellip;\]|\[...\]/g,
-                    `... <a href="/latest-news/article/${post.id}" class="text-sky-600 dark:text-gray-400">Read more</a>`
-                  ),
-                }}
-              />
-            }
-            image={imageSrc || "https://via.placeholder.com/600x400.png"}
-            author={authorName}
-          />
-        );
-      })
-    );
+    const posts = (await response.json()) as WordPressPost[];
+    const totalPages = parseInt(response.headers.get("X-WP-TotalPages") || "1");
 
     return (
       <>
         <PageTop PageMessage="Latest News" />
-
         <section className="bg-white pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]">
           <div className="container mx-auto">
             <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-              {postsContent}
+              {posts.map((post) => (
+                <PostCard
+                  key={post.id}
+                  id={post.id}
+                  date={new Date(post.date).toLocaleDateString()}
+                  CardTitle={post.title.rendered}
+                  CardDescription={
+                    <div
+                      className="excerpt-content"
+                      dangerouslySetInnerHTML={{
+                        __html: post.excerpt.rendered.replace(
+                          /\[&hellip;\]|\[...\]/g,
+                          `... <a href="/latest-news/article/${post.id}" class="text-sky-600 dark:text-gray-400">Read more</a>`
+                        ),
+                      }}
+                    />
+                  }
+                  image={
+                    post.post_featured_image ||
+                    "https://via.placeholder.com/600x400.png"
+                  }
+                  author={post.author_details.name}
+                  avatar={post.author_details.avatar}
+                />
+              ))}
             </div>
             <Pagination currentPage={page} totalPages={totalPages} />
           </div>
@@ -120,53 +104,58 @@ const LatestNewsRoll = async ({ searchParams }: LatestNewsProps) => {
 
 const PostCard = ({
   id,
-  author,
-  image,
   date,
   CardTitle,
   CardDescription,
+  image,
+  author,
+  avatar,
 }: {
   id: number;
-  author: string;
-  image: string;
   date: string;
   CardTitle: string;
   CardDescription: React.ReactNode;
-}) => {
-  return (
-    // <Link href={`/latest-news/article/${id}`}>
-    <div key={id} id={id.toString()} className="w-full h-full flex flex-col">
-      <div className="mb-10 w-full h-full bg-white dark:bg-dark rounded shadow-md overflow-hidden flex flex-col justify-between">
-        <div className="overflow-hidden rounded-t h-64 flex-shrink-0">
-          <Image
-            src={image}
-            alt=""
-            className="w-full h-full object-cover"
-            width={600}
-            height={400}
-          />
-        </div>
-        <div className="py-4 px-4 flex flex-col justify-between flex-grow">
-          {date && (
-            <span className="mb-2 inline-block rounded bg-black px-4 py-1 text-left text-xs font-semibold text-white">
-              Date Published: {date}
-            </span>
-          )}
-          <div className="text-sm font-semibold text-sky-600 dark:text-gray-400">
-            <span className="text-black">Author:</span> {author}
-          </div>
-          <h3 className="mb-4 text-xl font-semibold text-dark dark:text-white">
-            {CardTitle}
-          </h3>
-          <div className="mb-4 text-base text-body-color dark:text-dark-6">
-            {CardDescription}
-          </div>
-        </div>
+  image: string;
+  author: string;
+  avatar: string;
+}) => (
+  <div
+    key={id}
+    id={id.toString()}
+    className="w-full h-full flex flex-col border border-gray-200 rounded-lg shadow-md"
+  >
+    <div className="overflow-hidden rounded-t h-64 flex-shrink-0">
+      <img
+        src={image}
+        alt="Post Thumbnail"
+        className="w-full h-full object-cover"
+      />
+    </div>
+    <div className="py-4 px-4 flex flex-col justify-between flex-grow">
+      {date && (
+        <span className="mb-2 inline-block rounded bg-gray-800 px-4 py-1 text-left text-xs font-semibold text-white">
+          Date Published: {date}
+        </span>
+      )}
+      <div className="flex items-center space-x-2 mb-2">
+        <img
+          src={avatar}
+          alt="Author Avatar"
+          className="w-8 h-8 rounded-full"
+        />
+        <span className="text-sm font-semibold text-sky-600 dark:text-gray-400">
+          <span className="text-black">Author:</span> {author}
+        </span>
+      </div>
+      <h3 className="mb-4 text-xl font-semibold text-dark dark:text-white">
+        {CardTitle}
+      </h3>
+      <div className="mb-4 text-base text-body-color dark:text-dark-6">
+        {CardDescription}
       </div>
     </div>
-    // </Link>
-  );
-};
+  </div>
+);
 
 export default function LatestNewsWithSuspense({
   searchParams,

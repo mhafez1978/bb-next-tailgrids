@@ -27,7 +27,7 @@ export default function ProductDetails() {
         });
 
         const responseText = await response.text();
-        console.log("Response from API:", responseText);
+        //console.log("Response from API:", responseText);
 
         if (!response.ok) {
           throw new Error(
