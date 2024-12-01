@@ -1,12 +1,25 @@
 import React from "react";
 import Cta from "@/components/responsive/banner/call-to-action/CTA";
 import Image from "next/image";
+import type { Metadata } from "next";
 
 interface Tag {
   id: number;
   slug: string;
   name: string;
 }
+
+export const metadata: Metadata = {
+  title: "Blooming Brands | Blog ",
+  description:
+    "Boston based Website Design, Development, and Online Marketing Agency",
+  keywords:
+    "website design, website development, online stores, online marketing",
+  applicationName: "Blooming Brands", // Provide the app name or remove this field if unnecessary
+  authors: [{ name: "Mohamed Hafez" }], // Changed to array of objects
+  creator: "Blooming Brands Web Development Team",
+  publisher: "Blooming Brands LLC a division subsidiary of Nodes Unlimited LLC",
+};
 
 const Post = async ({ params }: { params: { id: string } }) => {
   try {
@@ -55,7 +68,7 @@ const Post = async ({ params }: { params: { id: string } }) => {
 
     // Extract author from embedded data
     const author = post._embedded?.author?.[0] || {
-      name: "Unknown Author",
+      name: "Webmaster",
       avatar_urls: { 96: "https://placehold.co/40x40" },
     };
 

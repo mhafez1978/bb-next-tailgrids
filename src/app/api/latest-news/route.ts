@@ -43,7 +43,7 @@ export async function GET() {
     const authors = await Promise.all(
       authorIds.map(async (id) => {
         const authorResponse = await fetch(
-          `https://api.blooming-brands.com/wp-json/wp/v2/users/${id}`
+          `https://api.blooming-brands.com/wp-json/wp/v2/users/${id}?_embed`
         );
         if (authorResponse.ok) {
           const author = (await authorResponse.json()) as WordPressAuthor;
