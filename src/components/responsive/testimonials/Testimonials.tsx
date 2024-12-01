@@ -194,7 +194,10 @@ const Testimonials: React.FC = () => {
   };
 
   return (
-    <section className="relative w-screen min-h-[50vh] bg-slate-800 text-slate-100 py-24 z-[30]">
+    <section
+      className="relative w-screen min-h-[50vh] bg-slate-800 text-slate-100 py-24"
+      style={{ zIndex: "-30" }}
+    >
       <h3 className="text-lg capitalize mb-4 text-center">
         What our clients are saying
       </h3>
@@ -203,7 +206,7 @@ const Testimonials: React.FC = () => {
       </h5>
       <hr className="w-12 mx-auto bg-white mb-6" />
       <div className="container h-full mx-auto flex flex-col justify-center items-center">
-        <div className="relative w-full lg:w-2/3 mx-auto flex justify-center items-center overflow-hidden pb-20 z-[60]">
+        <div className="relative w-full lg:w-2/3 mx-auto flex justify-center items-center overflow-hidden pb-20">
           <div
             ref={sliderRef}
             className={`w-full mx-auto flex transition-transform duration-500 ease-in-out ${
@@ -246,7 +249,7 @@ const Testimonials: React.FC = () => {
 
           {/* Arrows */}
         </div>
-        <div className="w-[88vw] mx-auto absolute flex justify-between items-center px-4 z-[60] lg:-mt-28">
+        <div className="w-[88vw] mx-auto absolute flex justify-between items-center px-4 lg:-mt-28">
           <button
             onClick={handlePrevClick}
             className="bg-slate-100 text-slate-800 p-2 rounded-full shadow-lg hover:bg-slate-200"
