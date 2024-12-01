@@ -2,6 +2,7 @@ import React from "react";
 import Cta from "@/components/responsive/banner/call-to-action/CTA";
 import Image from "next/image";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 interface Tag {
   id: number;
@@ -31,7 +32,12 @@ const Post = async ({ params }: { params: { id: string } }) => {
 
     // Check if the post fetch was successful
     if (!post || !post.title) {
-      return <p>Post not found</p>;
+      return (
+        <>
+          <p>Sorry, but this post could not be found, </p>
+          <Link href="/latest-news">Go Back</Link>
+        </>
+      );
     }
 
     // Fetch all posts to find the next and previous posts
