@@ -3,6 +3,7 @@ import Cta from "@/components/responsive/banner/call-to-action/CTA";
 import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
+import DOMPurify from "dompurify";
 
 interface Tag {
   id: number;
@@ -84,7 +85,10 @@ const Post = async ({ params }: { params: { id: string } }) => {
       "https://via.placeholder.com/600x400.png"; // Fallback to PNG
 
     // Sanitize the content
-    const sanitizedContent = post.content.rendered.trim();
+    const sanitizedContent =
+      typeof window !== "undefined"
+        ? DOMPurify.sanitize(post.content.rendered.trim())
+        : post.content.rendered.trim();
 
     return (
       <section className="bg-white py-20 dark:bg-dark lg:py-[120px]">
