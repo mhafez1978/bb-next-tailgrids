@@ -10,6 +10,18 @@ body {
   width: 100vw; /* Ensure the body takes the entire width of the viewport */
 }
 
+#post h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+#post h2 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
 #post h3 {
   font-size: 2rem;
   font-weight: 700;
