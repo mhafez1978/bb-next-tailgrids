@@ -4,7 +4,7 @@ import "./Footer.module.css";
 
 const Footer = () => {
   return (
-    <footer className="relative z-10 overflow-hidden bg-[url('https://www.shutterstock.com/image-illustration/abstract-dark-blue-background-use-260nw-162887189.jpg')] bg-cover bg-center-bottom bg-no-repeat pt-20 lg:pt-[120px]">
+    <footer className="relative z-10 overflow-hidden bg-[url('/footer-bg.png')] bg-cover bg-center-bottom bg-no-repeat pt-20 lg:pt-[120px]">
       <div className="container mx-auto">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4 sm:w-2/3 lg:w-4/12 xl:w-3/12">
@@ -12,7 +12,7 @@ const Footer = () => {
               <a
                 href="/"
                 className={
-                  " fascinate-inline-regular mb-6 inline-block max-w-[360px] text-xl text-white font-semibold"
+                  " fascinate-inline-regular mb-6 inline-block max-w-[360px] text-3xl text-white font-semibold"
                 }
               >
                 {/* <Image
@@ -76,22 +76,16 @@ const Footer = () => {
           </div>
 
           <LinkGroup header="Company">
-            <NavLink link="/#" label="About company" />
-            <NavLink link="/#" label="Company services" />
-            <NavLink link="/#" label="Job opportunities" />
-            <NavLink link="/#" label="Creative people" />
+            <NavLink link="/about" label="About company" />
+            <NavLink link="/services" label="Company services" />
+            {/* <NavLink link="/#" label="Job opportunities" /> */}
+            {/* <NavLink link="/#" label="Creative people" /> */}
           </LinkGroup>
           <LinkGroup header="Customer">
-            <NavLink link="/#" label="Client support" />
-            <NavLink link="/#" label="Latest news" />
-            <NavLink link="/#" label="Company story" />
-            <NavLink link="/#" label="Pricing packages" />
-          </LinkGroup>
-          <LinkGroup header="Additional">
-            <NavLink link="/#" label="Our story" />
-            <NavLink link="/#" label="Who we are" />
-            <NavLink link="/#" label="Our process" />
-            <NavLink link="/#" label="Latest news" />
+            <NavLink link="/contact" label="Client support" />
+            <NavLink link="/latest-news" label="Latest news" />
+            {/* <NavLink link="/#" label="Company story" />
+            <NavLink link="/#" label="Pricing packages" /> */}
           </LinkGroup>
 
           <div className="w-full px-4 md:w-1/2 lg:w-4/12 xl:w-3/12">
@@ -100,7 +94,7 @@ const Footer = () => {
                 Latest News
               </h4>
               <a
-                href="#"
+                href="/latest-news"
                 className="mb-8 flex items-center text-gray-1 hover:text-white"
               >
                 <div className="mr-5 w-full max-w-[70px] overflow-hidden rounded">
@@ -113,11 +107,11 @@ const Footer = () => {
                   />
                 </div>
                 <p className="text-white">
-                  I think really important to design...
+                  How to start marketing on a low budget
                 </p>
               </a>
               <a
-                href="/#"
+                href="/latest-news"
                 className="mb-8 flex items-center text-gray-1 hover:text-white"
               >
                 <div className="mr-5 w-full max-w-[70px] overflow-hidden rounded">
@@ -130,7 +124,7 @@ const Footer = () => {
                   />
                 </div>
                 <p className="text-white">
-                  Recognizing the need is the primary...
+                  Social media marketing for small businesses
                 </p>
               </a>
             </div>
