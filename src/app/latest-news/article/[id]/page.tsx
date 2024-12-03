@@ -91,7 +91,7 @@ const Post = async ({ params }: { params: { id: string } }) => {
         : post.content.rendered.trim();
 
     return (
-      <section className="bg-white py-20 dark:bg-dark lg:py-[120px]">
+      <section id="post" className="bg-white py-20 dark:bg-dark lg:py-[120px]">
         <div className="container mx-auto">
           <div className="-mx-4 flex flex-wrap justify-center">
             <div className="w-full px-4 lg:w-10/12 xl:w-8/12">
