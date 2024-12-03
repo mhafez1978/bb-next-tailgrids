@@ -33,7 +33,7 @@ export async function GET(
     });
 
     const responseText = await response.text();
-    console.log("Raw response:", responseText);
+    //console.log("Raw response:", responseText);
 
     if (!response.ok) {
       throw new Error(

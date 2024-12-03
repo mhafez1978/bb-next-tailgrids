@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
       throw new Error("Failed to save email");
     }
 
-    console.log("WP_API_URL:", process.env.WP_API_URL);
+    //console.log("WP_API_URL:", process.env.WP_API_URL);
     return NextResponse.json({ message: "Successfully subscribed!" });
   } catch (error) {
     console.error("Error processing request:", error);

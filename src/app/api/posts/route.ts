@@ -14,7 +14,7 @@ export async function GET() {
     }
 
     const posts = await response.json();
-    console.log(posts);
+    //console.log(posts);
 
     return NextResponse.json(posts);
   } catch (error) {

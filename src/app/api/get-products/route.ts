@@ -38,7 +38,7 @@ export async function GET() {
     }
 
     const products = await response.json();
-    console.log("Products: ", products);
+    //console.log("Products: ", products);
 
     return NextResponse.json({ products });
   } catch (error) {
