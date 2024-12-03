@@ -65,15 +65,7 @@ export default function NewsLetterForm() {
               <div className="w-full">
                 <div className="w-full flex flex-row gap-2 justify-start items-start mb-4 -mt-2 lg:mt-0">
                   {/* Honeypot field (hidden) */}
-                  <input
-                    type="text"
-                    id="honeypot"
-                    name="honeypot"
-                    value={honeypot}
-                    onChange={(e) => setHoneypot(e.target.value)}
-                    style={{ display: "none", width: "0" }}
-                    aria-hidden="true"
-                  />
+
                   <input
                     type="email"
                     id="email"
@@ -81,7 +73,7 @@ export default function NewsLetterForm() {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                     placeholder="name@email.com"
-                    className="p-2 w-full h-[80px] text-2xl rounded-md border shadow-sm focus:border-purple-600 focus:ring-purple-400"
+                    className="p-2 w-[480px] h-[80px] text-2xl rounded-md border shadow-sm focus:border-purple-600 focus:ring-purple-400 lg:w-full"
                   />
                   <Button
                     type="submit"
@@ -95,6 +87,15 @@ export default function NewsLetterForm() {
               <div className="flex flex-col lg:-mt-4">
                 <div className="flex flex-row gap-2 items-center">
                   <input
+                    type="text"
+                    id="honeypot"
+                    name="honeypot"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                    className="hidden"
+                    aria-hidden="true"
+                  />
+                  <input
                     required
                     type="checkbox"
                     id="optIn"
@@ -104,7 +105,7 @@ export default function NewsLetterForm() {
                   />
                   <label
                     htmlFor="optIn"
-                    className="ml-2 font-thin text-[.7rem] text-gray-100"
+                    className="ml-2 font-thin text-[1.2rem] text-gray-100"
                   >
                     I opt-in to receive marketing emails from Blooming Brands
                     LLC.
