@@ -5,14 +5,14 @@ const LikePostButton = ({ postId }: { postId: number }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [titleText, setTitleText] = useState("Do you like this post ?");
 
   useEffect(() => {
     const fetchLikeStatus = async () => {
       try {
-        // console.log("Fetching like status for post:", postId); // Debugging
-
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_POSTLIKES}/get-likes/${postId}`
+          `${process.env.NEXT_PUBLIC_POSTLIKES}/get-likes/${postId}`,
+          { next: { revalidate: 60 }, cache: "no-cache" }
         );
 
         if (!response.ok) {
@@ -22,33 +22,18 @@ const LikePostButton = ({ postId }: { postId: number }) => {
         }
 
         const data = await response.json();
-
-        console.log("API Response:", data); // Debugging
-
-        if (Object.keys(data).length === 0) {
-          setIsLiked(false);
-          setLikesCount(0);
-        } else if (Object.keys(data).length > 0 && isLiked === false) {
-          setLikesCount(data.likes_count);
-        } else {
-          setLikesCount(data.likes_count); // Set the likes count from API response
-          setIsLiked(true);
-        }
+        setLikesCount(data.likes_count || 0);
+        setIsLiked(!!data.is_liked);
       } catch (error) {
-        if (error instanceof Error) {
-          console.error("Error fetching like status:", error.message);
-        } else {
-          console.error("Error fetching like status:", error);
-        }
-        setLikesCount(0); // Fallback to 0 on error
+        console.error("Error fetching like status:", error);
+        setLikesCount(0);
         setIsLiked(false);
       }
     };
 
     fetchLikeStatus();
-  }, [postId]);
+  }, [postId]); // Ensure this triggers a fresh fetch on postId change
 
-  // Function to add a like
   const addLike = async () => {
     try {
       const response = await fetch(
@@ -108,19 +93,27 @@ const LikePostButton = ({ postId }: { postId: number }) => {
       await removeLike(); // Call remove like function
     } else {
       await addLike(); // Call add like function
+      setTitleText("You liked this Post");
     }
   };
 
   return (
-    <div className="flex flex-row gap-6 items-center justify-center">
-      <div>
-        <h4>Like this post ?</h4>
+    <div className="w-2/3 flex flex-row gap-2 items-center justify-start">
+      <div className="w-1/3 text-right">
+        <h6 className="w-full font-black">{titleText}</h6>
       </div>
-      <div className="relative inline-block pb-2">
+      <div className="w-1/3 relative inline-block pb-2 overflow-visible">
         {/* Like Count Badge */}
-        <span className="absolute -top-2 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center z-30">
-          {likesCount}
-        </span>
+        <div className="w-full absolute  -right-10">
+          <div className="relative">
+            <span className="absolute -bottom-4 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center z-30">
+              {likesCount}
+            </span>
+            <span className="absolute -top-1 left-6 text-black text-xs font-bold z-30">
+              {likesCount > 0 ? "Liked this post" : "No one Liked this post"}
+            </span>
+          </div>
+        </div>
 
         {/* Heart Button */}
         <button
