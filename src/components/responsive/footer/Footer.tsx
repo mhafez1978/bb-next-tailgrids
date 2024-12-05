@@ -32,6 +32,7 @@ const Footer = () => {
                 <a
                   href="https://www.facebook.com/profile.php?id=61568859597363"
                   className="px-3 text-gray-1 hover:text-white"
+                  target="_blank"
                 >
                   <svg
                     width="10"
@@ -45,6 +46,7 @@ const Footer = () => {
                 <a
                   href="https://x.com/BloomingBrands"
                   className="px-3 text-gray-1 hover:text-white"
+                  target="_blank"
                 >
                   <svg
                     width="19"
@@ -62,6 +64,7 @@ const Footer = () => {
                 <a
                   href="https://www.instagram.com/bloomingbrands/"
                   className="px-3 text-gray-1 hover:text-white"
+                  target="_blank"
                 >
                   <svg
                     width="18"
@@ -77,6 +80,7 @@ const Footer = () => {
                 <a
                   href="https://www.linkedin.com/in/blooming-brands/"
                   className="px-3 text-gray-1 hover:text-white"
+                  target="_blank"
                 >
                   <svg
                     width="18"
@@ -85,6 +89,21 @@ const Footer = () => {
                     className="fill-[#ffffff]"
                   >
                     <path d="M16.7821 0.947388H1.84847C1.14272 0.947388 0.578125 1.49747 0.578125 2.18508V16.7623C0.578125 17.4224 1.14272 18 1.84847 18H16.7257C17.4314 18 17.996 17.4499 17.996 16.7623V2.15757C18.0525 1.49747 17.4879 0.947388 16.7821 0.947388ZM5.7442 15.4421H3.17528V7.32837H5.7442V15.4421ZM4.44563 6.2007C3.59873 6.2007 2.94944 5.5406 2.94944 4.74297C2.94944 3.94535 3.62696 3.28525 4.44563 3.28525C5.26429 3.28525 5.94181 3.94535 5.94181 4.74297C5.94181 5.5406 5.32075 6.2007 4.44563 6.2007ZM15.4835 15.4421H12.9146V11.509C12.9146 10.5739 12.8864 9.33618 11.5596 9.33618C10.2045 9.33618 10.0069 10.3813 10.0069 11.4265V15.4421H7.438V7.32837H9.95046V8.45605H9.9787C10.3457 7.79594 11.1644 7.13584 12.4347 7.13584C15.0601 7.13584 15.54 8.7861 15.54 11.0414V15.4421H15.4835Z" />
+                  </svg>
+                </a>
+                <a
+                  href="https://www.tiktok.com/@bostonbloomingbrands"
+                  className="px-3 text-gray-1 hover:text-white"
+                  target="_blank"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 48 48"
+                    className="fill-[#ffffff]"
+                  >
+                    <path d="M35.09 13.91a9.78 9.78 0 0 1-2.1-6.09h-4.86v24.66a8.45 8.45 0 1 1-8.45-8.45 8.73 8.73 0 0 1 3.57.76v-5.3a15.88 15.88 0 0 0-3.57-.4 14.94 14.94 0 1 0 14.94 14.94V18.86a9.9 9.9 0 0 0 4.44 1.1v-5.31a9.83 9.83 0 0 1-4.01-1.74Z" />
                   </svg>
                 </a>
               </div>
@@ -162,7 +181,8 @@ const Footer = () => {
             <div className="w-full px-4 md:w-1/3 lg:w-1/2">
               <div className="my-1 flex justify-center md:justify-end">
                 <p className="text-white text-gray-1">
-                  &copy; {new Date().getFullYear()} Blooming Brands LLC
+                  &copy; {new Date().getFullYear()} Blooming Brands LLC, Boston
+                  MA
                 </p>
               </div>
             </div>

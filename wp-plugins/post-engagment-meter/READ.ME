@@ -1,0 +1,56 @@
+Creates a Custom Database Table on Activation
+
+Uses the register_activation_hook to create a table (wp_post_likes) in the WordPress database to store post likes with columns:
+id: Auto-increment primary key.
+post_id: ID of the post.
+post_title: Title of the post.
+post_author: Author's name.
+likes_count: Count of likes for the post.
+Keeps the Table on Deactivation
+
+The register_deactivation_hook ensures the table remains in the database when the plugin is deactivated.
+Removes the Table on Deletion (with Confirmation)
+
+The register_uninstall_hook deletes the table (wp_post_likes) after ensuring it’s an uninstall action. This operation is performed only after user confirmation through WordPress.
+Includes TailwindCSS for Styling
+
+Hooks the TailwindCSS CDN (https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css) into the plugin's admin page for modern styling.
+Adds a Custom Admin Menu Page
+
+Registers a menu item Post Engagement Meter in the WordPress admin sidebar.
+The page shows the status of the likes table and options to create the table if it doesn't exist.
+Displays a Dashboard with Table Data
+
+Lists all entries in the likes table (wp_post_likes) in a styled HTML table with TailwindCSS.
+Shows:
+ID
+Post ID
+Post Title
+Post Author
+Likes Count
+Displays an appropriate message if no data is found.
+Provides Button to Create the Table
+
+If the table doesn’t exist, a button allows the admin to create it.
+Function Review (List of Functions)
+heartpress_create_table
+
+Creates the wp_post_likes table if it doesn’t exist during plugin activation.
+Defines columns and primary key for the likes data.
+heartpress_deactivate
+
+Keeps the database table intact during plugin deactivation.
+heartpress_uninstall
+
+Drops the wp_post_likes table when the plugin is uninstalled.
+Ensures the operation runs only during a WordPress uninstall action.
+heartpress_enqueue_styles
+
+Enqueues the TailwindCSS CDN on the plugin's admin dashboard page for custom styling.
+heartpress_add_menu
+
+Registers a menu item called Post Engagement Meter in the WordPress admin panel.
+heartpress_dashboard
+
+Displays the likes data table in the plugin's admin page.
+Includes options to create the table if it doesn’t exist and uses TailwindCSS for styling.

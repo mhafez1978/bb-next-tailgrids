@@ -4,6 +4,7 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import DOMPurify from "dompurify";
+import LikePostButton from "@/components/responsive/like-button/LikePostButton";
 
 interface Tag {
   id: number;
@@ -145,6 +146,10 @@ const Post = async ({ params }: { params: { id: string } }) => {
                   dangerouslySetInnerHTML={{ __html: sanitizedContent }}
                   className="mb-8 text-base leading-relaxed text-body-color dark:text-dark-6"
                 ></div>
+
+                <div className="w-full flex flex-row">
+                  <LikePostButton postId={post.id} />
+                </div>
 
                 {/* Dynamically render post tags only if they exist */}
                 {tagsData.length > 0 && (
