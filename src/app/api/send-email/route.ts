@@ -43,8 +43,8 @@ export async function POST(req: Request) {
 
       return response.data.access_token;
     } catch (error) {
-      console.log(error);
-      throw new Error("Failed to obtain OAuth token");
+      //console.log(error);
+      throw new Error(String(error));
     }
   }
 
@@ -87,8 +87,8 @@ export async function POST(req: Request) {
         },
       });
     } catch (error) {
-      console.log(error);
-      throw new Error("Failed to send email");
+      //console.log(error);
+      throw new Error(String(error));
     }
   }
 
@@ -101,10 +101,9 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ message: "Email sent successfully" });
   } catch (error) {
-    console.error("Error in POST handler:", error);
-    return NextResponse.json(
-      { message: "Failed to send email" },
-      { status: 500 }
-    );
+    //console.error("Error in POST handler:", error);
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
+    return NextResponse.json({ message: errorMessage }, { status: 500 });
   }
 }

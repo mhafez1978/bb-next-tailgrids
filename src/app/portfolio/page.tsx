@@ -6,7 +6,7 @@ import PageTop from "@/components/responsive/page-top/PageTop";
 export const metadata: Metadata = {
   title: "Blooming Brands | Portfolio",
   description:
-    "Boston based Website Design, Development, and Online Marketing Agency",
+    "Portfolio of Blooming Brands LLC past projects, We're a Boston based Website Design, Development, and Online Marketing Agency.",
   keywords:
     "website design, website development, online stores, online marketing",
   applicationName: "Blooming Brands", // Provide the app name or remove this field if unnecessary

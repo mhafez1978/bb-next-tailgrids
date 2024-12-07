@@ -63,8 +63,8 @@ async function getOAuthToken() {
 
     return response.data.access_token;
   } catch (error) {
-    console.log(error);
-    throw new Error("Failed to obtain OAuth token");
+    //console.log(error);
+    throw new Error(`Failed to obtain OAuth token: ${error}`);
   }
 }
 

@@ -8,9 +8,9 @@ import NewsLetterForm2 from "@/components/responsive/newsletter/NewsletterForm2"
 
 // Metadata for SEO
 export const metadata: Metadata = {
-  title: "Blooming Brands | Latest News",
+  title: "Blooming Brands | Our Latest News",
   description:
-    "Boston based Website Design, Development, and Online Marketing Agency",
+    "Blooming Brands Blog , should provide our latest news, projects, promotional offers...",
   keywords:
     "website design, website development, online stores, online marketing",
   applicationName: "Blooming Brands",

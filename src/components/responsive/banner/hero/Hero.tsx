@@ -31,7 +31,7 @@ const Hero = () => {
 
                 <a
                   href="#portfolio"
-                  className="w-full flex flex-row gap-2 items-center justify-center px-8 py-3 rounded-lg bg-gradient-to-r from-red-400 to-red-600 shadow-lg border-2 border-red-700 text-white text-lg font-bold hover:shadow-2xl transition-transform duration-300 transform hover:scale-110 lg:w-1/2"
+                  className="w-[250px] flex flex-row gap-2 items-center justify-center px-8 py-3 rounded-lg bg-gradient-to-r from-red-400 to-red-600 shadow-lg border-2 border-red-700 text-white text-lg font-bold hover:shadow-2xl transition-transform duration-300 transform hover:scale-110 lg:w-1/2"
                 >
                   <span className="capitalize text-lg font-semibold transition-colors duration-500 group-hover:text-transparent bg-clip-text group-hover:bg-gradient-to-r from-slate-100 via-violet-300 to-slate-200">
                     See our work

@@ -92,7 +92,7 @@ function subscribers_plugin_menu() {
         'subscribers-plugin',
         'subscribers_admin_page',
         'dashicons-email-alt',
-        100
+        103
     );
 }
 

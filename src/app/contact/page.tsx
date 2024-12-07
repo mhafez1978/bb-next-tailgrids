@@ -7,7 +7,7 @@ import NewsLetterForm2 from "@/components/responsive/newsletter/NewsletterForm2"
 export const metadata: Metadata = {
   title: "Blooming Brands | Contact us",
   description:
-    "Boston based Website Design, Development, and Online Marketing Agency",
+    "Contact Blooming Brands LLC  a Boston based Website Design, Development, and Online Marketing Agency",
   keywords:
     "website design, website development, online stores, online marketing",
   applicationName: "Blooming Brands", // Provide the app name or remove this field if unnecessary

@@ -4,7 +4,7 @@ import "./Footer.module.css";
 
 const Footer = () => {
   return (
-    <footer className="relative z-10 overflow-hidden bg-[url('/footer-bg.png')] bg-cover bg-center-bottom bg-no-repeat pt-20 lg:pt-[120px]">
+    <footer className="relative w-screen z-10 overflow-hidden bg-[url('/footer-bg.png')] bg-cover bg-center-bottom bg-no-repeat pt-20 lg:pt-[120px]">
       <div className="container mx-auto">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4 sm:w-2/3 lg:w-4/12 xl:w-3/12">

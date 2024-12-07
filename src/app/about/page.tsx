@@ -8,9 +8,8 @@ import NewsletterSignup2 from "@/components/responsive/newsletter/NewsletterForm
 export const metadata: Metadata = {
   title: "Blooming Brands | About us",
   description:
-    "Boston based Website Design, Development, and Online Marketing Agency",
-  keywords:
-    "website design, website development, online stores, online marketing",
+    "We Craft Full-Stack, Data-Driven Apps, Websites, Online Stores, Blogs, and More",
+  keywords: "Full-Stack, Data-Driven Apps, Websites, Online Stores, Blogs",
   applicationName: "Blooming Brands", // Provide the app name or remove this field if unnecessary
   authors: [{ name: "Mohamed Hafez" }], // Changed to array of objects
   creator: "Blooming Brands Web Development Team",

@@ -37,7 +37,9 @@ const RandomFunnyImage: React.FC = () => {
           unoptimized={true}
         />
       ) : (
-        <p>Loading...</p>
+        <div className="w-full h-full flex flex-col items-center justify-center">
+          <p>Loading ....</p>
+        </div>
       )}
     </>
   );

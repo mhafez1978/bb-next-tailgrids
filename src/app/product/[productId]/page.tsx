@@ -1,82 +1,57 @@
-"use client";
-import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import type { Metadata } from "next";
+import ProductDetails from "@/app/product/[productId]/ProductComponent";
 
-interface Product {
-  pid: number;
-  name: string;
-  description: string;
-  pricing: { [key: string]: { monthly: string; annually: string } };
-  product_url: string;
-}
+type Props = {
+  params: {
+    productId: string | number;
+  };
+};
 
-export default function ProductDetails() {
-  const { productId } = useParams();
-  const [product, setProduct] = useState<Product | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+// Helper function to fetch product details
+const fetchProductDetails = async (productId: string | number) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/get-product/${productId}`,
+    {
+      method: "GET",
+    }
+  );
 
-  useEffect(() => {
-    if (!productId) return;
+  if (!response.ok) {
+    throw new Error(
+      `Failed to fetch product details for metadata. Status: ${response.status}`
+    );
+  }
 
-    const fetchProduct = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch(`/api/get-product/${productId}`, {
-          method: "GET",
-        });
+  const data = await response.json();
+  return data.product.products.product[0]; // Adjust based on your API response structure
+};
 
-        const responseText = await response.text();
-        //console.log("Response from API:", responseText);
-
-        if (!response.ok) {
-          throw new Error(
-            `Failed to fetch product details. Status: ${response.status}`
-          );
-        }
-
-        const data = JSON.parse(responseText);
-        setProduct(data.product.products.product[0]); // Access the product object as needed
-      } catch (error: unknown) {
-        console.error("Fetch Error:", error);
-        setError(
-          `Error fetching product: ${
-            error instanceof Error ? error.message : "Unknown error"
-          }`
-        );
-      } finally {
-        setLoading(false);
-      }
+export const generateMetadata = async ({
+  params,
+}: Props): Promise<Metadata> => {
+  try {
+    const product = await fetchProductDetails(params.productId);
+    return {
+      title: `Product ${product.name}`,
+      description:
+        product.description ||
+        `Details and pricing for product ${params.productId}`,
     };
+  } catch (error) {
+    console.error("Error generating metadata:", error);
+    return {
+      title: `Product ${params.productId}`,
+      description: `Details and pricing for product ${params.productId}`,
+    };
+  }
+};
 
-    fetchProduct();
-  }, [productId]);
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div className="text-red-500">{error}</div>;
-
+export default function ProductPage({ params }: Props) {
   return (
-    <div className="p-6 max-w-2xl mx-auto bg-white shadow-md rounded-lg py-22 mt-[200px] mb-[200px] min-h-2/3">
-      <h2 className="font-semibold text-2xl mb-4">{product?.name}</h2>
-      <p className="text-gray-600 mb-4">{product?.description}</p>
-      <a
-        href={product?.product_url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-blue-500 underline mb-4 block"
-      >
-        View Product
-      </a>
-      <div className="text-sm">
-        <p className="font-semibold mb-2">Pricing:</p>
-        {product?.pricing?.USD ? (
-          <ul>
-            <li>Monthly: {product.pricing.USD.monthly} USD</li>
-            <li>Annually: {product.pricing.USD.annually} USD</li>
-          </ul>
-        ) : (
-          <p>Pricing unavailable</p>
-        )}
+    <div className="w-screen min-h-[50vh] mt-[120px]">
+      <div className="container mx-auto">
+        <h1 className="text-3xl font-bold px-4">Product Details Page</h1>
+        <ProductDetails productId={params.productId} />
       </div>
     </div>
   );

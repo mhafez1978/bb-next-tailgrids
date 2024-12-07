@@ -126,42 +126,51 @@ function jwt_management_admin_page() {
 
     // Handle Form Submissions
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Toggle JWT status
         if (isset($_POST['toggle_jwt'])) {
             $jwt_status = !$jwt_status;
             update_option('jwt_plugin_status', $jwt_status);
         }
 
-        if ($jwt_status) {
-            if (isset($_POST['generate_token'])) {
-                $username = sanitize_text_field($_POST['username']);
-                $password = sanitize_text_field($_POST['password']);
-                $user = wp_authenticate($username, $password);
+        // Generate Token
+        if ($jwt_status && isset($_POST['generate_token'])) {
+            $username = sanitize_text_field($_POST['username']);
+            $password = sanitize_text_field($_POST['password']);
+            $user = wp_authenticate($username, $password);
 
-                if (is_wp_error($user)) {
-                    $token_response = 'Invalid credentials! Error: ' . esc_html($user->get_error_message());
-                } else {
-                    $payload = [
-                        'iss' => get_bloginfo('url'),
-                        'iat' => time(),
-                        'exp' => time() + 3600,
-                        'user' => [
-                            'id' => $user->ID,
-                            'login' => $user->user_login,
-                            'email' => $user->user_email,
-                        ],
-                    ];
-                    $token_response = JWT::encode($payload, $jwt_secret_key, 'HS256');
-                }
+            if (is_wp_error($user)) {
+                $token_response = 'Invalid credentials! Error: ' . esc_html($user->get_error_message());
+            } else {
+                // Get the user's roles and primary role
+                $roles = $user->roles;
+                $primary_role = $roles[0] ?? 'subscriber';
+
+                // Create the payload with the role included
+                $payload = [
+                    'iss' => get_bloginfo('url'),
+                    'iat' => time(),
+                    'exp' => time() + 3600, // Token valid for 1 hour
+                    'user' => [
+                        'id' => $user->ID,
+                        'login' => $user->user_login,
+                        'email' => $user->user_email,
+                        'role' => $primary_role, // Include role
+                    ],
+                ];
+
+                // Encode the payload into a JWT token
+                $token_response = JWT::encode($payload, $jwt_secret_key, 'HS256');
             }
+        }
 
-            if (isset($_POST['validate_token'])) {
-                $token = sanitize_text_field($_POST['token']);
-                try {
-                    $decoded = JWT::decode($token, $jwt_secret_key, ['HS256']);
-                    $validation_response = json_encode($decoded, JSON_PRETTY_PRINT);
-                } catch (Exception $e) {
-                    $validation_response = 'Invalid token: ' . $e->getMessage();
-                }
+        // Validate Token
+        if ($jwt_status && isset($_POST['validate_token'])) {
+            $token = sanitize_text_field($_POST['token']);
+            try {
+                $decoded = JWT::decode($token, $jwt_secret_key, ['HS256']);
+                $validation_response = json_encode($decoded, JSON_PRETTY_PRINT);
+            } catch (Exception $e) {
+                $validation_response = 'Invalid token: ' . $e->getMessage();
             }
         }
     }
@@ -169,6 +178,17 @@ function jwt_management_admin_page() {
     ?>
     <div class="max-w-4xl mx-auto p-6 bg-gray-100 rounded-lg shadow-lg">
         <h1 class="text-2xl font-bold mb-4">JWT Management</h1>
+
+        <!-- JWT Secret Key Display -->
+        <div class="mb-6">
+            <h2 class="text-lg font-semibold mb-2">JWT Secret Key</h2>
+            <div class="bg-gray-200 p-4 rounded">
+                <p class="text-sm font-mono break-all"><?php echo esc_html($jwt_secret_key); ?></p>
+            </div>
+            <p class="text-sm text-gray-500 mt-2">
+                Copy this key and paste it into your Next.js <code>.env.local</code> file as <code>JWT_SECRET</code>.
+            </p>
+        </div>
 
         <!-- JWT Status -->
         <form method="post" class="mb-6">
@@ -222,6 +242,8 @@ function jwt_management_admin_page() {
     <?php
 }
 
+
+
 // Add REST API routes and token handling (login, register, refresh).
 // REST API Routes
 add_action('rest_api_init', function () {
@@ -248,6 +270,52 @@ add_action('rest_api_init', function () {
     ]);
 });
 
+// // Handle Login API
+// function handle_jwt_login(WP_REST_Request $request) {
+//     if (!is_jwt_enabled()) {
+//         return new WP_REST_Response(['error' => 'JWT functionality is disabled.'], 403);
+//     }
+
+//     $params = $request->get_json_params();
+//     $username = sanitize_text_field($params['username'] ?? '');
+//     $password = sanitize_text_field($params['password'] ?? '');
+
+//     $user = wp_authenticate($username, $password);
+
+//     if (is_wp_error($user)) {
+//         return new WP_REST_Response(['error' => $user->get_error_message()], 403);
+//     }
+
+//     $jwt_secret_key = get_option('jwt_secret_key', '');
+//     $payload = [
+//         'iss' => get_bloginfo('url'),
+//         'iat' => time(),
+//         'exp' => time() + 3600, // Access token valid for 1 hour
+//         'user' => [
+//             'id' => $user->ID,
+//             'login' => $user->user_login,
+//             'email' => $user->user_email,
+//         ],
+//     ];
+
+//     $token = JWT::encode($payload, $jwt_secret_key, 'HS256');
+
+//     // Generate a refresh token
+//     $refresh_token = bin2hex(random_bytes(32)); // Secure random token
+//     update_user_meta($user->ID, 'refresh_token', $refresh_token);
+
+//     // Set the refresh token as a secure, HttpOnly cookie
+//     setcookie('refreshToken', $refresh_token, [
+//         'expires' => time() + (7 * 24 * 60 * 60), // Valid for 7 days
+//         'path' => '/',
+//         'httponly' => true,
+//         'secure' => is_ssl(),
+//         'samesite' => 'Strict',
+//     ]);
+
+//     return new WP_REST_Response(['token' => $token, 'expires_in' => 3600], 200);
+// }
+
 // Handle Login API
 function handle_jwt_login(WP_REST_Request $request) {
     if (!is_jwt_enabled()) {
@@ -258,24 +326,34 @@ function handle_jwt_login(WP_REST_Request $request) {
     $username = sanitize_text_field($params['username'] ?? '');
     $password = sanitize_text_field($params['password'] ?? '');
 
+    // Authenticate user
     $user = wp_authenticate($username, $password);
 
     if (is_wp_error($user)) {
-        return new WP_REST_Response(['error' => $user->get_error_message()], 403);
+        $custom_error = 'The information you provided is not valid.';
+        //return new WP_REST_Response(['error' => $user->get_error_message()], 403);
+        return new WP_REST_Response(['error' => $custom_error], 403);
     }
 
+    // Get user's roles and determine the primary role
+    $roles = $user->roles; // Array of roles
+    $primary_role = $roles[0] ?? 'subscriber'; // Default to 'subscriber' if no roles exist
+
+    // Generate JWT payload
     $jwt_secret_key = get_option('jwt_secret_key', '');
     $payload = [
-        'iss' => get_bloginfo('url'),
-        'iat' => time(),
-        'exp' => time() + 3600, // Access token valid for 1 hour
+        'iss' => get_bloginfo('url'), // Issuer
+        'iat' => time(),              // Issued at
+        'exp' => time() + 3600,       // Expiry time (1 hour)
         'user' => [
             'id' => $user->ID,
             'login' => $user->user_login,
             'email' => $user->user_email,
+            'role' => $primary_role, // Include user's role
         ],
     ];
 
+    // Encode the token
     $token = JWT::encode($payload, $jwt_secret_key, 'HS256');
 
     // Generate a refresh token
@@ -291,8 +369,19 @@ function handle_jwt_login(WP_REST_Request $request) {
         'samesite' => 'Strict',
     ]);
 
-    return new WP_REST_Response(['token' => $token, 'expires_in' => 3600], 200);
+    // Return the token and user data
+    return new WP_REST_Response([
+        'token' => $token,
+        'user' => [
+            'id' => $user->ID,
+            'login' => $user->user_login,
+            'email' => $user->user_email,
+            'role' => $primary_role, // Include role in response
+        ],
+        'expires_in' => 3600, // Token expiry time in seconds
+    ], 200);
 }
+
 
 // Handle Registration API
 function handle_jwt_register(WP_REST_Request $request) {
