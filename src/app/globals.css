@@ -46,3 +46,7 @@ body {
 .wp-block-heading {
   font-size: 1.4rem !important;
 }
+
+#sanity {
+  max-height: 80vh !important;
+}

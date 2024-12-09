@@ -138,6 +138,7 @@ import Script from "next/script";
 import Header from "@/components/responsive/header/Header";
 import Footer from "@/components/responsive/footer/Footer";
 import "./globals.css";
+import ChatButton from "@/components/ai/ChatButton";
 
 export const metadata: Metadata = {
   title: "Blooming Brands | ",
@@ -170,7 +171,10 @@ export default function RootLayout({
       </head>
       <body>
         <Header logo="/Blooming_Brands_Logo.png" darkLogo="/dark-logo.png" />
-        {children}
+        <div className="mt-[70px]">{children}</div>
+        <div className="">
+          <ChatButton />
+        </div>
         <Footer />
 
         {/* AdSense Script */}

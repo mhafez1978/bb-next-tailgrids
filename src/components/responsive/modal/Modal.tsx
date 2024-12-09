@@ -385,7 +385,7 @@ const Modal = () => {
         initial={{ opacity: 1, scale: 1 }}
         whileHover={{ scale: 1.1 }}
         onClick={handleModalToggle}
-        className="w-[250px] flex items-center justify-center py-3 px-6 rounded-lg bg-gradient-to-r from-blue-400 to-blue-600 shadow-lg border-2 border-blue-700 text-white text-lg font-bold hover:shadow-2xl transition-transform duration-300 transform hover:scale-110 lg:w-1/2"
+        className="min-w-[250px] flex items-center justify-center py-3 px-6 rounded-lg bg-gradient-to-r from-blue-400 to-blue-600 shadow-lg border-2 border-blue-700 text-white text-lg font-bold hover:shadow-2xl transition-transform duration-300 transform hover:scale-110 lg:w-1/2"
       >
         Get Started Today
       </motion.button>

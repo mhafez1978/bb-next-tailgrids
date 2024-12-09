@@ -96,6 +96,9 @@ export default function Login() {
               >
                 {loading ? "Logging in..." : "Login"}
               </button>
+              <a href={`${process.env.NEXT_PUBLIC_RESET_PASSWORD}`}>
+                Forgot Password
+              </a>
             </form>
           </div>
         </div>

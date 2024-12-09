@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "lib": ["dom", "dom.iterable", "esnext"],
-    "target": "es2015", // Ensure compatibility with Set iteration
+    "target": "ES2017", // Ensure compatibility with Set iteration
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
