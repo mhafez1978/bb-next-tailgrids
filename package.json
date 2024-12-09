@@ -42,7 +42,7 @@
     "sharp": "^0.33.5",
     "swiper": "^11.1.14",
     "tailgrids": "^2.2.7",
-    "tailwind-merge": "^2.5.2",
+    "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
