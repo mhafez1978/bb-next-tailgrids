@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 
 export default function Login() {
@@ -22,9 +23,8 @@ export default function Login() {
       if (!response.ok) {
         const { error } = await response.json();
         setError(error || "Invalid credentials");
-      } else {
-        window.location.href = "/dashboard";
       }
+      window.location.href = "/dashboard";
     } catch (err) {
       console.error("Error during login:", err);
       setError("Something went wrong.");
