@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import PageTop from "@/components/responsive/page-top/PageTop";
 import Pagination from "@/components/pagination/Pagination";
 //import Image from "next/image";
-import { Suspense } from "react";
+// import { Suspense } from "react";
 // import Link from "next/link";
 import NewsLetterForm2 from "@/components/responsive/newsletter/NewsletterForm2";
 // import sanitize from "dompurify";
@@ -103,158 +103,7 @@ const LatestNewsRoll = async ({ searchParams }: LatestNewsProps) => {
   }
 };
 
-//   const page = parseInt(searchParams.page?.toString() || "1");
-//   const perPage = 6;
-
-//   try {
-//     const response = await fetch(
-//       `https://api.blooming-brands.com/wp-json/wp/v2/posts?page=${page}&per_page=${perPage}`
-//     );
-
-//     if (!response.ok) {
-//       throw new Error("Failed to fetch posts");
-//     }
-
-//     const posts = (await response.json()) as WordPressPost[];
-//     const totalPages = parseInt(response.headers.get("X-WP-TotalPages") || "1");
-
-//     return (
-//       <>
-//         <PageTop PageMessage="Latest News" />
-//         <section className="bg-white pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]">
-//           <div className="container mx-auto">
-//             <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-//               {posts.map((post) => {
-//                 // Sanitize the HTML excerpt
-//                 const sanitizedExcerpt = DOMPurify.sanitize(
-//                   post.excerpt.rendered.replace(
-//                     /\[&hellip;\]|\[...\]/g,
-//                     `... <a href="/latest-news/article/${post.id}" class="text-sky-600 dark:text-gray-400">Read more</a>`
-//                   )
-//                 );
-
-//                 return (
-//                   <PostCard
-//                     key={post.id}
-//                     id={post.id}
-//                     date={new Date(post.date).toLocaleDateString()}
-//                     CardTitle={post.title.rendered}
-//                     CardDescription={
-//                       <div
-//                         className="excerpt-content"
-//                         dangerouslySetInnerHTML={{ __html: sanitizedExcerpt }}
-//                       />
-//                     }
-//                     image={
-//                       post.post_featured_image ||
-//                       "https://via.placeholder.com/600x400.png"
-//                     }
-//                     author={post.author_details.name}
-//                     avatar={post.author_details.avatar}
-//                   />
-//                 );
-//               })}
-//             </div>
-//             <Pagination currentPage={page} totalPages={totalPages} />
-//           </div>
-//         </section>
-//         <NewsLetterForm2 />
-//       </>
-//     );
-//   } catch (error) {
-//     return (
-//       <div className="text-center p-4 text-red-500">
-//         {error instanceof Error ? error.message : "Failed to fetch posts"}
-//       </div>
-//     );
-//   }
-// };
-
-// import DOMPurify from "dompurify";
-
-// interface WordPressPost {
-//   id: number;
-//   date: string;
-//   title: { rendered: string };
-//   excerpt: { rendered: string };
-//   content: { rendered: string };
-//   post_featured_image?: string;
-//   author_details: {
-//     name: string;
-//     avatar: string;
-//   };
-// }
-
-// interface LatestNewsProps {
-//   searchParams: Record<string, string | string[] | undefined>;
-// }
-
-// const LatestNewsRoll = async ({ searchParams }: LatestNewsProps) => {
-//   const page = parseInt(searchParams.page?.toString() || "1");
-//   const perPage = 6;
-
-//   try {
-//     const response = await fetch(
-//       `https://api.blooming-brands.com/wp-json/wp/v2/posts?page=${page}&per_page=${perPage}`
-//     );
-
-//     if (!response.ok) {
-//       throw new Error("Failed to fetch posts");
-//     }
-
-//     const posts = (await response.json()) as WordPressPost[];
-//     const totalPages = parseInt(response.headers.get("X-WP-TotalPages") || "1");
-
-//     return (
-//       <>
-//         <PageTop PageMessage="Latest News" />
-//         <section className="bg-white pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]">
-//           <div className="container mx-auto">
-//             <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-//               {posts.map((post) => {
-//                 const sanitizedExcerpt = DOMPurify.sanitize(
-//                   post.excerpt.rendered.replace(
-//                     /\[&hellip;\]|\[...\]/g,
-//                     `... <a href="/latest-news/article/${post.id}" class="text-sky-600 dark:text-gray-400">Read more</a>`
-//                   )
-//                 );
-
-//                 return (
-//                   <PostCard
-//                     key={post.id}
-//                     id={post.id}
-//                     date={new Date(post.date).toLocaleDateString()}
-//                     CardTitle={post.title.rendered}
-//                     CardDescription={
-//                       <div
-//                         className="excerpt-content"
-//                         dangerouslySetInnerHTML={{ __html: sanitizedExcerpt }}
-//                       />
-//                     }
-//                     image={
-//                       post.post_featured_image ||
-//                       "https://via.placeholder.com/600x400.png"
-//                     }
-//                     author={post.author_details.name}
-//                     avatar={post.author_details.avatar}
-//                   />
-//                 );
-//               })}
-//             </div>
-//             <Pagination currentPage={page} totalPages={totalPages} />
-//           </div>
-//         </section>
-//         <NewsLetterForm2 />
-//       </>
-//     );
-//   } catch (error) {
-//     return (
-//       <div className="text-center p-4 text-red-500">
-//         {error instanceof Error ? error.message : "Failed to fetch posts"}
-//       </div>
-//     );
-//   }
-// };
+export default LatestNewsRoll;
 
 const PostCard = ({
   id,
@@ -311,24 +160,14 @@ const PostCard = ({
   </div>
 );
 
-export default function LatestNewsWithSuspense({
-  searchParams,
-}: LatestNewsProps) {
-  return (
-    <Suspense fallback={<LoadingSpinner />}>
-      <LatestNewsRoll searchParams={searchParams} />
-    </Suspense>
-  );
-}
-
 // Loading Spinner component
-const LoadingSpinner = () => {
-  return (
-    <div className="flex items-center justify-center h-screen py-20">
-      <div className="text-center">
-        <div className="mb-4 inline-block h-16 w-16 animate-spin rounded-full border-t-4 border-blue-500"></div>
-        <p className="text-xl font-semibold">Loading ...</p>
-      </div>
-    </div>
-  );
-};
+// const LoadingSpinner = () => {
+//   return (
+//     <div className="flex items-center justify-center h-screen py-20">
+//       <div className="text-center">
+//         <div className="mb-4 inline-block h-16 w-16 animate-spin rounded-full border-t-4 border-blue-500"></div>
+//         <p className="text-xl font-semibold">Loading ...</p>
+//       </div>
+//     </div>
+//   );
+// };
