@@ -48,7 +48,7 @@ export const generateMetadata = async ({
 
 export default function ProductPage({ params }: Props) {
   return (
-    <div className="w-screen min-h-[50vh] mt-[120px]">
+    <div className="w-screen min-h-[50vh]">
       <div className="container mx-auto">
         <h1 className="text-3xl font-bold px-4">Product Details Page</h1>
         <ProductDetails productId={params.productId} />

@@ -303,7 +303,7 @@ const Portfolio02: React.FC = () => {
               />
             </SwiperSlide>
           </Swiper>
-          <div className="container mx-auto -mt-[25vh] w-full flex flex-row justify-between items-center z-30">
+          <div className="container mx-auto w-full flex flex-row justify-between items-center z-30">
             <div className="prev-arrow" onClick={handlePrev}>
               <button className="text-body-color dark:text-dark-6 hover:text-black flex items-center justify-center text-sm font-medium transition-all">
                 <span className="mr-3">

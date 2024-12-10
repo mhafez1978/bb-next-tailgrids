@@ -34,7 +34,7 @@ export default function Login() {
   };
 
   return (
-    <div className="relative bg-[#e7feed] mt-[70px]">
+    <div className="relative bg-[#e7feed]">
       <video
         autoPlay
         loop

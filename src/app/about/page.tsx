@@ -19,10 +19,20 @@ export const metadata: Metadata = {
 const page = () => {
   return (
     <>
-      <div className="min-h-[50vh] mt-[63px]">
+      <div className="min-h-[50vh]">
         <PageTop PageMessage="About us" />
+        <div className="min-h-[25vh] w-screen bg-[url('https://www.tallahasseefreeclassifiedads.com/banner_thumb_new.php?f=samplead.jpg&w=1500&h=500')] bg-center bg-cover bg-no-repeat">
+          <ins
+            className="adsbygoogle"
+            style={{ display: "block" }}
+            data-ad-client="ca-pub-1266489978722809"
+            data-ad-slot="8088782196"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          ></ins>
+        </div>
         <About />
-        <div className="min-h-[20vh] w-screen mt-10 mb-10">
+        <div className="min-h-[25vh] w-screen bg-[url('https://www.tallahasseefreeclassifiedads.com/banner_thumb_new.php?f=samplead.jpg&w=1500&h=500')] bg-center bg-cover bg-no-repeat">
           <ins
             className="adsbygoogle"
             style={{ display: "block" }}

@@ -109,7 +109,7 @@ add_action('admin_menu', function () {
         'jwt-management',
         'jwt_management_admin_page',
         'dashicons-admin-tools',
-        100
+        107
     );
 });
 

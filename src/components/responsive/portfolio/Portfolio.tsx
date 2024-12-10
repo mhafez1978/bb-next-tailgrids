@@ -521,7 +521,7 @@ PortfolioCardProps) => {
               className="w-full h-full object-cover"
             />
           </div>
-          <div className="relative z-10 mx-7 -mt-20 rounded-lg border-2 border-black bg-white py-[34px] px-3 text-center shadow-portfolio dark:shadow-box-dark">
+          <div className="relative z-10 mx-7 rounded-lg border-2 border-black bg-white py-[34px] px-3 text-center shadow-portfolio dark:shadow-box-dark">
             <span className="text-black mb-2 block text-sm font-medium">
               {category}
             </span>

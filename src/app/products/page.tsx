@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function ProductsPage() {
   return (
-    <main className="min-h-screen bg-gray-100 mt-[100px]">
+    <main className="min-h-screen bg-gray-100">
       <h1 className="text-3xl font-bold text-center py-8">Our Products</h1>
       <hr className="border-2" />
       <ProductList />

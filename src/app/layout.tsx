@@ -171,8 +171,8 @@ export default function RootLayout({
       </head>
       <body>
         <Header logo="/Blooming_Brands_Logo.png" darkLogo="/dark-logo.png" />
-        <div className="mt-[70px]">{children}</div>
-        <div className="">
+        <div className="mt-[80px]">{children}</div>
+        <div className="fixed botton-100 right-10 z-50">
           <ChatButton />
         </div>
         <Footer />

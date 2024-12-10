@@ -43,7 +43,7 @@ export default function Register() {
   };
 
   return (
-    <div className="w-screen relative mt-[70px] min-h-[100vh] bg-[url('/register-bg.png')] bg-cover bg-center bg-no-repeat">
+    <div className="w-screen relative min-h-[50vh] bg-[url('/register-bg.png')] bg-cover bg-center bg-no-repeat">
       <div className="container mx-auto flex flex-row-reverse">
         <div className="absolute w-screen h-screen left-0 top-0 bg-black/70 z-10"></div>
         <div className="w-3/4 min-h-[100vh] flex flex-col justify-end p-10 ">

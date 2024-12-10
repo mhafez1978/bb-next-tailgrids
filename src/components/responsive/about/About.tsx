@@ -612,40 +612,6 @@ const About = () => {
               </div>
             </div>
 
-            {/* <div className="w-full px-4 lg:w-1/2 xl:w-5/12">
-              <div className="mt-10 lg:mt-0">
-                <span className="block mb-4 text-lg font-semibold text-black">
-                  Design &amp; Functionality Crossing
-                </span>
-                <h2 className="mb-5 text-3xl font-bold text-dark dark:text-white sm:text-[40px]/[48px]">
-                  We Craft Full-Stack, Data-Driven Apps, Websites, Online
-                  Stores, Blogs, and More…
-                </h2>
-                <p className="mb-5 text-base text-body-color dark:text-dark-6">
-                  At Blooming Brands, we bring together creativity and
-                  technology to craft powerful digital experiences. From
-                  dynamic, data-driven websites and applications to seamless
-                  online stores and engaging blogs, we focus on delivering
-                  functionality and design that work in perfect harmony. Every
-                  project is tailored to enhance your brand and drive real
-                  results, ensuring your online presence stands out and performs
-                  at its best.
-                </p>
-                <p className="mb-8 text-base text-body-color dark:text-dark-6">
-                  With a team dedicated to innovation and detail, we transform
-                  ideas into impactful digital solutions that grow your business
-                  and captivate your audience. Let’s create something
-                  remarkable, together.
-                </p>
-                <a
-                  href="javascript:void(0)"
-                  className="inline-flex items-center justify-center py-3 text-base font-medium text-center text-white border border-transparent rounded-md px-7 bg-black hover:bg-opacity-90"
-                >
-                  Get Started
-                </a>
-              </div>
-            </div> */}
-
             <div className="w-full px-4 lg:w-1/2 xl:w-5/12">
               <div className="px-10 mt-10 lg:mt-0 lg:px-0">
                 <span className="block mb-4 text-lg font-semibold text-black">

@@ -27,7 +27,7 @@ export default function UserDashboard({ username }: UserDashboardProps) {
   }, []);
 
   return (
-    <div className="w-screen min-h-[100vh] mt-[100px]">
+    <div className="w-screen min-h-[50vh]">
       <div className="container bg-white">
         <div className="flex flex-row justify-between items-center mb-6">
           <h1 className="text-3xl font-bold">Dashboard</h1>

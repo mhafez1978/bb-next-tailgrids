@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 const page = () => {
   return (
     <>
-      <div className="min-h-[50vh] mt-[63px]">
+      <div className="min-h-[50vh]">
         <PageTop PageMessage="Our Portfolio" />
         <Portfolio />
       </div>

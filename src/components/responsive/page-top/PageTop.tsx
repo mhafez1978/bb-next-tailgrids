@@ -2,7 +2,7 @@ import React from "react";
 
 const PageTop = ({ PageMessage }: { PageMessage: string }) => {
   return (
-    <section className="relative z-10 overflow-hidden bg-slate-800 mt-[63px] py-20 lg:py-[50px]">
+    <section className="w-screen z-10 overflow-hidden bg-slate-800 lg:py-[50px]">
       <div className="container mx-auto">
         <div className="-mx-4 flex flex-wrap items-center">
           <div className="w-full px-4 lg:w-2/3 xl:w-3/4">
