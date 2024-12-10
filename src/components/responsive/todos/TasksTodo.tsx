@@ -886,7 +886,7 @@ const TasksTodo: React.FC<TasksTodoProps> = ({ token }) => {
   useEffect(() => {
     fetchTasks();
     fetchUsers();
-  }, [fetchTasks, fetchUsers]);
+  }, []);
 
   return (
     <div className="container mx-auto [min-h-50vh] bg-gray-100 flex flex-row gap-2 rounded-lg shadow-lg py-22">

@@ -14,7 +14,7 @@ export async function GET() {
     }
 
     const users = await response.json();
-    //console.log(posts);
+    console.log(users);
 
     return NextResponse.json(users);
   } catch (error) {
