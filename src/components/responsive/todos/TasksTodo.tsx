@@ -889,21 +889,27 @@ const TasksTodo: React.FC<TasksTodoProps> = ({ token }) => {
   }, []);
 
   return (
-    <div className="container mx-auto [min-h-50vh] bg-gray-100 flex flex-row gap-2 rounded-lg shadow-lg py-22">
-      <div className="w-3/4 pt-6">
-        <div className="w-3/4 flex flex-row">
-          <h1 className="w-1/4 text-2xl font-bold mb-2">Tasks Todo</h1>
-          {error && <p className="w-1/4 text-red-700 mb-4">{error}</p>}
-          {success && <p className="w-2/4 text-green-700 mb-4">{success}</p>}
+    <div className="container mx-auto bg-gray-100 flex flex-col gap-2 rounded-lg shadow-lg lg:flex-row lg:py-22">
+      <div className="w-full lg:w-3/4 lg:pt-6">
+        <div className="w-full flex flex-col lg:flex-row lg:w-3/4">
+          <h1 className="w-full text-2xl font-bold lg:w-1/4 lg:mb-2">
+            Tasks Todo
+          </h1>
+          {error && (
+            <p className="w-full text-red-700 lg:mb-4 lg:w-1/4">{error}</p>
+          )}
+          {success && (
+            <p className="w-full text-green-700 lg:w-2/4 lg:mb-4">{success}</p>
+          )}
         </div>
         {loading ? (
           <p>Loading tasks...</p>
         ) : (
-          <ul className="w-full min-h-[50vh] flex flex-wrap gap-x-2 gap-y-4 pb-8">
+          <ul className="w-full flex flex-wrap gap-x-2 gap-y-4 pb-8">
             {tasks.map((task) => (
               <li
                 key={task.id}
-                className="relative w-[200px] min-h-[20vh] max-h-[25vh] p-4 bg-white rounded shadow"
+                className="relative flex flex-col gap-2 w-[200px] min-h-[20vh] max-h-[25vh] p-4 bg-white rounded shadow"
               >
                 <h2 className="font-bold mb-2 capitalize">{task.title}</h2>
                 <p className="mb-2 text-emerald-600">{task.content}</p>
@@ -943,7 +949,7 @@ const TasksTodo: React.FC<TasksTodoProps> = ({ token }) => {
         )}
       </div>
 
-      <div className="w-1/4 flex flex-col justify-start items-start pt-10 pb-20 -ml-12">
+      <div className="w-full flex flex-col justify-start items-start lg:w-1/4 lg:pt-10 lg:pb-20 lg:-ml-12">
         <div className="w-full space-y-4">
           <h2 className="font-bold">
             {editingTask ? "Edit Task" : "Add New Task"}

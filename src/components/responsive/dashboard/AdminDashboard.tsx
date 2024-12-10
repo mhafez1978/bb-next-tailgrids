@@ -99,14 +99,16 @@ export default function AdminDashboard({ username }: AdminDashboardProps) {
   return (
     <div className="w-screen min-h-[50vh]">
       <div className="max-w-[1280px] mx-auto bg-white">
-        <div className="container mx-auto flex flex-row justify-between items-center mb-6">
+        <div className="container mx-auto flex flex-row justify-between items-center">
           <h1 className="text-3xl font-bold text-sky-700">Admin Dashboard</h1>
-          <LogoutBtn />
+          <div className="flex flex-row gap-4 justify-center">
+            <h2 className="text-2xl font-semibold text-sky-700">
+              Welcome, {username}
+            </h2>
+            <LogoutBtn />
+          </div>
         </div>
-        <div className="flex flex-col gap-2">
-          <h2 className="text-2xl font-semibold text-sky-700">
-            Welcome, {username}
-          </h2>
+        <div className="container mx-auto flex flex-col gap-2">
           <p className="hidden font-3xl font-semibold">Your token:</p>
           <p className="hidden w-2/3 text-lg text-wrap break-all">
             {token
@@ -119,7 +121,7 @@ export default function AdminDashboard({ username }: AdminDashboardProps) {
         <div>
           {/* Render TasksTodo only if the token is available */}
           {token ? (
-            <div className="mt-[100px] mb-[200px]">
+            <div className="mt-[20px] mb-[200px]">
               <TasksTodo token={token} />
             </div>
           ) : (
