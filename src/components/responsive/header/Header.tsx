@@ -38,7 +38,7 @@ const Header: React.FC<HeaderProps> = ({ logo, darkLogo }) => {
     return () => {
       window.removeEventListener("scroll", listenScrollEvent);
     };
-  }, [listenScrollEvent]);
+  }, []);
 
   return (
     <section>
