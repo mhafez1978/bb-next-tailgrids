@@ -99,7 +99,7 @@ export default function AdminDashboard({ username }: AdminDashboardProps) {
   return (
     <div className="w-screen min-h-[50vh]">
       <div className="max-w-[1280px] mx-auto bg-white">
-        <div className="container mx-auto flex justify-between items-center mb-6">
+        <div className="container mx-auto flex flex-row justify-between items-center mb-6">
           <h1 className="text-3xl font-bold text-sky-700">Admin Dashboard</h1>
           <LogoutBtn />
         </div>
