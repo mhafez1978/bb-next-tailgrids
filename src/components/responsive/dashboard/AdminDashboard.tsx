@@ -97,7 +97,7 @@ export default function AdminDashboard({ username }: AdminDashboardProps) {
   }, []);
 
   return (
-    <div className="w-screen min-h-[50vh]">
+    <div className="w-screen min-h-[50vh] mt-[80px]">
       <div className="max-w-[1280px] mx-auto bg-white">
         <div className="container mx-auto flex flex-row justify-between items-center">
           <h1 className="text-3xl font-bold text-sky-700">Admin Dashboard</h1>
