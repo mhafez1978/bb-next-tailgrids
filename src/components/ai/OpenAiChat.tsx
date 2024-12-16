@@ -69,43 +69,6 @@ export default function Chatbot() {
     }
   };
 
-  // const handleFormSubmit = async () => {
-  //   const { name, phone, email, services } = formData;
-
-  //   if (!name || !phone || !email || !services) {
-  //     alert("Please fill out all fields.");
-  //     return;
-  //   }
-
-  //   setFormStatus("sending");
-
-  //   try {
-  //     await sendMessage("formSubmitted", formData);
-
-  //     setFormStatus("sent");
-  //     setTimeout(() => setFormStatus("idle"), 2000);
-  //     setShowForm(false);
-
-  //     setMessages((prev) => [
-  //       ...prev,
-  //       {
-  //         role: "assistant",
-  //         content: `<p>Thank you! We've received your details:<br/>Name: ${name}, Phone: ${phone}, Email: ${email}, Services: ${services}.</p><p>A team member will contact you shortly.</p>`,
-  //       },
-  //     ]);
-
-  //     // Reset form data
-  //     setFormData({ name: "", phone: "", email: "", services: "" });
-  //     setTimeout(() => {
-  //       setShowForm(false); // This ensures the modal closes after a short delay
-  //       setFormStatus("idle"); // Reset button state after closing the modal
-  //     }, 1000); // Adjust delay as needed
-  //   } catch (error) {
-  //     console.error("Error submitting form:", error);
-  //     alert("Failed to submit the form. Please try again.");
-  //     setFormStatus("idle");
-  //   }
-  // };
   const handleFormSubmit = async () => {
     // Ensure the `formData` object exists and has the required fields
     const { name, phone, email, services } = formData;

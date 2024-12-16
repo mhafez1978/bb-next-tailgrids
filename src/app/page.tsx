@@ -11,6 +11,7 @@ import Contact from "@/components/responsive/contact/Contact";
 import type { Metadata } from "next";
 import CookiesConcentNotice from "@/components/responsive/consent/CookiesConcentNotice";
 import NewsLetterForm2 from "@/components/responsive/newsletter/NewsletterForm2";
+import ChatButton from "@/components/ai/ChatButton";
 
 export const metadata: Metadata = {
   title: "Blooming Brands | Home",
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
     "Boston based Website Design, Development, and Online Marketing Agency",
   keywords: "website design, website development, online marketing",
   applicationName: "Blooming Brands", // Provide the app name or remove this field if unnecessary
-  authors: [{ name: "Mohamed Hafez" }], // Changed to array of objects
+  authors: [{ name: "Blooming Brands LLC" }], // Changed to array of objects
   creator: "Blooming Brands Web Development Team",
   publisher: "Blooming Brands LLC a division subsidiary of Nodes Unlimited LLC",
 };
@@ -51,6 +52,9 @@ export default function Home() {
       <Contact />
       <NewsLetterForm2 />
       <CookiesConcentNotice />
+      <div className="hidden lg:fixed lg:block lg:botton-100 lg:right-10 z-30">
+        <ChatButton />
+      </div>
     </>
   );
 }

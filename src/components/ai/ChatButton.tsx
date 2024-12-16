@@ -12,15 +12,14 @@ export default function FloatingChat() {
       <div className="relative">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="h-[45px] w-[45px] text-2xl font-black fixed bottom-4 right-4 bg-purple-500 text-white text-center flex justify-center items-center rounded-full shadow-lg z-40 hover:bg-green-600"
+          className="h-[45px] w-[45px] text-2xl font-black fixed bottom-4 right-6 bg-purple-500 text-white text-center flex justify-center items-center rounded-full shadow-lg z-30 hover:bg-green-600"
           aria-label="Chat with us"
         >
           <IoChatbubblesOutline size={40} color="white" />
         </button>
-        {/* Tooltip */}
-        <div className="absolute bottom-[60px] right-0 transform translate-x-1/2 bg-gray-700 text-white text-sm font-semibold py-1 px-3 rounded-lg opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-          We&apos;re Online
-        </div>
+        <span className="text-slate-400 fixed bottom-6 right-20">
+          We available
+        </span>
       </div>
 
       {/* Chatbot Modal */}
