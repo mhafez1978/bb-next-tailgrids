@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import PageTop from "@/components/responsive/page-top/PageTop";
 import Pagination from "@/components/pagination/Pagination";
-import Link from "next/link";
+//import Image from "next/image";
+// import { Suspense } from "react";
+// import Link from "next/link";
 import NewsLetterForm2 from "@/components/responsive/newsletter/NewsletterForm2";
+// import sanitize from "dompurify";
 
+// Metadata for SEO
 export const metadata: Metadata = {
   title: "Blooming Brands | Our Latest News",
   description:
@@ -16,12 +20,13 @@ export const metadata: Metadata = {
   publisher: "Blooming Brands LLC",
 };
 
+// Define WordPressPost interface
 interface WordPressPost {
   id: number;
   date: string;
   title: { rendered: string };
   excerpt: { rendered: string };
-  slug: string;
+  content: { rendered: string };
   post_featured_image?: string;
   author_details: {
     name: string;
@@ -29,10 +34,12 @@ interface WordPressPost {
   };
 }
 
+// Define LatestNewsProps
 interface LatestNewsProps {
   searchParams: Record<string, string | string[] | undefined>;
 }
 
+// Component to display the latest news with posts and pagination
 const LatestNewsRoll = async ({ searchParams }: LatestNewsProps) => {
   const page = parseInt(searchParams.page?.toString() || "1");
   const perPage = 6;
@@ -49,14 +56,6 @@ const LatestNewsRoll = async ({ searchParams }: LatestNewsProps) => {
     const posts = (await response.json()) as WordPressPost[];
     const totalPages = parseInt(response.headers.get("X-WP-TotalPages") || "1");
 
-    if (!posts || posts.length === 0) {
-      return (
-        <div className="text-center p-4 text-gray-500">
-          No posts available at the moment. Please check back later.
-        </div>
-      );
-    }
-
     return (
       <>
         <PageTop PageMessage="Latest News" />
@@ -65,9 +64,8 @@ const LatestNewsRoll = async ({ searchParams }: LatestNewsProps) => {
             <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
               {posts.map((post) => (
                 <PostCard
-                  slug={post.slug}
                   key={post.id}
-                  id={post.slug} // Use slug for navigation
+                  id={post.id}
                   date={new Date(post.date).toLocaleDateString()}
                   CardTitle={post.title.rendered}
                   CardDescription={
@@ -76,7 +74,7 @@ const LatestNewsRoll = async ({ searchParams }: LatestNewsProps) => {
                       dangerouslySetInnerHTML={{
                         __html: post.excerpt.rendered.replace(
                           /\[&hellip;\]|\[...\]/g,
-                          `... <a href="/latest-news/article/${post.slug}" class="text-sky-600 dark:text-gray-400">Read more</a>`
+                          `... <a href="/latest-news/article/${post.id}" class="text-sky-600 dark:text-gray-400">Read more</a>`
                         ),
                       }}
                     />
@@ -109,7 +107,6 @@ export default LatestNewsRoll;
 
 const PostCard = ({
   id,
-  slug,
   date,
   CardTitle,
   CardDescription,
@@ -117,8 +114,7 @@ const PostCard = ({
   author,
   avatar,
 }: {
-  id: number | string;
-  slug: string; // Use slug instead of id
+  id: number;
   date: string;
   CardTitle: string;
   CardDescription: React.ReactNode;
@@ -127,13 +123,14 @@ const PostCard = ({
   avatar: string;
 }) => (
   <div
+    key={id}
     id={id.toString()}
     className="w-full h-full flex flex-col border border-gray-200 rounded-lg shadow-md"
   >
     <div className="overflow-hidden rounded-t h-64 flex-shrink-0">
       <img
         src={image}
-        alt={`Thumbnail for ${CardTitle}`}
+        alt="Post Thumbnail"
         className="w-full h-full object-cover"
       />
     </div>
@@ -154,7 +151,7 @@ const PostCard = ({
         </span>
       </div>
       <h3 className="mb-4 text-xl font-semibold text-dark dark:text-white">
-        <Link href={`/latest-news/article/${slug}`}>{CardTitle}</Link>
+        {CardTitle}
       </h3>
       <div className="mb-4 text-base text-body-color dark:text-dark-6">
         {CardDescription}

@@ -12,28 +12,61 @@ interface Tag {
   name: string;
 }
 
-export const metadata: Metadata = {
-  title: "Blooming Brands | Blog ",
-  description:
-    "Boston based Website Design, Development, and Online Marketing Agency",
-  keywords:
-    "website design, website development, online stores, online marketing",
-  applicationName: "Blooming Brands", // Provide the app name or remove this field if unnecessary
-  authors: [{ name: "Mohamed Hafez" }], // Changed to array of objects
-  creator: "Blooming Brands Web Development Team",
-  publisher: "Blooming Brands LLC a division subsidiary of Nodes Unlimited LLC",
-};
-
-const Post = async ({ params }: { params: { id: string } }) => {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
   try {
-    // Fetch the current post using the post ID from params
+    // Fetch the post using the slug
+    const res = await fetch(
+      `https://api.blooming-brands.com/wp-json/wp/v2/posts?slug=${params.slug}&_embed`
+    );
+    const post = await res.json();
+
+    // Default fallback title and description
+    let title = "Blooming Brands | Blog Post";
+    let description =
+      "Boston-based Website Design, Development, and Online Marketing Agency";
+
+    // If post data exists, use its title and excerpt
+    if (post && post[0]) {
+      const currentPost = post[0];
+      title = `Blooming Brands | ${currentPost.title.rendered}`;
+      description =
+        currentPost.excerpt?.rendered?.replace(/(<([^>]+)>)/gi, "") ||
+        description; // Strip HTML tags from excerpt
+    }
+
+    return {
+      title,
+      description,
+      keywords:
+        "website design, website development, online stores, online marketing",
+      applicationName: "Blooming Brands",
+      authors: [{ name: "Mohamed Hafez" }],
+      creator: "Blooming Brands Web Development Team",
+      publisher: "Blooming Brands LLC, a subsidiary of Nodes Unlimited LLC",
+    };
+  } catch (error) {
+    console.error("Error fetching post metadata:", error);
+    return {
+      title: "Blooming Brands | Error",
+      description: "An error occurred while fetching the post metadata.",
+    };
+  }
+}
+
+const Post = async ({ params }: { params: { slug: string } }) => {
+  try {
+    // Fetch the current post using the slug from params
     const data = await fetch(
-      `https://api.blooming-brands.com/wp-json/wp/v2/posts/${params.id}?_embed`
+      `https://api.blooming-brands.com/wp-json/wp/v2/posts?slug=${params.slug}&_embed`
     );
     const post = await data.json();
 
     // Check if the post fetch was successful
-    if (!post || !post.title) {
+    if (!post || !post[0]) {
       return (
         <>
           <p>Sorry, but this post could not be found, </p>
@@ -41,6 +74,8 @@ const Post = async ({ params }: { params: { id: string } }) => {
         </>
       );
     }
+
+    const currentPost = post[0];
 
     // Fetch all posts to find the next and previous posts
     const allPostsRes = await fetch(
@@ -50,7 +85,7 @@ const Post = async ({ params }: { params: { id: string } }) => {
 
     // Find the index of the current post
     const currentPostIndex = allPosts.findIndex(
-      (p: { id: number }) => p.id === parseInt(params.id)
+      (p: { id: number }) => p.id === currentPost.id
     );
 
     // Get the next post (if available)
@@ -65,9 +100,9 @@ const Post = async ({ params }: { params: { id: string } }) => {
 
     // Fetch post tags
     let tagsData: Tag[] = [];
-    if (post.tags.length > 0) {
+    if (currentPost.tags.length > 0) {
       const tagsRes = await fetch(
-        `https://api.blooming-brands.com/wp-json/wp/v2/tags?include=${post.tags.join(
+        `https://api.blooming-brands.com/wp-json/wp/v2/tags?include=${currentPost.tags.join(
           ","
         )}`
       );
@@ -75,21 +110,21 @@ const Post = async ({ params }: { params: { id: string } }) => {
     }
 
     // Extract author from embedded data
-    const author = post._embedded?.author?.[0] || {
+    const author = currentPost._embedded?.author?.[0] || {
       name: "Webmaster",
       avatar_urls: { 96: "https://placehold.co/40x40" },
     };
 
     // Handle fallback for post image (use a placeholder if no featured image)
     const postImage =
-      post._embedded?.["wp:featuredmedia"]?.[0]?.source_url?.trim() || // Check for empty or undefined source_url
+      currentPost._embedded?.["wp:featuredmedia"]?.[0]?.source_url?.trim() || // Check for empty or undefined source_url
       "https://via.placeholder.com/600x400.png"; // Fallback to PNG
 
     // Sanitize the content
     const sanitizedContent =
       typeof window !== "undefined"
-        ? DOMPurify.sanitize(post.content.rendered.trim())
-        : post.content.rendered.trim();
+        ? DOMPurify.sanitize(currentPost.content.rendered.trim())
+        : currentPost.content.rendered.trim();
 
     return (
       <section id="post" className="bg-white py-20 dark:bg-dark lg:py-[120px]">
@@ -98,8 +133,9 @@ const Post = async ({ params }: { params: { id: string } }) => {
             <div className="w-full px-4 lg:w-10/12 xl:w-8/12">
               <div className="w-full">
                 <h1 className="mb-6 text-[26px] font-bold leading-normal text-dark dark:text-white sm:text-3xl sm:leading-snug md:text-4xl md:leading-snug">
-                  {post.title.rendered}
+                  {currentPost.title.rendered}
                 </h1>
+                {/* Rest of your post component */}
                 <div className="flex flex-wrap items-center pb-4">
                   <div className="mb-4 mr-5 flex items-center md:mr-10">
                     <div className="mr-4 h-10 w-10 overflow-hidden rounded-full">
@@ -170,7 +206,7 @@ const Post = async ({ params }: { params: { id: string } }) => {
                 <div className="flex justify-evenly gap-4 items-center mt-10 mb-14 py-6">
                   {previousPost && (
                     <a
-                      href={`/latest-news/article/${previousPost.id}`}
+                      href={`/latest-news/article/${previousPost.slug}`}
                       className="group flex items-center rounded-lg px-6 py-3 border-2 border-black hover:shadow-md hover:transition-all hover:duration-300 hover:ease-in-out hover:border-emerald-500"
                     >
                       <div className="flex flex-col justify-center items-center mr-4">
@@ -201,7 +237,7 @@ const Post = async ({ params }: { params: { id: string } }) => {
                   )}
                   {nextPost && (
                     <a
-                      href={`/latest-news/article/${nextPost.id}`}
+                      href={`/latest-news/article/${nextPost.slug}`}
                       className="group flex items-center border-2 border-black rounded-lg px-6 py-3 hover:shadow-md hover:transition-all hover:duration-300 hover:ease-in-out hover:border-emerald-500"
                     >
                       <div className="flex flex-col items-end justify-center">
