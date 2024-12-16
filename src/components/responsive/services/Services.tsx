@@ -254,14 +254,31 @@ const Services = () => {
                 What we do for you?
               </h2>
               <p className="text-base text-body-color ">
-                There are many variations of passages of Lorem Ipsum available,
-                but the majority have suffered alteration in some form.
+                Full Stack Web Development, Online Marketing, and SEO Services
               </p>
             </div>
           </div>
         </div>
 
         <div className="mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center z-30 lg:w-2/3 lg:mx-auto">
+          <ServiceCard
+            icon={<FaBullhorn />}
+            title="Online Marketing"
+            details="Expand your reach with effective online marketing solutions"
+            onClick={() => router.push("/services/online-marketing")}
+          />
+          <ServiceCard
+            icon={<FaSearch />}
+            title="Search Engine Optimization - SEO"
+            details="Increase your website's visibility and ranking with SEO"
+            onClick={() => router.push("/services/search-engine-optimization")}
+          />
+          <ServiceCard
+            icon={<FaMousePointer />}
+            title="Pay-Per-Click Advertisement - PPC"
+            details="Target high-converting keywords with optimized PPC strategies"
+            onClick={() => router.push("/services/pay-per-click")}
+          />
           <ServiceCard
             icon={<FaLaptopCode />}
             title="Website Design"
@@ -279,24 +296,6 @@ const Services = () => {
             title="Online Stores"
             details="Secure, scalable eCommerce platforms to grow your sales"
             onClick={() => router.push("/services/online-stores")}
-          />
-          <ServiceCard
-            icon={<FaBullhorn />}
-            title="Online Marketing"
-            details="Expand your reach with effective online marketing solutions"
-            onClick={() => router.push("/services/online-marketing")}
-          />
-          <ServiceCard
-            icon={<FaMousePointer />}
-            title="Pay-Per-Click Advertisement - PPC"
-            details="Target high-converting keywords with optimized PPC strategies"
-            onClick={() => router.push("/services/pay-per-click")}
-          />
-          <ServiceCard
-            icon={<FaSearch />}
-            title="Search Engine Optimization - SEO"
-            details="Increase your website's visibility and ranking with SEO"
-            onClick={() => router.push("/services/search-engine-optimization")}
           />
         </div>
       </div>

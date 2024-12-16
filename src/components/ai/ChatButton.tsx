@@ -12,7 +12,7 @@ export default function FloatingChat() {
       <div className="relative">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="h-[45px] w-[45px] text-2xl font-black fixed bottom-4 right-4 bg-purple-500 text-white text-center flex justify-center items-center rounded-full shadow-lg hover:bg-green-600"
+          className="h-[45px] w-[45px] text-2xl font-black fixed bottom-4 right-4 bg-purple-500 text-white text-center flex justify-center items-center rounded-full shadow-lg z-40 hover:bg-green-600"
           aria-label="Chat with us"
         >
           <IoChatbubblesOutline size={40} color="white" />
@@ -25,7 +25,7 @@ export default function FloatingChat() {
 
       {/* Chatbot Modal */}
       {isOpen && (
-        <div className="w-[800px] fixed bottom-[445px] right-[80px] w-[400px] h-[500px] bg-gray-900 text-white rounded-lg shadow-lg z-40">
+        <div className="w-[400px] fixed bottom-[220px] right-[54px] h-[500px] bg-gray-900 text-white rounded-lg shadow-lg z-40">
           <div className="w-full top-2 right-2 flex flex-row justify-end p-4">
             <button
               onClick={() => setIsOpen(false)}

@@ -170,7 +170,7 @@ export default function RootLayout({
         {/* Additional meta tags or non-blocking head scripts can go here */}
       </head>
       <body className="relative">
-        <Header logo="/Blooming_Brands_Logo.png" darkLogo="/dark-logo.png" />
+        <Header darkLogo="/dark-logo.png" />
         <div className="">{children}</div>
         <div className="hidden lg:fixed lg:block lg:botton-100 lg:right-10 z-50">
           <ChatButton />

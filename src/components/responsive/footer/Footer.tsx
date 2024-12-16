@@ -111,6 +111,10 @@ const Footer = () => {
           <LinkGroup header="Customer">
             <NavLink link="/contact" label="Client support" />
             <NavLink link="/latest-news" label="Latest news" />
+            <NavLink
+              link="https://g.page/r/Caj6FmcZmNkEEAI/review"
+              label="Submit A Review"
+            />
             {/* <NavLink link="/#" label="Company story" />
             <NavLink link="/#" label="Pricing packages" /> */}
           </LinkGroup>

@@ -152,7 +152,7 @@ export default function Chatbot() {
       {
         role: "assistant",
         content:
-          "Glad you're here, I'm Henry Douquett, Blooming Brands AI assistant. How can I help you today?",
+          "Glad you're here, I'm Mike Sullivan, Blooming Brands Ai assistant. How can I help you today?",
       },
     ]);
   }, []);
@@ -170,8 +170,10 @@ export default function Chatbot() {
   };
 
   return (
-    <div className="w-[800px] p-6 bg-gray-900 text-white h-[800px] flex flex-col">
-      <h1 className="text-lg font-bold mb-4">We&apos;re Online ...</h1>
+    <div className="w-[400px] p-6 bg-gray-900 text-white h-[600px] flex flex-col">
+      <h1 className="text-lg font-bold mb-4">
+        Blooming Brands - Assistant Chat
+      </h1>
       <div
         ref={chatContainerRef}
         className="flex-1 overflow-y-auto mb-4 p-4 border rounded bg-gray-800"

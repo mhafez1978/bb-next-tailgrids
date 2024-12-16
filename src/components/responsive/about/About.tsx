@@ -1,6 +1,20 @@
 import Image from "next/image";
 
-const About = () => {
+interface AboutProps {
+  aboutTitle: string;
+  aboutSubTitle: string;
+  aboutParagraph1: string;
+  aboutParagraph2: string;
+  aboutCall2ActionText: string;
+}
+
+const About = ({
+  aboutTitle,
+  aboutSubTitle,
+  aboutParagraph1,
+  aboutParagraph2,
+  aboutCall2ActionText,
+}: AboutProps) => {
   return (
     <>
       <section className="overflow-hidden pt-20 pb-12 lg:pt-[120px] lg:pb-[90px] bg-white dark:bg-dark">
@@ -615,32 +629,22 @@ const About = () => {
             <div className="w-full px-4 lg:w-1/2 xl:w-5/12">
               <div className="px-10 mt-10 lg:mt-0 lg:px-0">
                 <span className="block mb-4 text-lg font-semibold text-black">
-                  We&apos;re Committed to Making a Positive Imapct
+                  {aboutTitle}
                 </span>
                 <h2 className="mb-5 text-3xl font-bold text-dark dark:text-white sm:text-[40px]/[48px]">
-                  We Craft Full-Stack, Data-Driven Apps, Websites, Online
-                  Stores, Blogs, and More…
+                  {aboutSubTitle}
                 </h2>
                 <p className="mb-5 text-base text-body-color dark:text-dark-6">
-                  At Blooming Brands, we believe in the power of innovation,
-                  creativity, and precision. As the founder, my vision has
-                  always been to help businesses flourish in the digital world
-                  by offering tailored solutions that blend design and
-                  functionality seamlessly.
+                  {aboutParagraph1}
                 </p>
                 <p className="mb-8 text-base text-body-color dark:text-dark-6">
-                  I am personally committed to delivering excellence in every
-                  project we take on. Our team is dedicated to building
-                  relationships based on trust, transparency, and a relentless
-                  focus on quality. We don&apos;t just build websites; we create
-                  experiences that leave a lasting impact and help your business
-                  thrive. Let&apos;s build something extraordinary, together.
+                  {aboutParagraph2}
                 </p>
                 <a
                   href="Tel:+1 508 936 3727"
                   className="w-full justify-center py-4 text-3xl font-medium "
                 >
-                  Call us +1 508 936 3727
+                  {aboutCall2ActionText}
                 </a>
               </div>
             </div>

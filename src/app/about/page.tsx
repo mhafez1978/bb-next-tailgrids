@@ -31,7 +31,19 @@ const page = () => {
             data-full-width-responsive="true"
           ></ins>
         </div>
-        <About />
+        <About
+          aboutTitle={"We're Committed to Making a Positive Imapct"}
+          aboutSubTitle={
+            "We Craft Full-Stack, Data-Driven Apps, Websites, Online Stores, Blogs, and More…"
+          }
+          aboutParagraph1={
+            "At Blooming Brands, we believe in the power of innovation, creativity, and precision. As the founder, my vision has always been to help businesses flourish in the digital world by offering tailored solutions that blend design and functionality seamlessly."
+          }
+          aboutParagraph2={
+            "I am personally committed to delivering excellence in every project we take on. Our team is dedicated to building relationships based on trust, transparency, and a relentless focus on quality. We don't just build websites; we create experiences that leave a lasting impact and help your business thrive. Let's build something extraordinary, together."
+          }
+          aboutCall2ActionText={"Call us +1 508 936 3727"}
+        />
         <div className="min-h-[25vh] w-screen bg-[url('https://www.tallahasseefreeclassifiedads.com/banner_thumb_new.php?f=samplead.jpg&w=1500&h=500')] bg-center bg-cover bg-no-repeat">
           <ins
             className="adsbygoogle"

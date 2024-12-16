@@ -3,18 +3,23 @@ import React from "react";
 import { SlArrowRightCircle } from "react-icons/sl";
 import Modal from "@/components/responsive/modal/Modal";
 
-const Hero = () => {
+const Hero = ({
+  heroTitle,
+  heroDescription,
+}: {
+  heroTitle: string;
+  heroDescription: string;
+}) => {
   return (
     <>
       <section className="w-screen h-[100vh] bg-[url('https://i.pinimg.com/originals/c5/9a/d2/c59ad2bd4ad2fbacd04017debc679ddb.gif')] bg-center bg-cover bg-fixed bg-no-repeat">
         <div className="w-full h-full bg-slate-100/90 text-black flex flex-col justify-center">
           <div className="w-full h-[40vh] flex flex-col items-center justify-center px-4 gap-6 lg:w-6/12 lg:mx-auto lg:px-0">
             <h1 className="text-4xl font-black text-center text-slate-800 capitalize lg:text-7xl">
-              Struggling to Grow Your Online Presence?
+              {heroTitle}
             </h1>
             <p className="px-4 text-center text-xl font-semibold lg:px-4 lg:w-3/4 lg:mx-auto">
-              We provide seamless website design, development, and marketing
-              solutions to help your brand thrive digitally.
+              {heroDescription}
             </p>
             <div className="w-full flex flex-col items-center gap-4 justify-center lg:flex-row lg:gap-2 ">
               {/* <Modal />
