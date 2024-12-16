@@ -35,7 +35,7 @@ export default function RootLayout({
       </head>
       <body className="relative">
         <Header darkLogo="/dark-logo.png" />
-        <div className="">{children}</div>
+        <div className="pt-[64px]">{children}</div>
         <Footer />
 
         {/* AdSense Script */}
