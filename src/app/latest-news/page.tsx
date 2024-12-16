@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 };
 
 interface WordPressPost {
-  id: number;
+  id: number | string;
   date: string;
   title: { rendered: string };
   excerpt: { rendered: string };
@@ -126,10 +126,7 @@ const PostCard = ({
   author: string;
   avatar: string;
 }) => (
-  <div
-    id={id.toString()}
-    className="w-full h-full flex flex-col border border-gray-200 rounded-lg shadow-md"
-  >
+  <div className="w-full h-full flex flex-col border border-gray-200 rounded-lg shadow-md">
     <div className="overflow-hidden rounded-t h-64 flex-shrink-0">
       <img
         src={image}
@@ -156,6 +153,7 @@ const PostCard = ({
       <h3 className="mb-4 text-xl font-semibold text-dark dark:text-white">
         <Link href={`/latest-news/article/${slug}`}>{CardTitle}</Link>
       </h3>
+      <p>Article No: {id}</p>
       <div className="mb-4 text-base text-body-color dark:text-dark-6">
         {CardDescription}
       </div>
