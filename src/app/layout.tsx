@@ -32,6 +32,7 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <head>
         {/* Additional meta tags or non-blocking head scripts can go here */}
+        <meta name="google-adsense-account" content="ca-pub-1266489978722809" />
       </head>
       <body className="relative">
         <Header darkLogo="/dark-logo.png" />
