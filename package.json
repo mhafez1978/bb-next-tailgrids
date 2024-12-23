@@ -34,7 +34,7 @@
     "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.446.0",
-    "next": "14.2.13",
+    "next": "14.2.15",
     "next-sanity": "^9.8.25",
     "next-secure-headers": "^2.2.0",
     "nodemailer": "^6.9.15",
