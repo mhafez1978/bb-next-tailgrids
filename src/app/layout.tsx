@@ -91,6 +91,12 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
 
+        <script
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="tgAseXOCr25EjtPoO0MNSw"
+          defer={true}
+        ></script>
+
         {/* GTM NoScript Fallback */}
         <noscript>
           <iframe
